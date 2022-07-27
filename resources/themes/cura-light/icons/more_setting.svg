@@ -1,0 +1,26 @@
+<svg id="切片" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="125" height="37" viewBox="0 0 125 37">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3584b7;
+        stroke-linejoin: round;
+        stroke-width: 1px;
+        stroke: url(#linear-gradient);
+        filter: url(#filter);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="62.5" y1="34.5" x2="62.5" y2="2.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1262fb"/>
+      <stop offset="1" stop-color="#51a4f6"/>
+    </linearGradient>
+    <filter id="filter" x="-0.5" y="-0.5" width="126" height="38" filterUnits="userSpaceOnUse">
+      <feImage preserveAspectRatio="none" x="2.5" y="2.5" width="120" height="32" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTIwIDMyIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiB1cmwoI2xpbmVhci1ncmFkaWVudCk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudCIgeDE9IjYwIiB5MT0iMzIiIHgyPSI2MCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9Ii0wLjI1IiBzdG9wLWNvbG9yPSIjMTk4MmZiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMS4yNSIgc3RvcC1jb2xvcj0iIzZmYjRmNyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjMyIi8+Cjwvc3ZnPgo="/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g style="fill: #3584b7; filter: url(#filter)">
+    <rect id="圆角矩形_1" data-name="圆角矩形 1" class="cls-1" x="2.5" y="2.5" width="120" height="32" rx="16" ry="16" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#圆角矩形_1" style="stroke: url(#linear-gradient); filter: none; fill: none"/>
+</svg>
