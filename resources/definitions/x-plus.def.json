@@ -1,0 +1,38 @@
+{
+    "id": "X-Plus",
+    "version": 2,
+    "name": "X-Plus",
+    "inherits": "X-series",
+    "metadata": {
+        "visible": true,
+        "author": "Qidi",
+        "manufacturer": "Qidi",
+        "category": "X-series",
+        "file_formats": "text/x-gcode",
+        "has_materials": true,
+		"has_machine_quality": true,
+		"exclude_materials": ["generic_pva", "generic_pa12_cf", "generic_s_green", "generic_ultrapa"],
+        "preferred_quality_type": "normal",
+        "icon": "icon_ultimaker2.png",
+        "platform": "X-Plus.stl",
+        "platform_offset": [-197, -38.3, 114],
+        "_platform_texture": "Ultimaker2backplate.png",
+        "first_start_actions": ["MachineSettingsAction"],
+        "machine_extruder_trains":
+        {
+            "0": "x-plus_extruder"
+        }
+    },
+    "overrides":{
+
+		"machine_start_gcode":{ "default_value":"G92 A0 B0\nG28 X0 Y0\nG0 X-1000 Y-1000 F1800\nG28 Z0\nG1 X0 Y0 Z50 F3600\nG1 X0 Y0 F3600\nM140 S{material_bed_temperature_layer_0}\nM104 S{material_print_temperature_layer_0}\nM190 S{material_bed_temperature_layer_0}\nM109 S{material_print_temperature_layer_0}\nG92 E0\nG92 A0 B0\nG0 X0 Y4 Z0.3 F3600\nG1 X{machine_width} Y5 F2400\nG1 X5 A17.55 F2400\nG92 A0 B0\nG1 X5 F2400\n"},
+		"machine_name": { "default_value": "X-Plus" },
+        "machine_width": { "default_value": 270 },
+        "machine_depth": { "default_value":  200 },
+        "machine_height": { "default_value": 200 },
+        "machine_extruder_count": { "default_value": 1 },
+
+		"cooling_chamber": { "value": true },
+		"cooling_chamber_visiable": { "value": true }
+    }
+}
