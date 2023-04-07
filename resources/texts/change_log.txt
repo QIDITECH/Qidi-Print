@@ -1,0 +1,194 @@
+[6.5.1]
+-Upgrade Slice Engine
+-Optimize the display effect of gcodeviewer
+-Optimize control panel interface display and communication for new models
+
+
+[6.5.0]
+-Add some new printer types
+-Add some new materials
+-Optimize the materials selection bar
+-Optimize the display effect of gcodeviewer
+-Optimize the interface for adding machine
+-Optimize the reading and writing of Gcode files
+-Optimize reading of materials configuration file
+-Optimize the writing of preview code
+-Optimize the preview display to recognize G2 and G3
+-Modify the materials management interface and add the properties column
+-Modify the control panel to fit the new machine types
+-Modify the translocation direction of the control panel nozzle on the x and y axes
+-Fix the bug where opening 3mf files would cause software to crash
+
+[6.4.1]
+-Add information such as location and speed of sprinkler head and current Gcode in the preview interface
+-Optimize the display effect of some display boxes in the preview interface
+-Optimized overlap Settings
+-Optimize the connection of the control panel
+-Optimize the model display effect of X-Ray interface and preview interface
+-Optimized the download file path selection box on the Control panel
+-Modify the slice error pop-up interface
+-Fix the  bug where uncompressed sending failed
+-Fix the bug where post-processing plugin failed
+-Fix the bug where default buttons on the Settings screen did not work for some options
+-Fix the bug where the Ooze Shield did not generate due to unpopping the slice confirmation window
+-Fix the bug where the Ooze Shield did not generate due to unpopping the slice confirmation window
+-Fix the bug where the 3D flat button would not work in some cases
+
+[6.4.0]
+-Add stretchable feature for parameter bar
+-Add a slice exception pop-up
+-Optimize the automatic slicing mode
+-Optimize the wifi search process
+-Modified Added the printer interface and functions
+-Modify the after-sales UI and functions
+-Modify setting interface
+-Modified Add the material management page
+-Modify the ui and functions of the control panel
+-Modify the 3D button display effect
+-Modify some material parameters and related Settings
+-Fix the  bug where model name is missing
+-Fix the bug that the icon does not change color after modifying some parameters
+-Fix the bug where opening 3mf files would cause software to crash
+-Fix the bug  that  the x-ray display error of linux system
+-Fix the bug where the control panel was connected to the printer for a long time, causing the software to get stuck
+-Fix the bug where the software reported errors when modifying parameters such as density on the material management interface
+-Deleted the function of copying an earlier version configuration file when creating a configuration file
+
+[6.3.1]
+-Add mesh tools plugin
+-Add consumable unit price calculation
+-Fix the bug in the travel prime
+-Fix the bug that the icon did not change color after some parameters were modified
+-Fix the bug that the angle of view cannot be rotated when using the flat by face function
+
+
+[6.3.0]
+-Upgrade Slice Engine
+-Add 3D button
+-Add model, version and filament information to Gcode
+-Fix the bug where the control panel could not print some files with special filenames
+-Fix the failure of some functions in the latest version of the mac system
+-Fix bugs where icons overlap in the pop-up window of the item list in some cases
+-Optimize the guidance interface
+-Optimize the sliding effect of parameter bar
+-Fix the bug that the icon does not change color after modifying some parameters
+-Add Control Panel Print Progress Display
+-Fix bugs where cannot change the ip name
+
+[6.2.3]
+-Add save reminder pop-up before closing
+-Fix the bug where wifi sending could not be completed
+-Fix the bug the number of copies input does not work properly
+-Add input IP record function
+-Optimize control panel connections
+-Fix individual bugs that cause the control panel to crash
+-Add the function of sorting the file list of control panel by alphabetical size
+-Add the dynamic monitoring of the printer hot chamber temperature and filament sensor detection by the control panel
+-Fix the bug that uploading files from the control panel will delete local files
+-Fix the bug of travelPrime error caused by file name
+-Fix the bug that the icon does not change color after modifying some parameters
+
+[6.2.2]
+-Add thumbnails of STL files
+-Fix the bug where Linux could not compress sent files
+-Add time-lapse photography plug-in
+-Fix the bug where the rotation axis does not appear in some cases
+-Fix the bug that caused the control panel to click Print immediately after uploading a file
+-Fix the bug where the extruder could no longer be enabled after opening certain 3MF files
+-Fix the bug that the software will run incorrectly when opening incomplete gcode files
+-Optimize parameter bar icon color change
+-Optimize WiFi sending files
+
+[6.2.1]
+-Add thumbnails of 3MF files
+-Fix the bug of missing icons in the management consumables interface
+-Fix the bug that the progress bar of STL file still displays after opening gcode file
+-Optimization Z-Offset
+-Optimize the display effect of material management interface
+-Add other categories of parameter bar
+
+[6.2.0]
+
+-Add the function of displaying the estimated printing time when reading gcode files
+-Modify the material display interface of the single nozzle model
+-Add custom consumables and Settings interface
+-Add X3G format to file export function
+-Optimize parameter bar icon color change
+-Optimize rotation Angle calculation
+-Optimizes the flat button
+-Fixed a bug where some information was lost when generating 3MF files
+-Modify some parameter Settings
+-Optimized starting code
+-Optimized support display effects
+-Optimized the IP address search function
+-Optimized the input IP search function
+
+[6.1.8]
+
+-Improve the prompt popover
+-Optimize the search display
+-Optimized Ooze Prevention
+-Optimized the UI and button enablement of the control panel
+-Optimized Model Preview Writer
+-Fix some bugs that affect the program
+-Add two options to remove IP warning and wifi send uncompressed in Settings screen
+-Modify the end Gcode for X-One2 models
+-Modify some parameter Settings
+
+[6.1.7]
+
+-Optimized enabling of some control panel buttons
+-Optimization parameter interface
+-Fix the bugs in the zooming function and upgrade this function
+-Optimize the control panel interface
+-Fixed a bug in the control panel's file deletion function
+-Hide Travel Prime
+-Fixed a case where antivirus software could mistakenly detect a virus
+
+[6.1.6]
+
+-Optimization parameter interface
+-Optimized slice information interface
+-Add x-One2 models
+-Optimized seepage cover
+
+[6.1.5]
+
+-Fix a bug in Flip by face
+-Fix the bug that will report an error when restoring factory settings on the MAC system
+-Optimize log output
+-Handle some warning reports
+-Fix the guide problem of Mac systemprogram
+-Fix the Support interception problem of Mac systemprogram
+-Fix problems with scale reset
+-Add translation
+-Modify the page for displaying print information
+[6.1.4]
+
+-Fix a bug in icon discoloration
+-Tidy up and rewrite the PostProcessingPlugin
+-Optimize the function of IP display
+-Optimize log input
+[6.1.3]
+
+-Fix some bugs
+[6.1.2]
+
+-Fixed an issue where the program would not run on older systems
+-Fixed missing information of extruder2 when loading a project
+-Optimized travel prime
+-Fixed an issue where the STL file cannot be sliced after opening the gcode file
+[6.1.1]
+
+-Optimized Z offset
+-Modify the shadow on the bottom of the model
+-Change icon
+[6.1.0]
+
+-Add scale function
+-Modify parameters
+-Optimized travel prime
+-Optimized Z offset
+-Change icon
+-Modify the shadow on the bottom of the model
+-Fix some bugs
