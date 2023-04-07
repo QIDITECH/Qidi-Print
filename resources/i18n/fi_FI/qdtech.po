@@ -1,0 +1,1192 @@
+# QDTECH
+# Copyright (C) 2021 QIDI B.V.
+# This file is distributed under the same license as the QDTECH package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QDTECH 4.9\n"
+"Report-Msgid-Bugs-To: r.dulek@qidi.com\n"
+"POT-Creation-Date: 2021-04-02 16:35+0200\n"
+"PO-Revision-Date: 2017-09-27 12:27+0200\n"
+"Last-Translator: Bothof <info@bothof.nl>\n"
+"Language-Team: Finnish <info@bothof.nl>\n"
+"Language: fi_FI\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/MirrorTool/__init__.py:12
+msgctxt "@label"
+msgid "Mirror"
+msgstr "Peilaus"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/MirrorTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Mirror Model"
+msgstr "Peilaa mallia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/__init__.py:12
+msgctxt "@action:button"
+msgid "Move"
+msgstr "Siirrä"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Move Model"
+msgstr "Siirrä mallia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/__init__.py:12
+msgctxt "@label"
+msgid "Rotate"
+msgstr "Pyöritys"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Rotate Model"
+msgstr "Pyöritä mallia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.py:355
+msgctxt "@label"
+msgid "Laying object flat on buildplate..."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.py:355
+msgctxt "@title"
+msgid "Object Rotation"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/__init__.py:12
+msgctxt "@label"
+msgid "Scale"
+msgstr "Skaalaus"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Scale Model"
+msgstr "Skaalaa mallia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateChecker.py:26
+msgctxt "@item:inmenu"
+msgid "Update Checker"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateChecker.py:27
+msgctxt "@item:inmenu"
+msgid "Check for Updates"
+msgstr "Tarkista päivitykset"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:52
+msgctxt "@info"
+msgid "Could not access update information."
+msgstr "Päivitystietoja ei löytynyt."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:53
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:71
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:100
+#: /mnt/projects/qidi/qidi/QDTECH/QD/VersionUpgradeManager.py:173
+msgctxt "@info:title"
+msgid "Version Upgrade"
+msgstr "Versiopäivitys"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:66
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:71
+msgctxt "@info"
+msgid "The version you are using does not support checking for updates."
+msgstr "Käyttämäsi versio ei tue päivitysten tarkistusta."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:66
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:196
+msgctxt "@info:title"
+msgid "Warning"
+msgstr "Varoitus"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:96
+msgctxt "@info"
+msgid "An error occurred while checking for updates."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:96
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:203
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Bindings/OutputDeviceManagerProxy.py:156
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Bindings/OutputDeviceManagerProxy.py:159
+msgctxt "@info:title"
+msgid "Error"
+msgstr "Virhe"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:100
+msgctxt "@info"
+msgid "No new version was found."
+msgstr "Uutta versiota ei löytynyt."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:105
+#, python-brace-format
+msgctxt "@info:status"
+msgid "{application_name} {version_number} is available!"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:107
+#, python-brace-format
+msgctxt "@info:status"
+msgid "{application_name} {version_number} provides a better and more reliable printing experience."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:110
+msgctxt "@action:button"
+msgid "Download"
+msgstr "Lataa"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:112
+msgctxt "@action:button"
+msgid "Learn more"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:30
+msgctxt "@item:inmenu"
+msgid "Local File"
+msgstr "Paikallinen tiedosto"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:31
+msgctxt "@action:button Preceded by 'Ready to'."
+msgid "Save to Disk"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:32
+msgctxt "@info:tooltip"
+msgid "Save to Disk"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:58
+msgctxt "@title:window"
+msgid "Save to Disk"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:91
+msgctxt "@info:warning"
+msgid "There are no file types available to write with!"
+msgstr "Käytettävissä ei ole tiedostotyyppejä, joilla voidaan kirjoittaa!"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:138
+msgctxt "@title:window"
+msgid "File Already Exists"
+msgstr "Tiedosto on jo olemassa"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:138
+#, python-brace-format
+msgctxt "@label Don't translate the XML tag <filename>!"
+msgid "The file <filename>{0}</filename> already exists. Are you sure you want to overwrite it?"
+msgstr "Tiedosto <filename>{0}</filename> on jo olemassa. Haluatko varmasti kirjoittaa sen päälle?"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:168
+#, python-brace-format
+msgctxt "@info:progress Don't translate the XML tags <filename>!"
+msgid "Saving to <filename>{0}</filename>"
+msgstr "Tallennetaan tiedostoon <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:169
+msgctxt "@info:title"
+msgid "Saving"
+msgstr "Tallennetaan"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:177
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename>!"
+msgid "Permission denied when trying to save <filename>{0}</filename>"
+msgstr "Lupa evätty yritettäessä tallentaa tiedostoon <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:180
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:196
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename> or <message>!"
+msgid "Could not save to <filename>{0}</filename>: <message>{1}</message>"
+msgstr "Ei voitu tallentaa tiedostoon <filename>{0}</filename>: <message>{1}</message>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:190
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename>!"
+msgid "Saved to <filename>{0}</filename>"
+msgstr "Tallennettu tiedostoon <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:190
+msgctxt "@info:title"
+msgid "File Saved"
+msgstr "Tiedosto tallennettu"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:191
+msgctxt "@action:button"
+msgid "Open Folder"
+msgstr "Avaa kansio"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:191
+msgctxt "@info:tooltip"
+msgid "Open the folder containing the file"
+msgstr "Avaa tiedoston sisältävän kansion"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:203
+#, python-brace-format
+msgctxt "@info:status"
+msgid "Something went wrong saving to <filename>{0}</filename>: <message>{1}</message>"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Views/SimpleView/__init__.py:12
+msgctxt "@item:inmenu"
+msgid "Simple"
+msgstr "Yksinkertainen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLReader/__init__.py:14
+msgctxt "@item:inlistbox"
+msgid "STL File"
+msgstr "STL-tiedosto"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/OBJWriter.py:25
+msgctxt "@error:not supported"
+msgid "OBJWriter does not support non-text mode."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/OBJWriter.py:32
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/STLWriter.py:29
+msgctxt "@error:no mesh"
+msgid "There is no mesh to write."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/__init__.py:15
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJReader/__init__.py:15
+msgctxt "@item:inlistbox"
+msgid "Wavefront OBJ File"
+msgstr "Wavefront OBJ -tiedosto"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/__init__.py:17
+msgctxt "@item:inlistbox"
+msgid "STL File (ASCII)"
+msgstr "STL-tiedosto (ASCII)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/__init__.py:23
+msgctxt "@item:inlistbox"
+msgid "STL File (Binary)"
+msgstr "STL-tiedosto (binaari)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/STLWriter.py:38
+msgctxt "@error:not supported"
+msgid "Unsupported output mode writing STL to stream."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:318
+msgctxt "@info:status"
+msgid ""
+"The plugin has been installed.\n"
+"Please re-start the application to activate the plugin."
+msgstr ""
+"Laajennus on asennettu.\n"
+"Ota laajennus käyttöön käynnistämällä sovellus uudelleen."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:379
+msgctxt "@error:untrusted"
+msgid "Plugin {} was not loaded because it could not be verified."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:479
+#, python-brace-format
+msgctxt "@info:status"
+msgid ""
+"The plugin has been removed.\n"
+"Please restart {0} to finish uninstall."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:826
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Settings/Models/InstanceContainersModel.py:193
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/FileHandler.py:60
+#, python-brace-format
+msgctxt "@item:inlistbox"
+msgid "All Supported Types ({0})"
+msgstr "Kaikki tuetut tyypit ({0})"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:827
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Settings/Models/InstanceContainersModel.py:196
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/FileHandler.py:61
+msgctxt "@item:inlistbox"
+msgid "All Files (*)"
+msgstr "Kaikki tiedostot (*)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:122
+#, python-brace-format
+msgctxt "@label Short days-hours-minutes format. {0} is days, {1} is hours, {2} is minutes"
+msgid "{0:0>2}d {1:0>2}h {2:0>2}min"
+msgstr "{0:0>2} p {1:0>2} h {2:0>2} min"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:124
+#, python-brace-format
+msgctxt "@label Short hours-minutes format. {0} is hours, {1} is minutes"
+msgid "{0:0>2}h {1:0>2}min"
+msgstr "{0:0>2} h {1:0>2} min"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is days"
+msgid "{0} day"
+msgid_plural "{0} days"
+msgstr[0] "{0} päivä"
+msgstr[1] "{0} päivää"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:129
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is hours"
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] "{0} tunti"
+msgstr[1] "{0} tuntia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:129
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:131
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is minutes"
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] "{0} minuutti"
+msgstr[1] "{0} minuuttia"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:192
+msgctxt "@info:progress"
+msgid "Initializing package manager..."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:200
+msgctxt "@info:status"
+msgid "Your configuration seems to be corrupt."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:202
+msgctxt "@info:title"
+msgid "Configuration errors"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:205
+msgctxt "@info:progress"
+msgid "Loading plugins..."
+msgstr "Ladataan lisäosia..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:212
+msgctxt "@info:progress"
+msgid "Updating configuration..."
+msgstr "Päivitetään määrityksiä..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:218
+msgctxt "@info:progress"
+msgid "Loading preferences..."
+msgstr "Ladataan lisäasetuksia..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:305
+msgctxt "@info:progress"
+msgid "Loading UI..."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Mesh/ReadMeshJob.py:70
+#, python-format, python-brace-format
+msgctxt "@info:status"
+msgid "Auto scaled object to {0}% of original size"
+msgstr "Kappale skaalattu automaattisesti {0} %:iin alkuperäisestä koosta"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Mesh/ReadMeshJob.py:70
+msgctxt "@info:title"
+msgid "Scaling Object"
+msgstr "Skaalataan kappaletta"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:192
+#, python-brace-format
+msgctxt "@info"
+msgid "Would you like to reload {filename}?"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:193
+msgctxt "@info:title"
+msgid "File has been modified"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:194
+msgctxt "@action:button"
+msgid "Reload"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:194
+msgctxt "@action:description"
+msgid "This will trigger the modified files to reload from disk."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:59
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:64
+msgctxt "@message"
+msgid "Failed to Initialize OpenGL"
+msgstr "OpenGL:n alustus epäonnistui"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:74
+msgctxt "Critical OpenGL Extensions Missing"
+msgid "Critical OpenGL extensions are missing. This program requires support for Framebuffer Objects. Please check your video card drivers."
+msgstr "Kriittisiä OpenGL-lisäosia puuttuu. Tämä ohjelma vaatii tuen Framebuffer-objekteille. Tarkista näytönohjaimen ajurit."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/VersionUpgradeManager.py:173
+#, python-brace-format
+msgctxt "@info:version-upgrade"
+msgid "A configuration from an older version of {0} was imported."
+msgstr "Aikaisemman {0} -version määritykset tuotiin."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:281
+#, python-brace-format
+msgctxt "@error:uninstall"
+msgid ""
+"There were some errors uninstalling the following packages:\n"
+"{packages}"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:283
+msgctxt "@info:title"
+msgid "Uninstalling errors"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:559
+#, python-brace-format
+msgctxt "@error:update"
+msgid ""
+"There was an error uninstalling the package {package} before installing new version:\n"
+"{error}.\n"
+"Please try to upgrade again later."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:562
+msgctxt "@info:title"
+msgid "Updating error"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:40
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Cannot open files of the type of <filename>{0}</filename>"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:40
+msgctxt "@info:title"
+msgid "Invalid File"
+msgstr "Virheellinen tiedosto"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:53
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Failed to load <filename>{0}</filename>. The file could be corrupt or inaccessible."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:55
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:81
+msgctxt "@info:title"
+msgid "Unable to Open File"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:63
+msgctxt "@info:title"
+msgid "Loading"
+msgstr "Ladataan"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:78
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "There where no models in <filename>{0}</filename>."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:78
+msgctxt "@info:title"
+msgid "No Models in File"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:81
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Failed to load <filename>{0}</filename>. The file could be corrupt, inaccessible or it did not contain any models."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:33
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:21
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:67
+msgctxt "@action:button"
+msgid "Reset"
+msgstr "Palauta"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:45
+#, python-brace-format
+msgctxt "@info:status"
+msgid ""
+"Your configuration seems to be corrupt. Something seems to be wrong with the following profiles:\n"
+"- {profiles}\n"
+" Would you like to reset to factory defaults? Reset will remove all your current printers and profiles."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:50
+msgctxt "@title:window"
+msgid "Reset to factory"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:52
+msgctxt "@label"
+msgid "Reset will remove all your current printers and profiles! Are you sure you want to reset?"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/TranslateTool.qml:196
+msgctxt "@option:check"
+msgid "Lock Model"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:39
+msgctxt "@action:button"
+msgid "Lay flat"
+msgstr "Aseta latteaksi"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:60
+msgctxt "@action:button"
+msgid "Select face to align to the build plate"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:81
+msgctxt "@action:checkbox"
+msgid "Snap Rotation"
+msgstr "Kohdista pyöritys"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:93
+msgctxt "@option:check"
+msgid "Snap Scaling"
+msgstr "Kohdista skaalaus"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:121
+msgctxt "@option:check"
+msgid "Uniform Scaling"
+msgstr "Tasainen skaalaus"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/ConfirmRemoveDialog.qml:16
+msgctxt "@title:window"
+msgid "Confirm Remove"
+msgstr "Vahvista poisto"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/ConfirmRemoveDialog.qml:17
+msgctxt "@label (%1 is object name)"
+msgid "Are you sure you wish to remove %1? This cannot be undone!"
+msgstr "Haluatko varmasti poistaa kappaleen %1? Tätä ei voida kumota!"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:18
+msgctxt "@title:window"
+msgid "Preferences"
+msgstr "Lisäasetukset"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:111
+msgctxt "@action:button"
+msgid "Defaults"
+msgstr "Oletusarvot"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:119
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Sulje"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:149
+msgctxt "@title:tab"
+msgid "General"
+msgstr "Yleiset"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:150
+msgctxt "@title:tab"
+msgid "Settings"
+msgstr "Asetukset"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/SettingVisibilityItem.qml:32
+msgctxt "@item:tooltip"
+msgid "This setting has been hidden by the active machine and will not be visible."
+msgstr "Tämä asetus ei ole näkyvissä, koska aktiivinen laite on piilottanut sen."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/SettingVisibilityItem.qml:49
+msgctxt "@item:tooltip %1 is list of setting names"
+msgid "This setting has been hidden by the value of %1. Change the value of that setting to make this setting visible."
+msgid_plural "This setting has been hidden by the values of %1. Change the values of those settings to make this setting visible."
+msgstr[0] "Tämä asetus on piilotettu asetuksella %1. Tuo asetus näkyviin muuttamalla kyseisen asetuksen arvoa."
+msgstr[1] "Tämä asetus on piilotettu asetuksilla %1. Tuo asetus näkyviin muuttamalla kyseisten asetusten arvoja."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:19
+msgctxt "@title:window"
+msgid "Rename"
+msgstr "Nimeä uudelleen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:20
+msgctxt "@info"
+msgid "Please provide a new name."
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:70
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:241
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:75
+msgctxt "@action:button"
+msgid "OK"
+msgstr ""
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/MachinesPage.qml:12
+msgctxt "@title:tab"
+msgid "Printers"
+msgstr "Tulostimet"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/MachinesPage.qml:40
+msgctxt "@label"
+msgid "Type"
+msgstr "Tyyppi"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:215
+msgctxt "@action:button"
+msgid "Back"
+msgstr "Takaisin"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:231
+msgctxt "@action:button"
+msgid "Finish"
+msgstr "Lopeta"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:231
+msgctxt "@action:button"
+msgid "Next"
+msgstr "Seuraava"
+
+#: FileLogger/plugin.json
+msgctxt "description"
+msgid "Outputs log information to a file in your settings folder."
+msgstr "Lähettää lokitiedot asetuskansion tiedostoon."
+
+#: FileLogger/plugin.json
+msgctxt "name"
+msgid "File Logger"
+msgstr "Tiedonkeruuohjelma"
+
+#: LocalContainerProvider/plugin.json
+msgctxt "description"
+msgid "Provides built-in setting containers that come with the installation of the application."
+msgstr ""
+
+#: LocalContainerProvider/plugin.json
+msgctxt "name"
+msgid "Local Container Provider"
+msgstr ""
+
+#: Tools/MirrorTool/plugin.json
+msgctxt "description"
+msgid "Provides the Mirror tool."
+msgstr "Näyttää peilaustyökalun."
+
+#: Tools/MirrorTool/plugin.json
+msgctxt "name"
+msgid "Mirror Tool"
+msgstr "Peilaustyökalu"
+
+#: Tools/TranslateTool/plugin.json
+msgctxt "description"
+msgid "Provides the Move tool."
+msgstr "Näyttää siirtotyökalun."
+
+#: Tools/TranslateTool/plugin.json
+msgctxt "name"
+msgid "Move Tool"
+msgstr "Siirtotyökalu"
+
+#: Tools/RotateTool/plugin.json
+msgctxt "description"
+msgid "Provides the Rotate tool."
+msgstr "Näyttää pyöritystyökalun."
+
+#: Tools/RotateTool/plugin.json
+msgctxt "name"
+msgid "Rotate Tool"
+msgstr "Pyöritystyökalu"
+
+#: Tools/CameraTool/plugin.json
+msgctxt "description"
+msgid "Provides the tool to manipulate the camera."
+msgstr "Työkalu kameran käsittelyyn."
+
+#: Tools/CameraTool/plugin.json
+msgctxt "name"
+msgid "Camera Tool"
+msgstr "Kameratyökalu"
+
+#: Tools/SelectionTool/plugin.json
+msgctxt "description"
+msgid "Provides the Selection tool."
+msgstr "Näyttää valintatyökalun."
+
+#: Tools/SelectionTool/plugin.json
+msgctxt "name"
+msgid "Selection Tool"
+msgstr "Valintatyökalu"
+
+#: Tools/ScaleTool/plugin.json
+msgctxt "description"
+msgid "Provides the Scale tool."
+msgstr "Näyttää skaalaustyökalun."
+
+#: Tools/ScaleTool/plugin.json
+msgctxt "name"
+msgid "Scale Tool"
+msgstr "Skaalaustyökalu"
+
+#: UpdateChecker/plugin.json
+msgctxt "description"
+msgid "Checks for updates of the software."
+msgstr "Tarkistaa, onko ohjelmistopäivityksiä saatavilla."
+
+#: UpdateChecker/plugin.json
+msgctxt "name"
+msgid "Update Checker"
+msgstr "Päivitysten tarkistin"
+
+#: LocalFileOutputDevice/plugin.json
+msgctxt "description"
+msgid "Enables saving to local files."
+msgstr "Mahdollistaa tallennuksen paikallisiin tiedostoihin."
+
+#: LocalFileOutputDevice/plugin.json
+msgctxt "name"
+msgid "Local File Output Device"
+msgstr "Paikallisen tiedoston tulostusväline"
+
+#: ConsoleLogger/plugin.json
+msgctxt "description"
+msgid "Outputs log information to the console."
+msgstr "Lähettää lokitiedot konsoliin."
+
+#: ConsoleLogger/plugin.json
+msgctxt "name"
+msgid "Console Logger"
+msgstr "Konsolin tiedonkeruu"
+
+#: Views/SimpleView/plugin.json
+msgctxt "description"
+msgid "Provides a simple solid mesh view."
+msgstr "Näyttää yksinkertaisen kiinteän verkkonäkymän."
+
+#: Views/SimpleView/plugin.json
+msgctxt "name"
+msgid "Simple View"
+msgstr "Yksinkertainen näkymä"
+
+#: FileHandlers/STLReader/plugin.json
+msgctxt "description"
+msgid "Provides support for reading STL files."
+msgstr "Tukee STL-tiedostojen lukemista."
+
+#: FileHandlers/STLReader/plugin.json
+msgctxt "name"
+msgid "STL Reader"
+msgstr "STL-lukija"
+
+#: FileHandlers/OBJWriter/plugin.json
+msgctxt "description"
+msgid "Makes it possible to write Wavefront OBJ files."
+msgstr "Mahdollistaa Wavefront OBJ -tiedostojen kirjoittamisen."
+
+#: FileHandlers/OBJWriter/plugin.json
+msgctxt "name"
+msgid "Wavefront OBJ Writer"
+msgstr "Wavefront OBJ -kirjoitin"
+
+#: FileHandlers/STLWriter/plugin.json
+msgctxt "description"
+msgid "Provides support for writing STL files."
+msgstr "Tukee STL-tiedostojen kirjoittamista."
+
+#: FileHandlers/STLWriter/plugin.json
+msgctxt "name"
+msgid "STL Writer"
+msgstr "STL-kirjoitin"
+
+#: FileHandlers/OBJReader/plugin.json
+msgctxt "description"
+msgid "Makes it possible to read Wavefront OBJ files."
+msgstr "Mahdollistaa Wavefront OBJ -tiedostojen lukemisen."
+
+#: FileHandlers/OBJReader/plugin.json
+msgctxt "name"
+msgid "Wavefront OBJ Reader"
+msgstr "Wavefront OBJ -lukija"
+
+#~ msgctxt "@action:button Preceded by 'Ready to'."
+#~ msgid "Save to File"
+#~ msgstr "Tallenna tiedostoon"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Save to File"
+#~ msgstr "Tallenna tiedostoon"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save to File"
+#~ msgstr "Tallenna tiedostoon"
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Failed to load <filename>{0}</filename>"
+#~ msgstr "Tiedoston <filename>{0}</filename> lataaminen epäonnistui"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Plugins"
+#~ msgstr "Lisäosat"
+
+#~ msgctxt "@action:button"
+#~ msgid "Install new plugin"
+#~ msgstr "Asenna uusi laajennus"
+
+#~ msgctxt "@label"
+#~ msgid "You will need to restart the application before changes in plugins have effect."
+#~ msgstr "Laajennusten muutokset eivät tule käyttöön ennen kuin olet käynnistänyt sovelluksen uudelleen."
+
+#~ msgctxt "@label"
+#~ msgid "This plugin is required for the application to run."
+#~ msgstr "Sovellus ei toimi ilman tätä laajennusta."
+
+#~ msgctxt "@label"
+#~ msgid "Info..."
+#~ msgstr "Tietoja..."
+
+#~ msgctxt "@window:title"
+#~ msgid "Install Plugin"
+#~ msgstr "Asenna laajennus"
+
+#~ msgctxt "@title:window"
+#~ msgid "Open file(s)"
+#~ msgstr "Avaa tiedosto(t)"
+
+#~ msgctxt "@label"
+#~ msgid "No text available"
+#~ msgstr "Ei tekstiä saatavilla"
+
+#~ msgctxt "@title:window"
+#~ msgid "About %1"
+#~ msgstr "Tietoja: %1"
+
+#~ msgctxt "@label"
+#~ msgid "Author:"
+#~ msgstr "Tekijä:"
+
+#~ msgctxt "@label"
+#~ msgid "Version:"
+#~ msgstr "Versio:"
+
+#~ msgctxt "@info"
+#~ msgid "A new version is available!"
+#~ msgstr "Uusi versio on saatavilla!"
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Failed to install plugin from <filename>{0}</filename>:\n"
+#~ "<message>{1}</message>"
+#~ msgstr ""
+#~ "Laajennuksen asennus kohteesta <filename>{0}</filename> epäonnistui:\n"
+#~ "<message>{1}</message>"
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Failed to install the plugin;\n"
+#~ "<message>{0}</message>"
+#~ msgstr ""
+#~ "Laajennuksen asennus epäonnistui;\n"
+#~ "<message>{0}</message>"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Setting Visibility"
+#~ msgstr "Näkyvyyden asettaminen"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Check all"
+#~ msgstr "Tarkista kaikki"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Filter..."
+#~ msgstr "Suodatin..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Profiles"
+#~ msgstr "Profiilit"
+
+#~ msgctxt "@label"
+#~ msgid "Duplicate"
+#~ msgstr "Monista"
+
+#~ msgctxt "@label %1 is printer name"
+#~ msgid "Printer: %1"
+#~ msgstr "Tulostin: %1"
+
+#~ msgctxt "@action:button"
+#~ msgid "Update \"%1\""
+#~ msgstr "Päivitä \"%1\""
+
+#~ msgctxt "@action:button"
+#~ msgid "Update profile"
+#~ msgstr "Päivitä profiili"
+
+#~ msgctxt "@action:button"
+#~ msgid "Discard current changes"
+#~ msgstr "Hylkää tehdyt muutokset"
+
+#~ msgctxt "@action:button"
+#~ msgid "Reload profile"
+#~ msgstr "Lataa profiili uudelleen"
+
+#~ msgctxt "@label"
+#~ msgid "Based on"
+#~ msgstr "Peruste:"
+
+#~ msgctxt "@label"
+#~ msgid "Profile type"
+#~ msgstr "Profiilin tyyppi"
+
+#~ msgctxt "@label"
+#~ msgid "Protected profile"
+#~ msgstr "Suojattu profiili"
+
+#~ msgctxt "@label"
+#~ msgid "Custom profile"
+#~ msgstr "Mukautettu profiili"
+
+#~ msgctxt "@action:button"
+#~ msgid "Import"
+#~ msgstr "Tuo"
+
+#~ msgctxt "@action:button"
+#~ msgid "Export"
+#~ msgstr "Vie"
+
+#~ msgctxt "@window:title"
+#~ msgid "Import Profile"
+#~ msgstr "Profiilin tuonti"
+
+#~ msgctxt "@title:window"
+#~ msgid "Import Profile"
+#~ msgstr "Profiilin tuonti"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export Profile"
+#~ msgstr "Profiilin vienti"
+
+#~ msgctxt "@info"
+#~ msgid "An exception occurred while checking for updates."
+#~ msgstr "Päivitysten tarkistuksen yhteydessä tapahtui poikkeus."
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Loading <filename>{0}</filename>"
+#~ msgstr "Ladataan <filename>{0}</filename>"
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Cannot open file type <filename>{0}</filename>"
+#~ msgstr "Ei voida avata tiedostotyyppiä <filename>{0}</filename>"
+
+#~ msgctxt "@action:button"
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgctxt "@label"
+#~ msgid "The file <filename>{0}</filename> already exists. Are you sure you want to overwrite it?"
+#~ msgstr "Tiedosto <filename>{0}</filename> on jo olemassa. Haluatko varmasti kirjoittaa sen päälle?"
+
+#~ msgctxt "@info:progress"
+#~ msgid "Saving to <filename>{0}</filename>"
+#~ msgstr "Tallennetaan tiedostoon <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Permission denied when trying to save <filename>{0}</filename>"
+#~ msgstr "Lupa evätty yritettäessä tallentaa tiedostoon <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Could not save to <filename>{0}</filename>: <message>{1}</message>"
+#~ msgstr "Ei voitu tallentaa tiedostoon <filename>{0}</filename>: <message>{1}</message>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Saved to <filename>{0}</filename>"
+#~ msgstr "Tallennettu tiedostoon <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Cannot open file type <filename>{0}</filename>"
+#~ msgstr "Ei voida avata tiedostotyyppiä <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Failed to load <filename>{0}</filename>"
+#~ msgstr "Tiedoston <filename>{0}</filename> lataaminen epäonnistui"
+
+#~ msgctxt "@info:status"
+#~ msgid "Loading <filename>{0}</filename>"
+#~ msgstr "Ladataan <filename>{0}</filename>"
+
+#~ msgctxt "description"
+#~ msgid "Provides the Translate tool."
+#~ msgstr "Näyttää käännöstyökalun."
+
+#~ msgctxt "name"
+#~ msgid "Translate Tool"
+#~ msgstr "Käännöstyökalu"
+
+#~ msgctxt "@label"
+#~ msgid "Simple View"
+#~ msgstr "Yksinkertainen näkymä"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides a simple solid mesh view."
+#~ msgstr "Näyttää yksinkertaisen kiinteän verkkonäkymän."
+
+#~ msgctxt "@label"
+#~ msgid "File Logger"
+#~ msgstr "Tiedonkeruuohjelma"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Outputs log information to a file in your settings folder."
+#~ msgstr "Lähettää lokitiedot asetuskansion tiedostoon."
+
+#~ msgctxt "@label"
+#~ msgid "STL Reader"
+#~ msgstr "STL-lukija"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for reading STL files."
+#~ msgstr "Tukee STL-tiedostojen lukemista."
+
+#~ msgctxt "@label"
+#~ msgid "Wavefront OBJ Reader"
+#~ msgstr "Wavefront OBJ -lukija"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Makes it possbile to read Wavefront OBJ files."
+#~ msgstr "Mahdollistaa Wavefront OBJ -tiedostojen lukemisen."
+
+#~ msgctxt "@label"
+#~ msgid "Wavefront OBJ Writer"
+#~ msgstr "Wavefront OBJ -kirjoitin"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Makes it possbile to write Wavefront OBJ files."
+#~ msgstr "Mahdollistaa Wavefront OBJ -tiedostojen kirjoittamisen."
+
+#~ msgctxt "@label"
+#~ msgid "STL Writer"
+#~ msgstr "STL-kirjoitin"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for writing STL files."
+#~ msgstr "Tukee STL-tiedostojen kirjoittamista."
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "STL File (Ascii)"
+#~ msgstr "STL-tiedosto (ascii)"
+
+#~ msgctxt "@label"
+#~ msgid "Console Logger"
+#~ msgstr "Konsolin tiedonkeruu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Outputs log information to the console."
+#~ msgstr "Lähettää lokitiedot konsoliin."
+
+#~ msgctxt "@label"
+#~ msgid "Update Checker"
+#~ msgstr "Päivitysten tarkistin"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Checks for updates of the software."
+#~ msgstr "Tarkistaa, onko ohjelmistopäivityksiä saatavilla."
+
+#~ msgctxt "@label"
+#~ msgid "Local File Output Device"
+#~ msgstr "Paikallisen tiedoston tulostusväline"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enables saving to local files."
+#~ msgstr "Mahdollistaa tallennuksen paikallisiin tiedostoihin."
+
+#~ msgctxt "@label"
+#~ msgid "Scale Tool"
+#~ msgstr "Skaalaustyökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Scale tool."
+#~ msgstr "Näyttää skaalaustyökalun."
+
+#~ msgctxt "@label"
+#~ msgid "Selection Tool"
+#~ msgstr "Valintatyökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Selection tool."
+#~ msgstr "Näyttää valintatyökalun."
+
+#~ msgctxt "@label"
+#~ msgid "Translate Tool"
+#~ msgstr "Käännöstyökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Translate tool."
+#~ msgstr "Näyttää käännöstyökalun."
+
+#~ msgctxt "@label"
+#~ msgid "Camera Tool"
+#~ msgstr "Kameratyökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the tool to manipulate the camera."
+#~ msgstr "Työkalu kameran käsittelyyn."
+
+#~ msgctxt "@label"
+#~ msgid "Rotate Tool"
+#~ msgstr "Pyöritystyökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Rotate tool."
+#~ msgstr "Näyttää pyöritystyökalun."
+
+#~ msgctxt "@label"
+#~ msgid "Mirror Tool"
+#~ msgstr "Peilityökalu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Mirror tool."
+#~ msgstr "Näyttää peilaustyökalun."
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "The plugin has been installed.\n"
+#~ " Please re-start the application to active the plugin."
+#~ msgstr ""
+#~ "Laajennus on asennettu.\n"
+#~ " Ota laajennus käyttöön käynnistämällä sovellus uudelleen."
+
+#~ msgctxt "@label"
+#~ msgid "Wireframe View"
+#~ msgstr "Rautalankanäkymä"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides a simple wireframe view."
+#~ msgstr "Näyttää yksinkertaisen rautalankanäkymän."
+
+#~ msgctxt "@info"
+#~ msgid "An exception occured while parsing the JSON file."
+#~ msgstr "JSON-tiedostoa jäsennettäessä tapahtui poikkeus."
+
+#~ msgctxt "@label"
+#~ msgid "3MF Writer"
+#~ msgstr "3MF-kirjoitin"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for writing 3MF files."
+#~ msgstr "Tukee 3MF-tiedostojen kirjoittamista."
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "3MF file"
+#~ msgstr "3MF-tiedosto"
+
+#~ msgctxt "@action:button"
+#~ msgid "Scale to Max"
+#~ msgstr "Skaalaa maksimiin"
+
+#~ msgctxt "@action:button"
+#~ msgid "Center on Build Plate"
+#~ msgstr "Keskitä alustalle"
+
+#~ msgctxt "@action:button"
+#~ msgid "Drop to Build Plate"
+#~ msgstr "Pudota alustalle"

@@ -1,0 +1,1293 @@
+# QDTECH
+# Copyright (C) 2021 QIDI B.V.
+# This file is distributed under the same license as the QDTECH package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QDTECH 4.9\n"
+"Report-Msgid-Bugs-To: r.dulek@qidi.com\n"
+"POT-Creation-Date: 2021-04-02 16:35+0200\n"
+"PO-Revision-Date: 2021-04-16 15:12+0200\n"
+"Last-Translator: Lionbridge <info@lionbridge.com>\n"
+"Language-Team: Lionbridge <info@lionbridge.com>, QIDI <info@qidi.com>, Dutch <info@bothof.nl>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/MirrorTool/__init__.py:12
+msgctxt "@label"
+msgid "Mirror"
+msgstr "Spiegelen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/MirrorTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Mirror Model"
+msgstr "Model Spiegelen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/__init__.py:12
+msgctxt "@action:button"
+msgid "Move"
+msgstr "Verplaatsen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Move Model"
+msgstr "Model Verplaatsen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/__init__.py:12
+msgctxt "@label"
+msgid "Rotate"
+msgstr "Roteren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Rotate Model"
+msgstr "Model Roteren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.py:355
+msgctxt "@label"
+msgid "Laying object flat on buildplate..."
+msgstr "Object plat op platform plaatsen..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.py:355
+msgctxt "@title"
+msgid "Object Rotation"
+msgstr "Objectrotatie"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/__init__.py:12
+msgctxt "@label"
+msgid "Scale"
+msgstr "Schalen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/__init__.py:13
+msgctxt "@info:tooltip"
+msgid "Scale Model"
+msgstr "Model Schalen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateChecker.py:26
+msgctxt "@item:inmenu"
+msgid "Update Checker"
+msgstr "Updatecontrole"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateChecker.py:27
+msgctxt "@item:inmenu"
+msgid "Check for Updates"
+msgstr "Controleren op Updates"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:52
+msgctxt "@info"
+msgid "Could not access update information."
+msgstr "Geen toegang tot update-informatie."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:53
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:71
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:100
+#: /mnt/projects/qidi/qidi/QDTECH/QD/VersionUpgradeManager.py:173
+msgctxt "@info:title"
+msgid "Version Upgrade"
+msgstr "Versie-upgrade"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:66
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:71
+msgctxt "@info"
+msgid "The version you are using does not support checking for updates."
+msgstr "Het controleren op updates wordt in de door u gebruikte versie niet ondersteund."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:66
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:196
+msgctxt "@info:title"
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:96
+msgctxt "@info"
+msgid "An error occurred while checking for updates."
+msgstr "Er is een fout opgetreden tijdens het controleren op updates."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:96
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:203
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Bindings/OutputDeviceManagerProxy.py:156
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Bindings/OutputDeviceManagerProxy.py:159
+msgctxt "@info:title"
+msgid "Error"
+msgstr "Fout"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:100
+msgctxt "@info"
+msgid "No new version was found."
+msgstr "Er is geen nieuwe versie gevonden."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:105
+#, python-brace-format
+msgctxt "@info:status"
+msgid "{application_name} {version_number} is available!"
+msgstr "{application_name} {version_number} is beschikbaar!"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:107
+#, python-brace-format
+msgctxt "@info:status"
+msgid "{application_name} {version_number} provides a better and more reliable printing experience."
+msgstr "{application_name} {version_number} biedt een betere en betrouwbaardere printervaring."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:110
+msgctxt "@action:button"
+msgid "Download"
+msgstr "Downloaden"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/UpdateChecker/UpdateCheckerJob.py:112
+msgctxt "@action:button"
+msgid "Learn more"
+msgstr "Meer informatie"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:30
+msgctxt "@item:inmenu"
+msgid "Local File"
+msgstr "Lokaal Bestand"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:31
+msgctxt "@action:button Preceded by 'Ready to'."
+msgid "Save to Disk"
+msgstr "Opslaan op schijf"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:32
+msgctxt "@info:tooltip"
+msgid "Save to Disk"
+msgstr "Opslaan op schijf"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:58
+msgctxt "@title:window"
+msgid "Save to Disk"
+msgstr "Opslaan op schijf"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:91
+msgctxt "@info:warning"
+msgid "There are no file types available to write with!"
+msgstr "Er zijn geen bestandstypen beschikbaar om te schrijven!"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:138
+msgctxt "@title:window"
+msgid "File Already Exists"
+msgstr "Het Bestand Bestaat Al"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:138
+#, python-brace-format
+msgctxt "@label Don't translate the XML tag <filename>!"
+msgid "The file <filename>{0}</filename> already exists. Are you sure you want to overwrite it?"
+msgstr "Het bestand <filename>{0}</filename> bestaat al. Weet u zeker dat u dit bestand wilt overschrijven?"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:168
+#, python-brace-format
+msgctxt "@info:progress Don't translate the XML tags <filename>!"
+msgid "Saving to <filename>{0}</filename>"
+msgstr "Opslaan als <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:169
+msgctxt "@info:title"
+msgid "Saving"
+msgstr "Opslaan"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:177
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename>!"
+msgid "Permission denied when trying to save <filename>{0}</filename>"
+msgstr "Toegang geweigerd tijdens opslaan als <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:180
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:196
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename> or <message>!"
+msgid "Could not save to <filename>{0}</filename>: <message>{1}</message>"
+msgstr "Kan niet opslaan als <filename>{0}</filename>: <message>{1}</message>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:190
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tags <filename>!"
+msgid "Saved to <filename>{0}</filename>"
+msgstr "Opgeslagen als <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:190
+msgctxt "@info:title"
+msgid "File Saved"
+msgstr "Bestand opgeslagen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:191
+msgctxt "@action:button"
+msgid "Open Folder"
+msgstr "Map Openen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:191
+msgctxt "@info:tooltip"
+msgid "Open the folder containing the file"
+msgstr "De map met het bestand openen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/LocalFileOutputDevice/LocalFileOutputDevice.py:203
+#, python-brace-format
+msgctxt "@info:status"
+msgid "Something went wrong saving to <filename>{0}</filename>: <message>{1}</message>"
+msgstr "Er is een fout opgetreden tijdens het opslaan naar <filename>{0}</filename>: <message>{1}</message>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Views/SimpleView/__init__.py:12
+msgctxt "@item:inmenu"
+msgid "Simple"
+msgstr "Eenvoudig"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLReader/__init__.py:14
+msgctxt "@item:inlistbox"
+msgid "STL File"
+msgstr "STL-bestand"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/OBJWriter.py:25
+msgctxt "@error:not supported"
+msgid "OBJWriter does not support non-text mode."
+msgstr "OBJWriter ondersteunt geen non-tekstmodus."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/OBJWriter.py:32
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/STLWriter.py:29
+msgctxt "@error:no mesh"
+msgid "There is no mesh to write."
+msgstr "Er is geen raster om te schrijven."
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJWriter/__init__.py:15
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/OBJReader/__init__.py:15
+msgctxt "@item:inlistbox"
+msgid "Wavefront OBJ File"
+msgstr "Wavefront OBJ-bestand"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/__init__.py:17
+msgctxt "@item:inlistbox"
+msgid "STL File (ASCII)"
+msgstr "STL-bestand (ASCII)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/__init__.py:23
+msgctxt "@item:inlistbox"
+msgid "STL File (Binary)"
+msgstr "STL-bestand (binair)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/FileHandlers/STLWriter/STLWriter.py:38
+msgctxt "@error:not supported"
+msgid "Unsupported output mode writing STL to stream."
+msgstr "Niet-ondersteunde uitvoermodus bij het schrijven van STL naar stream."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:318
+msgctxt "@info:status"
+msgid ""
+"The plugin has been installed.\n"
+"Please re-start the application to activate the plugin."
+msgstr ""
+"De invoegtoepassing is geïnstalleerd.\n"
+"Start de toepassing opnieuw om de invoegtoepassing te activeren."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:379
+msgctxt "@error:untrusted"
+msgid "Plugin {} was not loaded because it could not be verified."
+msgstr "Plug-in {} is niet geladen omdat deze niet kon worden geverifieerd."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:479
+#, python-brace-format
+msgctxt "@info:status"
+msgid ""
+"The plugin has been removed.\n"
+"Please restart {0} to finish uninstall."
+msgstr ""
+"De invoegtoepassing is verwijderd.\n"
+"Start {0} opnieuw om het verwijderen te voltooien."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:826
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Settings/Models/InstanceContainersModel.py:193
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/FileHandler.py:60
+#, python-brace-format
+msgctxt "@item:inlistbox"
+msgid "All Supported Types ({0})"
+msgstr "Alle Ondersteunde Typen ({0})"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PluginRegistry.py:827
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Settings/Models/InstanceContainersModel.py:196
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/FileHandler.py:61
+msgctxt "@item:inlistbox"
+msgid "All Files (*)"
+msgstr "Alle Bestanden (*)"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:122
+#, python-brace-format
+msgctxt "@label Short days-hours-minutes format. {0} is days, {1} is hours, {2} is minutes"
+msgid "{0:0>2}d {1:0>2}h {2:0>2}min"
+msgstr "{0:0>2}d {1:0>2}u {2:0>2}min"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:124
+#, python-brace-format
+msgctxt "@label Short hours-minutes format. {0} is hours, {1} is minutes"
+msgid "{0:0>2}h {1:0>2}min"
+msgstr "{0:0>2}u {1:0>2}min"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is days"
+msgid "{0} day"
+msgid_plural "{0} days"
+msgstr[0] "{0} dag"
+msgstr[1] "{0} dagen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:129
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is hours"
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] "{0} uur"
+msgstr[1] "{0} uur"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:127
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:129
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/Duration.py:131
+#, python-brace-format
+msgctxt "@label Long duration format. {0} is minutes"
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] "{0} minuut"
+msgstr[1] "{0} minuten"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:192
+msgctxt "@info:progress"
+msgid "Initializing package manager..."
+msgstr "Pakketbeheer initialiseren..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:200
+msgctxt "@info:status"
+msgid "Your configuration seems to be corrupt."
+msgstr "Uw configuratie is mogelijk beschadigd."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:202
+msgctxt "@info:title"
+msgid "Configuration errors"
+msgstr "Configuratiefouten"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:205
+msgctxt "@info:progress"
+msgid "Loading plugins..."
+msgstr "Invoegtoepassingen laden..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:212
+msgctxt "@info:progress"
+msgid "Updating configuration..."
+msgstr "Configuratie bijwerken..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:218
+msgctxt "@info:progress"
+msgid "Loading preferences..."
+msgstr "Voorkeuren laden..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/QtApplication.py:305
+msgctxt "@info:progress"
+msgid "Loading UI..."
+msgstr "UI laden ..."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Mesh/ReadMeshJob.py:70
+#, python-format, python-brace-format
+msgctxt "@info:status"
+msgid "Auto scaled object to {0}% of original size"
+msgstr "Het object is automatisch geschaald naar {0}% van het oorspronkelijke formaat"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Mesh/ReadMeshJob.py:70
+msgctxt "@info:title"
+msgid "Scaling Object"
+msgstr "Object schalen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:192
+#, python-brace-format
+msgctxt "@info"
+msgid "Would you like to reload {filename}?"
+msgstr "Wilt u {filename} opnieuw laden?"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:193
+msgctxt "@info:title"
+msgid "File has been modified"
+msgstr "Het bestand is gewijzigd"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:194
+msgctxt "@action:button"
+msgid "Reload"
+msgstr "Opnieuw laden"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Scene/Scene.py:194
+msgctxt "@action:description"
+msgid "This will trigger the modified files to reload from disk."
+msgstr "Hiermee wordt het opnieuw laden van de bestanden vanaf de schijf geactiveerd."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:59
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:64
+msgctxt "@message"
+msgid "Failed to Initialize OpenGL"
+msgstr "Kan OpenGL niet initialiseren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/View/GL/OpenGL.py:74
+msgctxt "Critical OpenGL Extensions Missing"
+msgid "Critical OpenGL extensions are missing. This program requires support for Framebuffer Objects. Please check your video card drivers."
+msgstr "Er ontbreken essentiële OpenGL-extensies. Voor dit programma is ondersteuning voor Framebuffer-objecten vereist. Controleer het stuurprogramma voor uw videokaart."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/VersionUpgradeManager.py:173
+#, python-brace-format
+msgctxt "@info:version-upgrade"
+msgid "A configuration from an older version of {0} was imported."
+msgstr "Er is een configuratie van een oudere versie van {0} geïmporteerd."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:281
+#, python-brace-format
+msgctxt "@error:uninstall"
+msgid ""
+"There were some errors uninstalling the following packages:\n"
+"{packages}"
+msgstr ""
+"Er zijn fouten opgetreden bij het deïnstalleren van de volgende packages:\n"
+"{packages}"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:283
+msgctxt "@info:title"
+msgid "Uninstalling errors"
+msgstr "Fouten bij het de-installeren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:559
+#, python-brace-format
+msgctxt "@error:update"
+msgid ""
+"There was an error uninstalling the package {package} before installing new version:\n"
+"{error}.\n"
+"Please try to upgrade again later."
+msgstr ""
+"Er is een fout opgetreden bij het deïnstalleren van de package {package} vóór installatie van de nieuwe versie:\n"
+"{error}.\n"
+"Probeer de upgrade later opnieuw uit te voeren."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/PackageManager.py:562
+msgctxt "@info:title"
+msgid "Updating error"
+msgstr "Fout bij het bijwerken"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:40
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Cannot open files of the type of <filename>{0}</filename>"
+msgstr "Kan geen bestanden openen van het type <filename>{0}</filename>"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:40
+msgctxt "@info:title"
+msgid "Invalid File"
+msgstr "Ongeldig bestand"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:53
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Failed to load <filename>{0}</filename>. The file could be corrupt or inaccessible."
+msgstr "Kan <filename>{0}</filename> niet laden. Het bestand is mogelijk beschadigd of ontoegankelijk."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:55
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:81
+msgctxt "@info:title"
+msgid "Unable to Open File"
+msgstr "Kan bestand niet openen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:63
+msgctxt "@info:title"
+msgid "Loading"
+msgstr "Laden"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:78
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "There where no models in <filename>{0}</filename>."
+msgstr "Er waren geen modellen in <filename>{0}</filename>."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:78
+msgctxt "@info:title"
+msgid "No Models in File"
+msgstr "Geen modellen in bestand"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/FileHandler/ReadFileJob.py:81
+#, python-brace-format
+msgctxt "@info:status Don't translate the XML tag <filename>!"
+msgid "Failed to load <filename>{0}</filename>. The file could be corrupt, inaccessible or it did not contain any models."
+msgstr "Kan <filename>{0}</filename> niet laden. Het bestand is mogelijk corrupt of ontoegankelijk, of het bevat geen modellen."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:33
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:21
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:67
+msgctxt "@action:button"
+msgid "Reset"
+msgstr "Herstellen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:45
+#, python-brace-format
+msgctxt "@info:status"
+msgid ""
+"Your configuration seems to be corrupt. Something seems to be wrong with the following profiles:\n"
+"- {profiles}\n"
+" Would you like to reset to factory defaults? Reset will remove all your current printers and profiles."
+msgstr ""
+"Uw configuratie is mogelijk beschadigd. Er lijkt een probleem te zijn met de volgende profielen:\n"
+"- {profiles}\n"
+" Wilt u de standaardinstellingen herstellen? Hiermee worden al uw huidige printers en profielen gewist."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:50
+msgctxt "@title:window"
+msgid "Reset to factory"
+msgstr "Herstellen naar fabrieksinstellingen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/ConfigurationErrorMessage.py:52
+msgctxt "@label"
+msgid "Reset will remove all your current printers and profiles! Are you sure you want to reset?"
+msgstr "Als u de instellingen herstelt, worden alle huidige printers en profielen verwijderd. Weet u zeker dat u de instellingen wilt herstellen?"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/TranslateTool/TranslateTool.qml:196
+msgctxt "@option:check"
+msgid "Lock Model"
+msgstr "Model vergrendelen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:39
+msgctxt "@action:button"
+msgid "Lay flat"
+msgstr "Plat neerleggen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:60
+msgctxt "@action:button"
+msgid "Select face to align to the build plate"
+msgstr "Selecteer de kant die u wilt uitlijnen met het platform"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/RotateTool/RotateTool.qml:81
+msgctxt "@action:checkbox"
+msgid "Snap Rotation"
+msgstr "Roteren in Stappen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:93
+msgctxt "@option:check"
+msgid "Snap Scaling"
+msgstr "Schalen in Stappen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/plugins/Tools/ScaleTool/ScaleTool.qml:121
+msgctxt "@option:check"
+msgid "Uniform Scaling"
+msgstr "Uniform Schalen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/ConfirmRemoveDialog.qml:16
+msgctxt "@title:window"
+msgid "Confirm Remove"
+msgstr "Verwijderen Bevestigen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/ConfirmRemoveDialog.qml:17
+msgctxt "@label (%1 is object name)"
+msgid "Are you sure you wish to remove %1? This cannot be undone!"
+msgstr "Weet u zeker dat u %1 wilt verwijderen? Deze bewerking kan niet ongedaan worden gemaakt!"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:18
+msgctxt "@title:window"
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:111
+msgctxt "@action:button"
+msgid "Defaults"
+msgstr "Standaardwaarden"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:119
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Sluiten"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:149
+msgctxt "@title:tab"
+msgid "General"
+msgstr "Algemeen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/PreferencesDialog.qml:150
+msgctxt "@title:tab"
+msgid "Settings"
+msgstr "Instellingen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/SettingVisibilityItem.qml:32
+msgctxt "@item:tooltip"
+msgid "This setting has been hidden by the active machine and will not be visible."
+msgstr "Deze instelling is door de actieve machine verborgen en wordt niet zichtbaar."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/SettingVisibilityItem.qml:49
+msgctxt "@item:tooltip %1 is list of setting names"
+msgid "This setting has been hidden by the value of %1. Change the value of that setting to make this setting visible."
+msgid_plural "This setting has been hidden by the values of %1. Change the values of those settings to make this setting visible."
+msgstr[0] "Deze instelling is verborgen vanwege de waarde van %1. Wijzig de waarde van die instelling om deze instelling zichtbaar te maken."
+msgstr[1] "Deze instelling is verborgen vanwege de waarden van %1. Wijzig de waarden van die instellingen om deze instelling zichtbaar te maken."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:19
+msgctxt "@title:window"
+msgid "Rename"
+msgstr "Hernoemen"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:20
+msgctxt "@info"
+msgid "Please provide a new name."
+msgstr "Geef een nieuwe naam op."
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:70
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:241
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/RenameDialog.qml:75
+msgctxt "@action:button"
+msgid "OK"
+msgstr "OK"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/MachinesPage.qml:12
+msgctxt "@title:tab"
+msgid "Printers"
+msgstr "Printers"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Preferences/MachinesPage.qml:40
+msgctxt "@label"
+msgid "Type"
+msgstr "Type"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:215
+msgctxt "@action:button"
+msgid "Back"
+msgstr "Terug"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:231
+msgctxt "@action:button"
+msgid "Finish"
+msgstr "Voltooien"
+
+#: /mnt/projects/qidi/qidi/QDTECH/QD/Qt/qml/QD/Wizard.qml:231
+msgctxt "@action:button"
+msgid "Next"
+msgstr "Volgende"
+
+#: FileLogger/plugin.json
+msgctxt "description"
+msgid "Outputs log information to a file in your settings folder."
+msgstr "Voert logboekinformatie uit naar een bestand in de instellingenmap."
+
+#: FileLogger/plugin.json
+msgctxt "name"
+msgid "File Logger"
+msgstr "Bestandenlogger"
+
+#: LocalContainerProvider/plugin.json
+msgctxt "description"
+msgid "Provides built-in setting containers that come with the installation of the application."
+msgstr "Deze optie biedt geïntegreerde instellingscontainers die samen met de toepassing worden geïnstalleerd."
+
+#: LocalContainerProvider/plugin.json
+msgctxt "name"
+msgid "Local Container Provider"
+msgstr "Lokale containerprovider"
+
+#: Tools/MirrorTool/plugin.json
+msgctxt "description"
+msgid "Provides the Mirror tool."
+msgstr "Biedt het Spiegelgereedschap."
+
+#: Tools/MirrorTool/plugin.json
+msgctxt "name"
+msgid "Mirror Tool"
+msgstr "Spiegelgereedschap"
+
+#: Tools/TranslateTool/plugin.json
+msgctxt "description"
+msgid "Provides the Move tool."
+msgstr "Biedt het Verplaatsgereedschap."
+
+#: Tools/TranslateTool/plugin.json
+msgctxt "name"
+msgid "Move Tool"
+msgstr "Verplaatsgereedschap"
+
+#: Tools/RotateTool/plugin.json
+msgctxt "description"
+msgid "Provides the Rotate tool."
+msgstr "Biedt het Rotatiegereedschap."
+
+#: Tools/RotateTool/plugin.json
+msgctxt "name"
+msgid "Rotate Tool"
+msgstr "Rotatiegereedschap"
+
+#: Tools/CameraTool/plugin.json
+msgctxt "description"
+msgid "Provides the tool to manipulate the camera."
+msgstr "Biedt het gereedschap waarmee u de camera kunt verplaatsen."
+
+#: Tools/CameraTool/plugin.json
+msgctxt "name"
+msgid "Camera Tool"
+msgstr "Cameragereedschap"
+
+#: Tools/SelectionTool/plugin.json
+msgctxt "description"
+msgid "Provides the Selection tool."
+msgstr "Biedt het Selectiegereedschap."
+
+#: Tools/SelectionTool/plugin.json
+msgctxt "name"
+msgid "Selection Tool"
+msgstr "Selectiegereedschap"
+
+#: Tools/ScaleTool/plugin.json
+msgctxt "description"
+msgid "Provides the Scale tool."
+msgstr "Biedt het Schaalgereedschap."
+
+#: Tools/ScaleTool/plugin.json
+msgctxt "name"
+msgid "Scale Tool"
+msgstr "Schaalgereedschap"
+
+#: UpdateChecker/plugin.json
+msgctxt "description"
+msgid "Checks for updates of the software."
+msgstr "Controleert of er updates zijn voor de software."
+
+#: UpdateChecker/plugin.json
+msgctxt "name"
+msgid "Update Checker"
+msgstr "Updatecontrole"
+
+#: LocalFileOutputDevice/plugin.json
+msgctxt "description"
+msgid "Enables saving to local files."
+msgstr "Maakt opslaan als lokaal bestand mogelijk."
+
+#: LocalFileOutputDevice/plugin.json
+msgctxt "name"
+msgid "Local File Output Device"
+msgstr "Uitvoerapparaat voor lokaal bestand"
+
+#: ConsoleLogger/plugin.json
+msgctxt "description"
+msgid "Outputs log information to the console."
+msgstr "Voert logboekinformatie uit naar de console."
+
+#: ConsoleLogger/plugin.json
+msgctxt "name"
+msgid "Console Logger"
+msgstr "Consolelogger"
+
+#: Views/SimpleView/plugin.json
+msgctxt "description"
+msgid "Provides a simple solid mesh view."
+msgstr "Biedt een eenvoudige, solide rasterweergave."
+
+#: Views/SimpleView/plugin.json
+msgctxt "name"
+msgid "Simple View"
+msgstr "Eenvoudige Weergave"
+
+#: FileHandlers/STLReader/plugin.json
+msgctxt "description"
+msgid "Provides support for reading STL files."
+msgstr "Biedt ondersteuning voor het lezen van STL-bestanden."
+
+#: FileHandlers/STLReader/plugin.json
+msgctxt "name"
+msgid "STL Reader"
+msgstr "STL-lezer"
+
+#: FileHandlers/OBJWriter/plugin.json
+msgctxt "description"
+msgid "Makes it possible to write Wavefront OBJ files."
+msgstr "Maakt het mogelijk Wavefront OBJ-bestanden te schrijven."
+
+#: FileHandlers/OBJWriter/plugin.json
+msgctxt "name"
+msgid "Wavefront OBJ Writer"
+msgstr "Wavefront OBJ-schrijver"
+
+#: FileHandlers/STLWriter/plugin.json
+msgctxt "description"
+msgid "Provides support for writing STL files."
+msgstr "Biedt ondersteuning voor het schrijven van STL-bestanden."
+
+#: FileHandlers/STLWriter/plugin.json
+msgctxt "name"
+msgid "STL Writer"
+msgstr "STL-schrijver"
+
+#: FileHandlers/OBJReader/plugin.json
+msgctxt "description"
+msgid "Makes it possible to read Wavefront OBJ files."
+msgstr "Maakt het mogelijk Wavefront OBJ-bestanden te lezen."
+
+#: FileHandlers/OBJReader/plugin.json
+msgctxt "name"
+msgid "Wavefront OBJ Reader"
+msgstr "Wavefront OBJ-lezer"
+
+#~ msgctxt "@action:button Preceded by 'Ready to'."
+#~ msgid "Save to File"
+#~ msgstr "Opslaan als bestand"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Save to File"
+#~ msgstr "Opslaan als Bestand"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save to File"
+#~ msgstr "Opslaan als Bestand"
+
+#~ msgctxt "@error:untrusted"
+#~ msgid "Plugin {} was not loaded because it tried to load files outside of the trusted context"
+#~ msgstr "Invoegtoepassing {} is niet geladen omdat deze bestanden probeerde te laden buiten de vertrouwde context"
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Failed to load <filename>{0}</filename>"
+#~ msgstr "Kan <filename>{0}</filename> niet laden"
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Your configuration seems to be corrupt. Something seems to be wrong with the following profiles:\n"
+#~ "- {profiles}\n"
+#~ "Would you like to reset to factory defaults?"
+#~ msgstr ""
+#~ "Uw configuratie is mogelijk beschadigd. Er lijkt een probleem te zijn met de volgende profielen:\n"
+#~ "- {profiles}\n"
+#~ "Wilt u de standaardinstellingen herstellen?"
+
+#~ msgctxt "@info:button"
+#~ msgid "Reset your configuration to factory defaults."
+#~ msgstr "Herstel uw configuratie naar de standaardinstellingen."
+
+#~ msgctxt "description"
+#~ msgid "Example extension to instruct people on how to create QDTECH extensions."
+#~ msgstr "Voorbeeldextensie om gebruikers te tonen hoe QDTECH-extensies worden gemaakt."
+
+#~ msgctxt "name"
+#~ msgid "Example Extension"
+#~ msgstr "Voorbeeldextensie"
+
+#~ msgctxt "description"
+#~ msgid "Example file reader to instruct people on how to create QDTECH file readers."
+#~ msgstr "Voorbeeldbestandslezer om gebruikers te tonen hoe QDTECH-bestandslezers worden gemaakt."
+
+#~ msgctxt "name"
+#~ msgid "Example File Reader"
+#~ msgstr "Voorbeeldbestandslezer"
+
+#~ msgctxt "description"
+#~ msgid "Example tool to instruct people on how to create QDTECH tools."
+#~ msgstr "Voorbeeldgereedschap om gebruikers te tonen hoe QDTECH-gereedschap wordt gemaakt."
+
+#~ msgctxt "name"
+#~ msgid "Example Tool"
+#~ msgstr "Voorbeeldgereedschap"
+
+#~ msgctxt "description"
+#~ msgid "Example output device to instruct people on how to create QDTECH output devices."
+#~ msgstr "Voorbeelduitvoerapparaat om gebruikers te tonen hoe QDTECH-uitvoerapparaten worden gemaakt."
+
+#~ msgctxt "name"
+#~ msgid "Example Output Device"
+#~ msgstr "Voorbeelduitvoerapparaat"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Plugins"
+#~ msgstr "Invoegtoepassingen"
+
+#~ msgctxt "@action:button"
+#~ msgid "Install new plugin"
+#~ msgstr "Nieuwe invoegtoepassing installeren"
+
+#~ msgctxt "@label"
+#~ msgid "You will need to restart the application before changes in plugins have effect."
+#~ msgstr "U moet de toepassing opnieuw starten voordat wijzigingen in invoegtoepassingen van kracht worden."
+
+#~ msgctxt "@label"
+#~ msgid "This plugin is required for the application to run."
+#~ msgstr "Voor het uitvoeren van de toepassing is deze invoegtoepassing vereist."
+
+#~ msgctxt "@label"
+#~ msgid "Info..."
+#~ msgstr "Info..."
+
+#~ msgctxt "@window:title"
+#~ msgid "Install Plugin"
+#~ msgstr "Invoegtoepassing installeren"
+
+#~ msgctxt "@title:window"
+#~ msgid "Open file(s)"
+#~ msgstr "Bestand(en) openen"
+
+#~ msgctxt "@label"
+#~ msgid "No text available"
+#~ msgstr "Geen tekst beschikbaar"
+
+#~ msgctxt "@title:window"
+#~ msgid "About %1"
+#~ msgstr "Over %1"
+
+#~ msgctxt "@label"
+#~ msgid "Author:"
+#~ msgstr "Auteur:"
+
+#~ msgctxt "@label"
+#~ msgid "Version:"
+#~ msgstr "Versie:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Learn more about the new features"
+#~ msgstr "Meer informatie over de nieuwe functies"
+
+#~ msgctxt "@info:status"
+#~ msgid "QIDI {0} is available!"
+#~ msgstr "QIDI {0} is beschikbaar."
+
+#~ msgctxt "@info:status"
+#~ msgid "QIDI {0} provides better and reliable printing experience."
+#~ msgstr "QIDI {0} biedt een betere en betrouwbare printervaring."
+
+#~ msgctxt "@action:button"
+#~ msgid "Learn more about new features"
+#~ msgstr "Meer informatie over de nieuwe functies"
+
+#~ msgctxt "@error:update"
+#~ msgid ""
+#~ "There was an error uninstalling the package {package} before installingnew version:\n"
+#~ "{error}.\n"
+#~ "Please try to upgrade again later."
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het de-installeren van de package {package} vóór installatie van de nieuwe versie:\n"
+#~ "{error}.\n"
+#~ "Probeer de upgrade later opnieuw uit te voeren."
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Your configuration seems to be corrupt. Something seems to be wrong with the following profiles:\n"
+#~ "- {profiles}\n"
+#~ "Would you like to reset to factory defaults? Reset will remove all your current printers and profiles."
+#~ msgstr ""
+#~ "Uw configuratie is mogelijk beschadigd. Er lijkt een probleem te zijn met de volgende profielen:\n"
+#~ "- {profiles}\n"
+#~ "Wilt u de standaardinstellingen herstellen? Hiermee worden al uw huidige printers en profielen gewist."
+
+#~ msgctxt "@info"
+#~ msgid "A new version is available!"
+#~ msgstr "Er is een nieuwe versie beschikbaar."
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Failed to install plugin from <filename>{0}</filename>:\n"
+#~ "<message>{1}</message>"
+#~ msgstr ""
+#~ "Kan de invoegtoepassing van <filename>{0}</filename> niet installeren:\n"
+#~ "<message>{1}</message>"
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "Failed to install the plugin;\n"
+#~ "<message>{0}</message>"
+#~ msgstr ""
+#~ "Kan de invoegtoepassing niet installeren;\n"
+#~ "<message>{0}</message>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Failed to uninstall plugin. Plugin will be removed after {0} restarts."
+#~ msgstr "Kan de invoegtoepassing niet verwijderen. De invoegtoepassing wordt na {0} keer opnieuw opstarten verwijderd."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Setting Visibility"
+#~ msgstr "Zichtbaarheid Instellen"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Check all"
+#~ msgstr "Alles aanvinken"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Filter..."
+#~ msgstr "Filteren..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Profiles"
+#~ msgstr "Profielen"
+
+#~ msgctxt "@label"
+#~ msgid "Duplicate"
+#~ msgstr "Dupliceren"
+
+#~ msgctxt "@label %1 is printer name"
+#~ msgid "Printer: %1"
+#~ msgstr "Printer: %1"
+
+#~ msgctxt "@action:button"
+#~ msgid "Update \"%1\""
+#~ msgstr "\"%1\" bijwerken"
+
+#~ msgctxt "@action:button"
+#~ msgid "Update profile"
+#~ msgstr "Profiel bijwerken"
+
+#~ msgctxt "@action:button"
+#~ msgid "Discard current changes"
+#~ msgstr "Huidige wijzigingen verwijderen"
+
+#~ msgctxt "@action:button"
+#~ msgid "Reload profile"
+#~ msgstr "Profiel opnieuw laden"
+
+#~ msgctxt "@label"
+#~ msgid "Based on"
+#~ msgstr "Gebaseerd op"
+
+#~ msgctxt "@label"
+#~ msgid "Profile type"
+#~ msgstr "Profieltype"
+
+#~ msgctxt "@label"
+#~ msgid "Protected profile"
+#~ msgstr "Beschermd profiel"
+
+#~ msgctxt "@label"
+#~ msgid "Custom profile"
+#~ msgstr "Aangepast profiel"
+
+#~ msgctxt "@action:button"
+#~ msgid "Import"
+#~ msgstr "Importeren"
+
+#~ msgctxt "@action:button"
+#~ msgid "Export"
+#~ msgstr "Exporteren"
+
+#~ msgctxt "@window:title"
+#~ msgid "Import Profile"
+#~ msgstr "Profiel Importeren"
+
+#~ msgctxt "@title:window"
+#~ msgid "Import Profile"
+#~ msgstr "Profiel Importeren"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export Profile"
+#~ msgstr "Profiel Exporteren"
+
+#~ msgctxt "@info"
+#~ msgid "An exception occurred while checking for updates."
+#~ msgstr "Er is een uitzondering opgetreden tijdens het controleren op updates."
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Loading <filename>{0}</filename>"
+#~ msgstr "<filename>{0}</filename> wordt geladen"
+
+#~ msgctxt "@info:status Don't translate the XML tag <filename>!"
+#~ msgid "Cannot open file type <filename>{0}</filename>"
+#~ msgstr "Kan het bestandstype van <filename>{0}</filename> niet openen."
+
+#~ msgctxt "@action:button"
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgctxt "@label"
+#~ msgid "The file <filename>{0}</filename> already exists. Are you sure you want to overwrite it?"
+#~ msgstr "Het bestand <filename>{0}</filename> bestaat al. Weet u zeker dat u dit bestand wilt overschrijven?"
+
+#~ msgctxt "@info:progress"
+#~ msgid "Saving to <filename>{0}</filename>"
+#~ msgstr "Opslaan als <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Permission denied when trying to save <filename>{0}</filename>"
+#~ msgstr "Toegang geweigerd tijdens opslaan als <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Could not save to <filename>{0}</filename>: <message>{1}</message>"
+#~ msgstr "Kan niet opslaan als <filename>{0}</filename>: <message>{1}</message>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Saved to <filename>{0}</filename>"
+#~ msgstr "Opgeslagen als <filename>{0}</filename>"
+
+#~ msgctxt "@info:status"
+#~ msgid "Cannot open file type <filename>{0}</filename>"
+#~ msgstr "Kan het bestandstype <filename>{0}</filename> niet openen"
+
+#~ msgctxt "@info:status"
+#~ msgid "Failed to load <filename>{0}</filename>"
+#~ msgstr "Kan <filename>{0}</filename> niet laden"
+
+#~ msgctxt "@info:status"
+#~ msgid "Loading <filename>{0}</filename>"
+#~ msgstr "<filename>{0}</filename> wordt geladen"
+
+#~ msgctxt "description"
+#~ msgid "Provides the Translate tool."
+#~ msgstr "Biedt het Verplaatsgereedschap."
+
+#~ msgctxt "name"
+#~ msgid "Translate Tool"
+#~ msgstr "Verplaatsgereedschap"
+
+#~ msgctxt "@label"
+#~ msgid "Simple View"
+#~ msgstr "Eenvoudige Weergave"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides a simple solid mesh view."
+#~ msgstr "Biedt een eenvoudig, solide rasterweergave."
+
+#~ msgctxt "@label"
+#~ msgid "File Logger"
+#~ msgstr "Bestandenlogger"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Outputs log information to a file in your settings folder."
+#~ msgstr "Voert logboekinformatie uit naar een bestand in de instellingenmap."
+
+#~ msgctxt "@label"
+#~ msgid "STL Reader"
+#~ msgstr "STL-lezer"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for reading STL files."
+#~ msgstr "Deze optie biedt ondersteuning voor het lezen van STL-bestanden."
+
+#~ msgctxt "@label"
+#~ msgid "Wavefront OBJ Reader"
+#~ msgstr "Wavefront OBJ-lezer"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Makes it possbile to read Wavefront OBJ files."
+#~ msgstr "Met deze optie kunt u Wavefront OBJ-bestanden lezen."
+
+#~ msgctxt "@label"
+#~ msgid "Wavefront OBJ Writer"
+#~ msgstr "Wavefront OBJ-schrijver"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Makes it possbile to write Wavefront OBJ files."
+#~ msgstr "Maakt het mogelijk Wavefront OBJ-bestanden te schrijven."
+
+#~ msgctxt "@label"
+#~ msgid "STL Writer"
+#~ msgstr "STL-lezer"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for writing STL files."
+#~ msgstr "Biedt ondersteuning voor het schrijven van STL-bestanden."
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "STL File (Ascii)"
+#~ msgstr "STL-bestand (ASCII)"
+
+#~ msgctxt "@label"
+#~ msgid "Console Logger"
+#~ msgstr "Consolelogger"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Outputs log information to the console."
+#~ msgstr "Voert logboekinformatie uit naar de console."
+
+#~ msgctxt "@label"
+#~ msgid "Update Checker"
+#~ msgstr "Updatecontrole"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Checks for updates of the software."
+#~ msgstr "Controleert of er updates zijn voor de software."
+
+#~ msgctxt "@label"
+#~ msgid "Local File Output Device"
+#~ msgstr "Uitvoerapparaat voor lokaal bestand"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Enables saving to local files."
+#~ msgstr "Maakt opslaan als lokaal bestand mogelijk."
+
+#~ msgctxt "@label"
+#~ msgid "Scale Tool"
+#~ msgstr "Schaalgereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Scale tool."
+#~ msgstr "Biedt het Schaalgereedschap."
+
+#~ msgctxt "@label"
+#~ msgid "Selection Tool"
+#~ msgstr "Selectiegereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Selection tool."
+#~ msgstr "Biedt het Selectiegereedschap."
+
+#~ msgctxt "@label"
+#~ msgid "Translate Tool"
+#~ msgstr "Verplaatsgereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Translate tool."
+#~ msgstr "Biedt het Verplaatsgereedschap."
+
+#~ msgctxt "@label"
+#~ msgid "Camera Tool"
+#~ msgstr "Cameragereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the tool to manipulate the camera."
+#~ msgstr "Biedt het gereedschap waarmee u de camera kunt verplaatsen."
+
+#~ msgctxt "@label"
+#~ msgid "Rotate Tool"
+#~ msgstr "Rotatiegereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Rotate tool."
+#~ msgstr "Biedt het Rotatiegereedschap."
+
+#~ msgctxt "@label"
+#~ msgid "Mirror Tool"
+#~ msgstr "Spiegelgereedschap"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides the Mirror tool."
+#~ msgstr "Biedt het Spiegelgereedschap."
+
+#~ msgctxt "@info:status"
+#~ msgid ""
+#~ "The plugin has been installed.\n"
+#~ " Please re-start the application to active the plugin."
+#~ msgstr ""
+#~ "De invoegtoepassing is geïnstalleerd.\n"
+#~ " Start de toepassing opnieuw om de invoegtoepassing te activeren."
+
+#~ msgctxt "@label"
+#~ msgid "Wireframe View"
+#~ msgstr "Draadmodelweergave"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides a simple wireframe view."
+#~ msgstr "Deze optie biedt een eenvoudige draadmodelweergave."
+
+#~ msgctxt "@info"
+#~ msgid "An exception occured while parsing the JSON file."
+#~ msgstr "Er is een uitzondering opgetreden tijdens het parseren van het JSON-bestand."
+
+#~ msgctxt "@label"
+#~ msgid "3MF Writer"
+#~ msgstr "3MF-schrijver"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Provides support for writing 3MF files."
+#~ msgstr "Biedt ondersteuning voor het schrijven van 3MF-bestanden."
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "3MF file"
+#~ msgstr "3MF-bestand"
+
+#~ msgctxt "@action:button"
+#~ msgid "Scale to Max"
+#~ msgstr "Schalen naar Maximale Grootte"
+
+#~ msgctxt "@action:button"
+#~ msgid "Center on Build Plate"
+#~ msgstr "Op Platform Centreren"
+
+#~ msgctxt "@action:button"
+#~ msgid "Drop to Build Plate"
+#~ msgstr "Op Platform Laten Vallen"
