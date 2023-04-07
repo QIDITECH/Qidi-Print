@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fdmmaterial xmlns="http://www.qidi.com/material" version="1.3">
+    <metadata>
+        <name>
+            <brand>QIDI</brand>
+            <material>ABS-GF</material>
+            <color>Generic</color>
+        </name>
+        <GUID>60636bb4-518f-42e7-8237-fe77b194ebe6</GUID>
+        <version>23</version>
+        <color_code>#141414</color_code>
+    </metadata>
+    <properties>
+        <density>1.15</density>
+        <diameter>1.75</diameter>
+        <humidity>≤30</humidity>
+        <water_resistant>3</water_resistant>
+        <chemically_resistant>1</chemically_resistant>
+        <creep_resistant>3</creep_resistant>
+        <anneal>no</anneal>
+        <HDT_0.45>97</HDT_0.45>
+        <HDT_1.80>93</HDT_1.80>
+        <tensile_strength>48.48±0.61</tensile_strength>
+        <tensile_modulus>3752.13±68.39</tensile_modulus>
+        <elongation_at_break>2.10±0.10</elongation_at_break>
+        <flexural_strength>78.80±1.26</flexural_strength>
+        <flexural_modulus>3531.71±75.79</flexural_modulus>
+        <impact_strength>8.91±0.63</impact_strength>
+    </properties>
+    <settings>
+        <setting key="retraction amount">1.5</setting>
+        <setting key="retraction speed">30</setting>
+        <setting key="build volume temperature">80</setting>
+        <setting key="print temperature">260</setting>
+        <setting key="heated bed temperature">110</setting>
+        <setting key="standby temperature">200</setting>
+        <setting key="print cooling">20</setting>
+        <setting key="chamber cooling">0</setting>
+        <setting key="rapid cooling">0</setting>
+        <machine>
+            <machine_identifier manufacturer="X-series" product="X-MAX 3"/>
+            <machine_identifier manufacturer="X-series" product="X-Plus 3"/>
+            <setting key="retraction amount">1</setting>
+            <setting key="build volume temperature">50</setting>
+            <setting key="print temperature">270</setting>
+            <setting key="heated bed temperature">100</setting>
+        </machine>
+    </settings>
+</fdmmaterial>

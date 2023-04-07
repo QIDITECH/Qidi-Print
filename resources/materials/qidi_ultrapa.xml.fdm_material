@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fdmmaterial xmlns="http://www.qidi.com/material" version="1.3">
+    <metadata>
+        <name>
+            <brand>QIDI</brand>
+            <material>UltraPA</material>
+            <color>Generic</color>
+        </name>
+        <GUID>28fb4162-db74-49e1-9008-d05f1e8bef5c</GUID>
+        <version>23</version>
+        <color_code>#FFEBCD</color_code>
+    </metadata>
+    <properties>
+        <density>1.21</density>
+        <diameter>1.75</diameter>
+        <humidity>≤15</humidity>
+        <water_resistant>2</water_resistant>
+        <chemically_resistant>2</chemically_resistant>
+        <creep_resistant>2</creep_resistant>
+        <anneal>yes</anneal>
+        <HDT_0.45>77.8</HDT_0.45>
+        <HDT_1.80>73.1</HDT_1.80>
+        <tensile_strength>86.15±0.56</tensile_strength>
+        <tensile_modulus>3609.22±153.31</tensile_modulus>
+        <elongation_at_break>11.68±3.36</elongation_at_break>
+        <flexural_strength>121.47±3.14</flexural_strength>
+        <flexural_modulus>3314.03±181.88</flexural_modulus>
+        <impact_strength>5.78±0.30</impact_strength>
+    </properties>
+    <settings>
+        <setting key="retraction amount">1.5</setting>
+        <setting key="retraction speed">30</setting>
+        <setting key="build volume temperature">0</setting>
+        <setting key="print temperature">280</setting>
+        <setting key="heated bed temperature">80</setting>
+        <setting key="standby temperature">100</setting>
+        <setting key="print cooling">20</setting>
+        <setting key="chamber cooling">100</setting>
+        <setting key="rapid cooling">0</setting>
+    </settings>
+</fdmmaterial>
