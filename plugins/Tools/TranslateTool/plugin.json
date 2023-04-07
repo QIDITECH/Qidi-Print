@@ -1,0 +1,8 @@
+{
+    "name": "Move Tool",
+    "author": "QIDI B.V.",
+    "version": "1.0.1",
+    "description": "Provides the Move tool.",
+    "api": "7.5.0",
+    "i18n-catalog": "qdtech"
+}

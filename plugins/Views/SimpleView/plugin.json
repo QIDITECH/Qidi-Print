@@ -1,0 +1,8 @@
+{
+    "name": "Simple View",
+    "author": "QIDI B.V.",
+    "version": "1.0.1",
+    "description": "Provides a simple solid mesh view.",
+    "api": "7.5.0",
+    "i18n-catalog": "qdtech"
+}

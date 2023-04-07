@@ -1,0 +1,8 @@
+{
+    "name": "Update Checker",
+    "author": "QIDI B.V.",
+    "version": "1.0.1",
+    "description": "Checks for updates of the software.",
+    "api": "7.5.0",
+    "i18n-catalog": "qdtech"
+}
