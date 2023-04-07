@@ -1,0 +1,8 @@
+{
+    "name": "Post Processing",
+    "author": "QIDI",
+    "version": "2.2.1",
+    "api": "7.5.0",
+    "description": "Extension that allows for user created scripts for post processing",
+    "catalog": "qidi"
+}
