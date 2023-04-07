@@ -1,0 +1,16 @@
+{
+    "QIDI 2": "qidi2",
+    "QIDI 2 Extended": "qidi2_extended",
+    "QIDI 2 Extended+": "qidi2_extended_plus",
+    "QIDI 2 Go": "qidi2_go",
+    "QIDI 2+": "qidi2_plus",
+    "QIDI 2+ Connect": "qidi2_plus_connect",
+    "QIDI 3": "qidi3",
+    "QIDI 3 Extended": "qidi3_extended",
+    "QIDI S3": "qidi_s3",
+    "QIDI S5": "qidi_s5",
+    "QIDI Original": "qidi_original",
+    "QIDI Original+": "qidi_original_plus",
+    "QIDI Original Dual Extrusion": "qidi_original_dual",
+    "IMADE3D JellyBOX": "imade3d_jellybox"
+}

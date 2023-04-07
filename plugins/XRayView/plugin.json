@@ -1,0 +1,8 @@
+{
+    "name": "X-Ray View",
+    "author": "QIDI B.V.",
+    "version": "1.0.1",
+    "description": "Provides the X-Ray view.",
+    "api": "7.5.0",
+    "i18n-catalog": "qidi"
+}

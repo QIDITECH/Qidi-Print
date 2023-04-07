@@ -1,0 +1,8 @@
+{
+    "name": "Wifi Output Device",
+    "description": "Enables saving to device's files by Wifi.",
+    "author": "QIDI",
+    "version": "1.0.1",
+    "api": "7.5.0",
+    "i18n-catalog": "qidi"
+}
