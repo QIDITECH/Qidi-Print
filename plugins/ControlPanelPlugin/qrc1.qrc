@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml</file>
+        <file>ControlPanel.qml</file>
+        <file>index.html</file>
+        <file>echarts.min.js</file>
+    </qresource>
+</RCC>
