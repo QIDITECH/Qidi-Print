@@ -1,8 +1,0 @@
-{
-    "name": "Legacy QIDI Profile Reader",
-    "author": "QIDI B.V.",
-    "version": "1.0.1",
-    "description": "Provides support for importing profiles from legacy QIDI versions.",
-    "api": "7.5.0",
-    "i18n-catalog": "qidi"
-}

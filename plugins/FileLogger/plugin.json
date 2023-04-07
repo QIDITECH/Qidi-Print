@@ -1,8 +1,0 @@
-{
-    "name": "File Logger",
-    "author": "QIDI B.V.",
-    "version": "1.0.1",
-    "description": "Outputs log information to a file in your settings folder.",
-    "api": "7.5.0",
-    "i18n-catalog": "qdtech"
-}

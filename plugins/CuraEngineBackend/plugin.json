@@ -1,8 +1,0 @@
-{
-    "name": "CuraEngine Backend",
-    "author": "QIDI B.V.",
-    "description": "Provides the link to the CuraEngine slicing backend.",
-    "api": "7.5.0",
-    "version": "1.0.1",
-    "i18n-catalog": "qidi"
-}

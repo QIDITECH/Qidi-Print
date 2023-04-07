@@ -1,8 +1,0 @@
-{
-    "name": "G-code Writer",
-    "author": "QIDI B.V.",
-    "version": "1.0.1",
-    "description": "Writes g-code to a file.",
-    "api": "7.5.0",
-    "i18n-catalog": "qidi"
-}
