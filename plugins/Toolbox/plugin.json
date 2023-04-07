@@ -1,0 +1,7 @@
+{
+    "name": "Toolbox",
+    "author": "QIDI B.V.",
+    "version": "1.0.1",
+    "api": "7.5.0",
+    "description": "Find, manage and install new QIDI packages."
+}

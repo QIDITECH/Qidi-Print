@@ -1,0 +1,667 @@
+// Copyright (c) 2018 QIDI B.V.
+// QIDI is released under the terms of the LGPLv3 or higher.
+
+import QtQuick 2.4
+import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.1
+import QtQuick.Controls.Styles 1.1
+import QtGraphicalEffects 1.0
+
+import QD 1.0 as QD
+import QIDI 1.0 as QIDI
+
+
+Rectangle
+{
+    id: base
+    radius: 5
+    height: childrenRect.height + 20 * QD.Theme.getSize("size").width
+    width: childrenRect.width + 20 * QD.Theme.getSize("size").width
+    border.color: QD.Theme.getColor("gray_2")
+    color: QD.Theme.getColor("gray_5")
+
+    Connections
+    {
+        target: QD.Preferences
+        function onPreferenceChanged(preference)
+        {
+            if (preference !== "view/only_show_top_layers" && preference !== "view/top_layer_count" && ! preference.match("layerview/"))
+            {
+                return
+            }
+            layerTypeCombobox.currentIndex = QD.SimulationView.compatibilityMode ? 1 : QD.Preferences.getValue("layerview/layer_view_type")
+            layerTypeCombobox.updateLegends(layerTypeCombobox.currentIndex)
+            viewSettings.extruder_opacities = QD.Preferences.getValue("layerview/extruder_opacities").split("|")
+            viewSettings.show_travel_moves = QD.Preferences.getValue("layerview/show_travel_moves")
+            viewSettings.show_helpers = QD.Preferences.getValue("layerview/show_helpers")
+            viewSettings.show_skin = QD.Preferences.getValue("layerview/show_skin")
+            viewSettings.show_infill = QD.Preferences.getValue("layerview/show_infill")
+            viewSettings.only_show_top_layers = QD.Preferences.getValue("view/only_show_top_layers")
+            viewSettings.top_layer_count = QD.Preferences.getValue("view/top_layer_count")
+        }
+    }
+
+    Column
+    {
+        id: viewSettings
+        anchors.centerIn: parent
+
+        property var extruder_opacities: QD.Preferences.getValue("layerview/extruder_opacities").split("|")
+        property bool show_travel_moves: QD.Preferences.getValue("layerview/show_travel_moves")
+        property bool show_helpers: QD.Preferences.getValue("layerview/show_helpers")
+        property bool show_skin: QD.Preferences.getValue("layerview/show_skin")
+        property bool show_infill: QD.Preferences.getValue("layerview/show_infill")
+        property bool show_starts: QD.Preferences.getValue("layerview/show_starts")
+
+        // If we are in compatibility mode, we only show the "line type"
+        property bool show_legend: QD.SimulationView.compatibilityMode ? true : QD.Preferences.getValue("layerview/layer_view_type") == 1
+        property bool show_gradient: QD.SimulationView.compatibilityMode ? false : QD.Preferences.getValue("layerview/layer_view_type") == 2 || QD.Preferences.getValue("layerview/layer_view_type") == 3
+        property bool show_feedrate_gradient: show_gradient && QD.Preferences.getValue("layerview/layer_view_type") == 2
+        property bool show_thickness_gradient: show_gradient && QD.Preferences.getValue("layerview/layer_view_type") == 3
+        property bool show_line_width_gradient: show_gradient && QD.Preferences.getValue("layerview/layer_view_type") == 4
+        property bool show_flow_rate_gradient: show_gradient && QD.Preferences.getValue("layerview/layer_view_type") == 5
+        property bool only_show_top_layers: QD.Preferences.getValue("view/only_show_top_layers")
+        property int top_layer_count: QD.Preferences.getValue("view/top_layer_count")
+
+        width: QD.Theme.getSize("layerview_menu_size").width - 2 * QD.Theme.getSize("default_margin").width
+        height: implicitHeight
+        spacing: QD.Theme.getSize("layerview_row_spacing").height
+
+        ListModel  // matches SimulationView.py
+        {
+            id: layerViewTypes
+        }
+
+        Component.onCompleted:
+        {
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Material Color"),
+                type_id: 0
+            })
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Line Type"),
+                type_id: 1
+            })
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Speed"),
+                type_id: 2
+            })
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Layer Thickness"),
+                type_id: 3  // these ids match the switching in the shader
+            })
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Line Width"),
+                type_id: 4
+            })
+            layerViewTypes.append({
+                text: catalog.i18nc("@label:listbox", "Flow"),
+                type_id: 5
+            })
+        }
+
+        ComboBox
+        {
+            id: layerTypeCombobox
+            width: parent.width
+            model: layerViewTypes
+            visible: !QD.SimulationView.compatibilityMode
+            style: QD.Theme.styles.combobox
+
+            onActivated:
+            {
+                QD.Preferences.setValue("layerview/layer_view_type", index);
+            }
+
+            Component.onCompleted:
+            {
+                currentIndex = QD.SimulationView.compatibilityMode ? 1 : QD.Preferences.getValue("layerview/layer_view_type");
+                updateLegends(currentIndex);
+            }
+
+            function updateLegends(type_id)
+            {
+                // Update the visibility of the legends.
+                viewSettings.show_legend = QD.SimulationView.compatibilityMode || (type_id == 1);
+                viewSettings.show_gradient = !QD.SimulationView.compatibilityMode &&
+                  (type_id == 2 || type_id == 3 || type_id == 4 || type_id == 5) ;
+
+                viewSettings.show_feedrate_gradient = viewSettings.show_gradient && (type_id == 2);
+                viewSettings.show_thickness_gradient = viewSettings.show_gradient && (type_id == 3);
+                viewSettings.show_line_width_gradient = viewSettings.show_gradient && (type_id == 4);
+                viewSettings.show_flow_rate_gradient = viewSettings.show_gradient && (type_id == 5);
+            }
+        }
+
+        Label
+        {
+            id: compatibilityModeLabel
+            text: catalog.i18nc("@label", "Compatibility Mode")
+            font: QD.Theme.getFont("default")
+            color: QD.Theme.getColor("text")
+            visible: QD.SimulationView.compatibilityMode
+            height: QD.Theme.getSize("layerview_row").height
+            width: parent.width
+            renderType: Text.NativeRendering
+        }
+
+        Item  // Spacer
+        {
+            height: QD.Theme.getSize("narrow_margin").width
+            width: width
+        }
+
+        Repeater
+        {
+            model: QIDIApplication.getExtrudersModel()
+
+            CheckBox
+            {
+                id: extrudersModelCheckBox
+                checked: viewSettings.extruder_opacities[index] > 0.5 || viewSettings.extruder_opacities[index] == undefined || viewSettings.extruder_opacities[index] == ""
+                height: QD.Theme.getSize("layerview_row").height + QD.Theme.getSize("default_lining").height
+                width: parent.width
+                visible: !QD.SimulationView.compatibilityMode
+
+                onClicked:
+                {
+                    viewSettings.extruder_opacities[index] = checked ? 1.0 : 0.0
+                    QD.Preferences.setValue("layerview/extruder_opacities", viewSettings.extruder_opacities.join("|"));
+                }
+
+                style: QD.Theme.styles.checkbox
+
+
+                QD.RecolorImage
+                {
+                    id: swatch
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: extrudersModelCheckBox.right
+                    width: QD.Theme.getSize("layerview_legend_size").width
+                    height: QD.Theme.getSize("layerview_legend_size").height
+                    source: QD.Theme.getIcon("ExtruderSolid", "medium")
+                    color: model.color
+                }
+
+                Label
+                {
+                    text: model.name
+                    elide: Text.ElideRight
+                    color: QD.Theme.getColor("setting_control_text")
+                    font: QD.Theme.getFont("default")
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        left: extrudersModelCheckBox.left
+                        right: extrudersModelCheckBox.right
+                        leftMargin: QD.Theme.getSize("checkbox").width + Math.round(QD.Theme.getSize("default_margin").width / 2)
+                        rightMargin: QD.Theme.getSize("default_margin").width * 2
+                    }
+                    renderType: Text.NativeRendering
+                }
+            }
+        }
+
+        Repeater
+        {
+            model: ListModel
+            {
+                id: typesLegendModel
+                Component.onCompleted:
+                {
+                    typesLegendModel.append({
+                        label: catalog.i18nc("@label", "Travels"),
+                        initialValue: viewSettings.show_travel_moves,
+                        preference: "layerview/show_travel_moves",
+                        colorId:  "layerview_move_combing"
+                    });
+                    typesLegendModel.append({
+                        label: catalog.i18nc("@label", "Helpers"),
+                        initialValue: viewSettings.show_helpers,
+                        preference: "layerview/show_helpers",
+                        colorId:  "layerview_support"
+                    });
+                    typesLegendModel.append({
+                        label: catalog.i18nc("@label", "Shell"),
+                        initialValue: viewSettings.show_skin,
+                        preference: "layerview/show_skin",
+                        colorId:  "layerview_inset_0"
+                    });
+                    typesLegendModel.append({
+                        label: catalog.i18nc("@label", "Infill"),
+                        initialValue: viewSettings.show_infill,
+                        preference: "layerview/show_infill",
+                        colorId:  "layerview_infill"
+                    });
+                    if (! QD.SimulationView.compatibilityMode)
+                    {
+                        typesLegendModel.append({
+                            label: catalog.i18nc("@label", "Starts"),
+                            initialValue: viewSettings.show_starts,
+                            preference: "layerview/show_starts",
+                            colorId:  "layerview_starts"
+                        });
+                    }
+                }
+            }
+
+            CheckBox
+            {
+                id: legendModelCheckBox
+                checked: model.initialValue
+                onClicked: QD.Preferences.setValue(model.preference, checked)
+                height: QD.Theme.getSize("layerview_row").height + QD.Theme.getSize("default_lining").height
+                width: parent.width
+
+                style: QD.Theme.styles.checkbox
+
+                Rectangle
+                {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: legendModelCheckBox.right
+                    width: QD.Theme.getSize("layerview_legend_size").width
+                    height: QD.Theme.getSize("layerview_legend_size").height
+                    color: QD.Theme.getColor(model.colorId)
+                    border.width: QD.Theme.getSize("default_lining").width
+                    border.color: QD.Theme.getColor("lining")
+                    visible: viewSettings.show_legend
+                }
+
+                Label
+                {
+                    text: label
+                    font: QD.Theme.getFont("default")
+                    elide: Text.ElideRight
+                    renderType: Text.NativeRendering
+                    color: QD.Theme.getColor("setting_control_text")
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: legendModelCheckBox.left
+                    anchors.right: legendModelCheckBox.right
+                    anchors.leftMargin: QD.Theme.getSize("checkbox").width + Math.round(QD.Theme.getSize("default_margin").width / 2)
+                    anchors.rightMargin: QD.Theme.getSize("default_margin").width * 2
+                }
+            }
+        }
+
+        CheckBox
+        {
+            checked: viewSettings.only_show_top_layers
+            onClicked: QD.Preferences.setValue("view/only_show_top_layers", checked ? 1.0 : 0.0)
+            text: catalog.i18nc("@label", "Only Show Top Layers")
+            visible: QD.SimulationView.compatibilityMode
+            style: QD.Theme.styles.checkbox
+            width: parent.width
+        }
+
+        CheckBox
+        {
+            checked: viewSettings.top_layer_count == 5
+            onClicked: QD.Preferences.setValue("view/top_layer_count", checked ? 5 : 1)
+            text: catalog.i18nc("@label", "Show 5 Detailed Layers On Top")
+            width: parent.width
+            visible: QD.SimulationView.compatibilityMode
+            style: QD.Theme.styles.checkbox
+        }
+
+        Repeater
+        {
+            model: ListModel
+            {
+                id: typesLegendModelNoCheck
+                Component.onCompleted:
+                {
+                    typesLegendModelNoCheck.append({
+                        label: catalog.i18nc("@label", "Top / Bottom"),
+                        colorId: "layerview_skin",
+                    });
+                    typesLegendModelNoCheck.append({
+                        label: catalog.i18nc("@label", "Inner Wall"),
+                        colorId: "layerview_inset_x",
+                    });
+                }
+            }
+
+            Label
+            {
+                text: label
+                visible: viewSettings.show_legend
+                id: typesLegendModelLabel
+
+                height: QD.Theme.getSize("layerview_row").height + QD.Theme.getSize("default_lining").height
+                width: parent.width
+                color: QD.Theme.getColor("setting_control_text")
+                font: QD.Theme.getFont("default")
+                renderType: Text.NativeRendering
+                Rectangle
+                {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: typesLegendModelLabel.right
+
+                    width: QD.Theme.getSize("layerview_legend_size").width
+                    height: QD.Theme.getSize("layerview_legend_size").height
+
+                    color: QD.Theme.getColor(model.colorId)
+
+                    border.width: QD.Theme.getSize("default_lining").width
+                    border.color: QD.Theme.getColor("lining")
+                }
+            }
+        }
+
+        // Text for the minimum, maximum and units for the feedrates and layer thickness
+        Item
+        {
+            id: gradientLegend
+            visible: viewSettings.show_gradient
+            width: parent.width
+            height: QD.Theme.getSize("layerview_row").height
+
+            Label //Minimum value.
+            {
+                text:
+                {
+                    if (QD.SimulationView.layerActivity && QIDIApplication.platformActivity)
+                    {
+                        // Feedrate selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 2)
+                        {
+                            return parseFloat(QD.SimulationView.minFeedrate).toFixed(2)
+                        }
+                        // Layer thickness selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 3)
+                        {
+                            return parseFloat(QD.SimulationView.minThickness).toFixed(2)
+                        }
+                        // Line width selected
+                        if(QD.Preferences.getValue("layerview/layer_view_type") == 4)
+                        {
+                            return parseFloat(QD.SimulationView.minLineWidth).toFixed(2);
+                        }
+                        // Flow Rate selected
+                        if(QD.Preferences.getValue("layerview/layer_view_type") == 5)
+                        {
+                            return parseFloat(QD.SimulationView.minFlowRate).toFixed(2);
+                        }
+
+                    }
+                    return catalog.i18nc("@label","min")
+                }
+                anchors.left: parent.left
+                color: QD.Theme.getColor("setting_control_text")
+                font: QD.Theme.getFont("default")
+                renderType: Text.NativeRendering
+            }
+
+            Label //Unit in the middle.
+            {
+                text:
+                {
+                    if (QD.SimulationView.layerActivity && QIDIApplication.platformActivity)
+                    {
+                        // Feedrate selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 2)
+                        {
+                            return "mm/s"
+                        }
+                        // Layer thickness selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 3)
+                        {
+                            return "mm"
+                        }
+                        //Line width selected
+                        if(QD.Preferences.getValue("layerview/layer_view_type") == 4)
+                        {
+                            return "mm"
+                        }
+                        // Flow Rate selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 5)
+                        {
+                            return "mm³/s"
+                        }
+                    }
+                    return ""
+                }
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: QD.Theme.getColor("setting_control_text")
+                font: QD.Theme.getFont("default")
+            }
+
+            Label //Maximum value.
+            {
+                text: {
+                    if (QD.SimulationView.layerActivity && QIDIApplication.platformActivity)
+                    {
+                        // Feedrate selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 2)
+                        {
+                            return parseFloat(QD.SimulationView.maxFeedrate).toFixed(2)
+                        }
+                        // Layer thickness selected
+                        if (QD.Preferences.getValue("layerview/layer_view_type") == 3)
+                        {
+                            return parseFloat(QD.SimulationView.maxThickness).toFixed(2)
+                        }
+                        //Line width selected
+                        if(QD.Preferences.getValue("layerview/layer_view_type") == 4)
+                        {
+                            return parseFloat(QD.SimulationView.maxLineWidth).toFixed(2);
+                        }
+                        // Flow rate selected
+                        if(QD.Preferences.getValue("layerview/layer_view_type") == 5)
+                        {
+                            return parseFloat(QD.SimulationView.maxFlowRate).toFixed(2);
+                        }
+                    }
+                    return catalog.i18nc("@label","max")
+                }
+
+                anchors.right: parent.right
+                color: QD.Theme.getColor("setting_control_text")
+                font: QD.Theme.getFont("default")
+            }
+        }
+
+        // Gradient colors for feedrate
+        Rectangle
+        {
+            id: feedrateGradient
+            visible: (
+              viewSettings.show_feedrate_gradient ||
+              viewSettings.show_line_width_gradient
+            )
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Math.round(QD.Theme.getSize("layerview_row").height * 1.5)
+            border.width: QD.Theme.getSize("default_lining").width
+            border.color: QD.Theme.getColor("lining")
+
+            LinearGradient
+            {
+                anchors
+                {
+                    left: parent.left
+                    leftMargin: QD.Theme.getSize("default_lining").width
+                    right: parent.right
+                    rightMargin: QD.Theme.getSize("default_lining").width
+                    top: parent.top
+                    topMargin: QD.Theme.getSize("default_lining").width
+                    bottom: parent.bottom
+                    bottomMargin: QD.Theme.getSize("default_lining").width
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(parent.width, 0)
+                gradient: Gradient
+                {
+                    GradientStop
+                    {
+                        position: 0.000
+                        color: Qt.rgba(0, 0, 1, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.25
+                        color: Qt.rgba(0.25, 1, 0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.375
+                        color: Qt.rgba(0.375, 0.5, 0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 1.0
+                        color: Qt.rgba(1, 0.5, 0, 1)
+                    }
+                }
+            }
+        }
+
+        // Gradient colors for layer thickness (similar to parula colormap)
+        Rectangle
+        {
+            id: thicknessGradient
+            visible: (
+              viewSettings.show_thickness_gradient
+            )
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Math.round(QD.Theme.getSize("layerview_row").height * 1.5)
+            border.width: QD.Theme.getSize("default_lining").width
+            border.color: QD.Theme.getColor("lining")
+
+            LinearGradient
+            {
+                anchors
+                {
+                    left: parent.left
+                    leftMargin: QD.Theme.getSize("default_lining").width
+                    right: parent.right
+                    rightMargin: QD.Theme.getSize("default_lining").width
+                    top: parent.top
+                    topMargin: QD.Theme.getSize("default_lining").width
+                    bottom: parent.bottom
+                    bottomMargin: QD.Theme.getSize("default_lining").width
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(parent.width, 0)
+                gradient: Gradient
+                {
+                    GradientStop
+                    {
+                        position: 0.000
+                        color: Qt.rgba(0, 0, 0.5, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.25
+                        color: Qt.rgba(0, 0.375, 0.75, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.5
+                        color: Qt.rgba(0, 0.75, 0.5, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.75
+                        color: Qt.rgba(1, 0.75, 0.25, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 1.0
+                        color: Qt.rgba(1, 1, 0, 1)
+                    }
+                }
+            }
+        }
+
+        // Gradient colors for flow (similar to jet colormap)
+        Rectangle
+        {
+            id: jetGradient
+            visible: (
+              viewSettings.show_flow_rate_gradient
+            )
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Math.round(QD.Theme.getSize("layerview_row").height * 1.5)
+            border.width: QD.Theme.getSize("default_lining").width
+            border.color: QD.Theme.getColor("lining")
+
+            LinearGradient
+            {
+                anchors
+                {
+                    left: parent.left
+                    leftMargin: QD.Theme.getSize("default_lining").width
+                    right: parent.right
+                    rightMargin: QD.Theme.getSize("default_lining").width
+                    top: parent.top
+                    topMargin: QD.Theme.getSize("default_lining").width
+                    bottom: parent.bottom
+                    bottomMargin: QD.Theme.getSize("default_lining").width
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(parent.width, 0)
+                gradient: Gradient
+                {
+                    GradientStop
+                    {
+                        position: 0.0
+                        color: Qt.rgba(0, 0, 0.5, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.125
+                        color: Qt.rgba(0, 0.0, 1.0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.25
+                        color: Qt.rgba(0, 0.5, 1.0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.375
+                        color: Qt.rgba(0.0, 1.0, 1.0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.5
+                        color: Qt.rgba(0.5, 1.0, 0.5, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.625
+                        color: Qt.rgba(1.0, 1.0, 0.0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.75
+                        color: Qt.rgba(1.0, 0.5, 0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 0.875
+                        color: Qt.rgba(1.0, 0.0, 0, 1)
+                    }
+                    GradientStop
+                    {
+                        position: 1.0
+                        color: Qt.rgba(0.5, 0, 0, 1)
+                    }
+                }
+            }
+        }
+    }
+
+    FontMetrics
+    {
+        id: fontMetrics
+        font: QD.Theme.getFont("default")
+    }
+}
+
+
+
