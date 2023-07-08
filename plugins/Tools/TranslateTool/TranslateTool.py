@@ -260,7 +260,7 @@ class TranslateTool(Tool):
             id = self._selection_pass.getIdAtPosition(cast(MouseEvent, event).x, cast(MouseEvent, event).y)
             if not id:
                 return False
-            if id == "open" or id == "delete" or id == "flat" or id == "copy" or id == "place" :
+            if id == "open" or id == "delete" or id == "float" or id == "copy" or id == "place":
                 return False
                 
             if id in self._enabled_axis:

@@ -57,7 +57,7 @@ def _traceDisconnect(signal: Any, *args: Any, **kwargs: Any) -> None:
 
 
 def _isTraceEnabled() -> bool:
-    return "URANIUM_TRACE_SIGNALS" in os.environ
+    return "URANIQD_TRACE_SIGNALS" in os.environ
 
 
 class SignalQueue:

@@ -27,7 +27,7 @@ class WifiOutputDevicePlugin(OutputDevicePlugin):
         addtime = False
         while self._check_updates:
             wifisend = WifiSend.getInstance()
-            result = wifisend.IPList
+            result = wifisend.FullNameIPList
             if (str(result).find("/") != -1) :
                 if not addtime :
                     self.getOutputDeviceManager().addOutputDevice(WifiOutputDevice.WifiOutputDevice('', ''))

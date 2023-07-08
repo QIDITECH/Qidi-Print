@@ -205,7 +205,6 @@ class Application:
 
         self._preferences = Preferences()
         self._preferences.addPreference("general/language", self._default_language)
-        self._preferences.addPreference("general/setting_veiw_width", 350)
         self._preferences.addPreference("qidi/fontsize", 1)
         self._preferences.addPreference("qidi/imagesize", 1)
         self._preferences.addPreference("qidi/show_search", "")

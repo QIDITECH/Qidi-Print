@@ -10,7 +10,7 @@ from QD.OutputDevice.OutputDevice import OutputDevice
 from QD.OutputDevice import OutputDeviceError
 from qidi.Wifi.WifiSend import WifiSend
 from qidi.Wifi.CBDConnect import CBDConnect
-from qidi.Wifi.MKSConnect import MKSConnect
+from qidi.Wifi.QIDIConnect import QIDIConnect
 
 from QD.Resources import  Resources
 
@@ -95,12 +95,12 @@ class WifiOutputDevice(OutputDevice):
         # self._stream.close()
         # wifisend = WifiSend.getInstance()
         # cbdConnect = CBDConnect.getInstance()
-        # mksConnect = MKSConnect.getInstance()
+        # qidiConnect = QIDIConnect.getInstance()
         # firmware_manufacturers = wifisend.currentDeviceIP[-3:]
         # if firmware_manufacturers == "CBD":
             # cbdConnect.startSending(self.file_name, wifisend.currentDeviceIP)
         # else:
-            # mksConnect.uploadfunc(self.file_name, wifisend.currentDeviceIP)
+            # qidiConnect.uploadfunc(self.file_name, wifisend.currentDeviceIP)
         
     def _onFinished(self, job):
         if self._stream:
@@ -127,10 +127,10 @@ class WifiOutputDevice(OutputDevice):
         job.getStream().close()
         wifisend = WifiSend.getInstance()
         cbdConnect = CBDConnect.getInstance()
-        mksConnect = MKSConnect.getInstance()
+        qidiConnect = QIDIConnect.getInstance()
         firmware_manufacturers = wifisend.currentDeviceIP[-3:]
         if firmware_manufacturers == "CBD":
             cbdConnect.startSending(self.file_name, wifisend.currentDeviceIP)
         else:
-            mksConnect.uploadfunc(self.file_name, wifisend.currentDeviceIP)
+            qidiConnect.uploadfunc(self.file_name, wifisend.currentDeviceIP)
         # job.getStream().close()

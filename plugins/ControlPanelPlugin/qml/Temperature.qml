@@ -86,8 +86,8 @@ Item{
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        url:"qrc:/index.html"
-        // url:"G:/QIDIWrite/QIDI/build/package/plugins/ControlPanelPlugin/index.html"
+        // url:"qrc:/index.html"
+        url:"../index.html"
         // url:"http://qd3dprinter.com/qidiprint/news.png"
         backgroundColor:"transparent"
         // onNewViewRequested: request.openIn(view)

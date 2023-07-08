@@ -237,7 +237,6 @@ Item
             Keys.onBacktabPressed: selectTextInTextfield(widthTextField)
             Keys.onTabPressed: selectTextInTextfield(depthTextField)
         }
-		
         TextField
         {
             id: zPercentage
@@ -257,7 +256,6 @@ Item
             Keys.onBacktabPressed: selectTextInTextfield(depthTextField)
             Keys.onTabPressed: selectTextInTextfield(heightTextField)
         }
-		
         TextField
         {
             id: yPercentage

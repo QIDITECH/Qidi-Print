@@ -18,11 +18,33 @@ QD.Dialog
     id: dialog
 
     title: catalog.i18nc("@title:window", "Post Processing Plugin")
-    width: 700 * screenScaleFactor;
-    height: 500 * screenScaleFactor;
-    minimumWidth: 400 * screenScaleFactor;
-    minimumHeight: 250 * screenScaleFactor;
+    minimumWidth: 800 * screenScaleFactor;
+    minimumHeight: 500 * screenScaleFactor;
+    width: minimumWidth
+    height: minimumHeight
+    Rectangle
+    {
+        width: parent.width
+        height: parent.height
+        border.color: QD.Theme.getColor("gray_3")
+        border.width: QD.Theme.getSize("size").width
+    }
+    /*Rectangle
+    {
+        color: QD.Theme.getColor("gray_3")
+        width: parent.width
+        height: QD.Theme.getSize("size").width
+        anchors
+        {
+            top: parent.top
+            topMargin: 30 * QD.Theme.getSize("size").width
+            left: parent.left
+            right: parent.right
 
+        }
+    }*/
+
+    backgroundColor: QD.Theme.getColor("main_background")
     onVisibleChanged:
     {
         if(!visible) //Whenever the window is closed (either via the "Close" button or the X on the window frame), we want to update it in the stack.
@@ -50,214 +72,304 @@ QD.Dialog
         {
             id: activeScripts
             anchors.left: parent.left
-            width: base.columnWidth
+            anchors.leftMargin: QD.Theme.getSize("default_margin").width
+            width:base.columnWidth
+                /*250 * QD.Theme.getSize("size").width*/
             height: parent.height
-
             Label
             {
                 id: activeScriptsHeader
                 text: catalog.i18nc("@label", "Post Processing Scripts")
+                horizontalAlignment: Text.AlignHCenter
                 anchors.top: parent.top
                 anchors.topMargin: base.textMargin
                 anchors.left: parent.left
-                anchors.leftMargin: base.textMargin
+                anchors.leftMargin: QD.Theme.getSize("default_margin").width
                 anchors.right: parent.right
                 anchors.rightMargin: base.textMargin
                 font: QD.Theme.getFont("large_bold")
+                color: QD.Theme.getColor("blue_6")
                 elide: Text.ElideRight
             }
-            ListView
-            {
-                id: activeScriptsList
 
+            ScrollView
+            {
+                id: scrollViewLeft
                 anchors
                 {
                     top: activeScriptsHeader.bottom
+                    topMargin: 10 * QD.Theme.getSize("size").width
                     left: parent.left
                     right: parent.right
-                    rightMargin: base.textMargin
-                    topMargin: base.textMargin
-                    leftMargin: QD.Theme.getSize("default_margin").width
+                    bottom: parent.bottom
                 }
+                visible: manager.selectedScriptDefinitionId != ""
+                verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
-                height: childrenRect.height
-                model: manager.scriptList
-                delegate: Item
+                ListView
                 {
-                    width: parent.width
-                    height: activeScriptButton.height
-                    Button
+                    id: activeScriptsList
+
+                    anchors
                     {
-                        id: activeScriptButton
-                        text: manager.getScriptLabelByKey(modelData.toString())
-                        exclusiveGroup: selectedScriptGroup
+                        top: activeScriptsHeader.bottom
+                        left: parent.left
+                        right: parent.right
+                        rightMargin: base.textMargin
+                    }
+                    spacing: QD.Theme.getSize("default_lining").height
+                    clip: true
+                    model: manager.scriptList
+                    delegate: Item
+                    {
                         width: parent.width
-                        height: QD.Theme.getSize("setting").height
-                        checkable: true
-
-                        checked:
+                        height: activeScriptButton.height
+                        Button
                         {
-                            if (manager.selectedScriptIndex == index)
+                            id: activeScriptButton
+                            text: manager.getScriptLabelByKey(modelData.toString())
+                            exclusiveGroup: selectedScriptGroup
+                            width: parent.width
+                            height: QD.Theme.getSize("section").height
+                            checkable: true
+
+                            checked:
                             {
+                                if (manager.selectedScriptIndex == index)
+                                {
+                                    base.activeScriptName = manager.getScriptLabelByKey(modelData.toString())
+                                    return true
+                                }
+                                else
+                                {
+                                    return false
+                                }
+                            }
+
+                            onClicked:
+                            {
+                                forceActiveFocus()
+                                manager.setSelectedScriptIndex(index)
                                 base.activeScriptName = manager.getScriptLabelByKey(modelData.toString())
-                                return true
                             }
-                            else
-                            {
-                                return false
-                            }
-                        }
-                        onClicked:
-                        {
-                            forceActiveFocus()
-                            manager.setSelectedScriptIndex(index)
-                            base.activeScriptName = manager.getScriptLabelByKey(modelData.toString())
-                        }
 
-                        style: ButtonStyle
-                        {
-                            background: Rectangle
+                            style: ButtonStyle
                             {
-                                color: activeScriptButton.checked ? palette.highlight : "transparent"
-                                width: parent.width
-                                height: parent.height
-                            }
-                            label: Label
-                            {
-                                wrapMode: Text.Wrap
-                                text: control.text
-                                elide: Text.ElideRight
-                                color: activeScriptButton.checked ? palette.highlightedText : palette.text
-                            }
-                        }
-                    }
-
-                    Button
-                    {
-                        id: removeButton
-                        text: "x"
-                        width: 20 * screenScaleFactor
-                        height: 20 * screenScaleFactor
-                        anchors.right:parent.right
-                        anchors.rightMargin: base.textMargin
-                        anchors.verticalCenter: parent.verticalCenter
-                        onClicked: manager.removeScriptByIndex(index)
-                        style: ButtonStyle
-                        {
-                            label: Item
-                            {
-                                QD.RecolorImage
+                                background: Rectangle
                                 {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    width: Math.round(control.width / 2.7)
-                                    height: Math.round(control.height / 2.7)
-                                    sourceSize.height: width
-                                    color: palette.text
-                                    source: QD.Theme.getIcon("Cancel")
+                                    color: activeScriptButton.checked ? QD.Theme.getColor("blue_4") : "transparent"         //选中背景色
+                                    width: parent.width
+                                    height: parent.height
+                                }
+                                label: Label
+                                {
+                                    verticalAlignment: Text.AlignVCenter
+                                    wrapMode: Text.Wrap
+                                    text: control.text
+                                    elide: Text.ElideRight
+                                    color: activeScriptButton.checked ? QD.Theme.getColor("blue_6") : palette.text
+                                    font: QD.Theme.getFont("font1")
+                                    /*opacity: 0.5*/
                                 }
                             }
                         }
-                    }
-                    Button
-                    {
-                        id: downButton
-                        text: ""
-                        anchors.right: removeButton.left
-                        anchors.verticalCenter: parent.verticalCenter
-                        enabled: index != manager.scriptList.length - 1
-                        width: 20 * screenScaleFactor
-                        height: 20 * screenScaleFactor
-                        onClicked:
+
+                        Button
                         {
-                            if (manager.selectedScriptIndex == index)
+                            id: removeButton
+                            text: "x"
+                            width: 15 * QD.Theme.getSize("size").width      /*20 * screenScaleFactor*/
+                            height: width     /*20 * screenScaleFactor*/
+                            anchors.right:parent.right
+                            anchors.rightMargin: 2 * base.textMargin
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked: manager.removeScriptByIndex(index)
+                            style: ButtonStyle
                             {
-                                manager.setSelectedScriptIndex(index + 1)
-                            }
-                            return manager.moveScript(index, index + 1)
-                        }
-                        style: ButtonStyle
-                        {
-                            label: Item
-                            {
-                                QD.RecolorImage
+                                background:Rectangle
                                 {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    width: Math.round(control.width / 2.5)
-                                    height: Math.round(control.height / 2.5)
-                                    sourceSize.height: width
-                                    color: control.enabled ? palette.text : disabledPalette.text
-                                    source: QD.Theme.getIcon("ChevronSingleDown")
+                                    anchors.fill: parent
+                                    color: QD.Theme.getColor("primary_button")
+                                    radius: 5
+                                }
+                                label: Item
+                                {
+                                    QD.RecolorImage
+                                    {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        width: Math.round(control.width / 1.3)
+                                        height: Math.round(control.height / 1.3)
+                                        sourceSize.height: width
+                                        color: palette.highlightedText
+                                        source: QD.Theme.getIcon("Cancel")
+                                    }
                                 }
                             }
                         }
-                    }
-                    Button
-                    {
-                        id: upButton
-                        text: ""
-                        enabled: index != 0
-                        width: 20 * screenScaleFactor
-                        height: 20 * screenScaleFactor
-                        anchors.right: downButton.left
-                        anchors.verticalCenter: parent.verticalCenter
-                        onClicked:
+                        Button
                         {
-                            if (manager.selectedScriptIndex == index)
+                            id: downButton
+                            text: ""
+                            anchors.right: removeButton.left
+                            anchors.rightMargin: base.textMargin
+                            anchors.verticalCenter: parent.verticalCenter
+                            enabled: index != manager.scriptList.length - 1
+                            width: 15 * QD.Theme.getSize("size").width
+                            height: width
+
+                            onClicked:
                             {
-                                manager.setSelectedScriptIndex(index - 1)
-                            }
-                            return manager.moveScript(index, index - 1)
-                        }
-                        style: ButtonStyle
-                        {
-                            label: Item
-                             {
-                                QD.RecolorImage
+                                if (manager.selectedScriptIndex == index)
                                 {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    width: Math.round(control.width / 2.5)
-                                    height: Math.round(control.height / 2.5)
-                                    sourceSize.height: width
-                                    color: control.enabled ? palette.text : disabledPalette.text
-                                    source: QD.Theme.getIcon("ChevronSingleUp")
+                                    manager.setSelectedScriptIndex(index + 1)
+                                }
+                                return manager.moveScript(index, index + 1)
+                            }
+                            style: ButtonStyle
+                            {
+                                background:Rectangle
+                                {
+                                    anchors.fill: parent
+                                    color: control.enabled ? QD.Theme.getColor("primary_button") : QD.Theme.getColor("disabled")
+                                    radius: 5
+                                }
+
+                                label: Item
+                                {
+                                    QD.RecolorImage
+                                    {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        width: Math.round(control.width / 1.2)
+                                        height: Math.round(control.height / 1.2)
+                                        sourceSize.height: width
+                                        color: control.enabled ? palette.highlightedText : disabledPalette.text
+                                        source: QD.Theme.getIcon("ChevronSingleDown")
+                                    }
+                                }
+                            }
+                        }
+                        Button
+                        {
+                            id: upButton
+                            text: ""
+                            enabled: index != 0
+                            width: 15 * QD.Theme.getSize("size").width     /*20 * screenScaleFactor*/
+                            height: width     /*20 * screenScaleFactor*/
+                            anchors.right: downButton.left
+                            anchors.rightMargin: base.textMargin
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked:
+                            {
+                                if (manager.selectedScriptIndex == index)
+                                {
+                                    manager.setSelectedScriptIndex(index - 1)
+                                }
+                                return manager.moveScript(index, index - 1)
+                            }
+                            style: ButtonStyle
+                            {
+                                background:Rectangle
+                                {
+                                    anchors.fill: parent
+                                    color: control.enabled ? QD.Theme.getColor("primary_button") : QD.Theme.getColor("disabled")
+                                    radius: 5
+                                }
+                                label: Item
+                                {
+                                    QD.RecolorImage
+                                    {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        width: Math.round(control.width / 1.2)
+                                        height: Math.round(control.height / 1.2)
+                                        sourceSize.height: width
+                                        color: control.enabled ? palette.highlightedText : disabledPalette.text
+                                        source: QD.Theme.getIcon("ChevronSingleUp")
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
             Button
             {
                 id: addButton
                 text: catalog.i18nc("@action", "Add a script")
-                anchors.left: parent.left
-                anchors.leftMargin: base.textMargin
-                anchors.top: activeScriptsList.bottom
+                width: 20 * QD.Theme.getSize("size").width
+                height: width
+                /*anchors.horizontalCenter: scrollViewLeft.horizontalCenter*/
+                /*anchors.bottom: scrollViewLeft.top
+                anchors.bottomMargin: 10 * QD.Theme.getSize("size").width*/
+                anchors.top: parent.top
                 anchors.topMargin: base.textMargin
-                onClicked: scriptsMenu.open()
+                anchors.left: parent.left
+                anchors.leftMargin: QD.Theme.getSize("default_margin").width
+                onClicked:
+                {
+                    scriptsMenu.x = QD.Theme.getSize("default_margin").width
+                    scriptsMenu.y = 25 * QD.Theme.getSize("size").width
+                    scriptsMenu.width = parent.width
+                    scriptsMenu.open()
+                }
                 style: ButtonStyle
                 {
-                    label: Label
+                    background:Rectangle
                     {
-                        text: control.text
+                        anchors.fill:parent
+                        color:QD.Theme.getColor("primary_button")
+                        radius: 5
+                    }
+                    label: Item
+                    {
+                        QD.RecolorImage
+                        {
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: Math.round(control.width / 0.9)
+                            height: Math.round(control.height / 0.9)
+                            sourceSize.height: width
+                            color: palette.highlightedText
+                            source: QD.Theme.getIcon("Additions")
+                        }
                     }
                 }
             }
+
             QQC2.Menu
             {
                 id: scriptsMenu
-                width: parent.width
-
                 Models.Instantiator
                 {
                     model: manager.loadedScriptList
 
                     QQC2.MenuItem
                     {
-                        text: manager.getScriptLabelByKey(modelData.toString())
+                        id:addMenuItem
+                        background:Rectangle
+                        {
+                            width: parent.width - 2 * QD.Theme.getSize("size").width
+                            height: parent.height - 2 * QD.Theme.getSize("size").width
+                            anchors.left: parent.left
+                            anchors.leftMargin: QD.Theme.getSize("size").width
+                            anchors.top: parent.top
+                            anchors.topMargin: QD.Theme.getSize("size").width
+                            color: addMenuItem.hovered? QD.Theme.getColor("blue_4") : "transparent"
+                            /*border.color: addMenuItem.hovered ? QD.Theme.getColor("blue_6"): "transparent"
+                            border.width: QD.Theme.getSize("size").width*/
+                        }
+                        height:  25 * QD.Theme.getSize("size").width
+                        Text{
+                            anchors.left: addMenuItem.left
+                            anchors.leftMargin: 5 * QD.Theme.getSize("size").width
+                            anchors.verticalCenter: addMenuItem.verticalCenter
+                            text: manager.getScriptLabelByKey(modelData.toString())
+                            font: QD.Theme.getFont("font2")
+                            color: addMenuItem.hovered? QD.Theme.getColor("blue_6") : palette.text
+                        }
                         onTriggered: manager.addScriptToList(modelData.toString())
                     }
 
@@ -266,16 +378,23 @@ QD.Dialog
                 }
             }
         }
+        Rectangle
+        {
+            id: lineOfCut
+            color: QD.Theme.getColor("blue_7")
+            width: QD.Theme.getSize("size").width
+            height: scrollViewLeft.height
+            anchors.centerIn: parent
+            /*anchors.verticalCenterOffset: 20 * QD.Theme.getSize("size").width*/
+        }
 
         Rectangle
         {
-            color: QD.Theme.getColor("main_background")
             anchors.left: activeScripts.right
-            anchors.leftMargin: QD.Theme.getSize("default_margin").width
             anchors.right: parent.right
-            height: parent.height
+            anchors.rightMargin: QD.Theme.getSize("size").width
+            height: parent.height - QD.Theme.getSize("size").width
             id: settingsPanel
-
             Label
             {
                 id: scriptSpecsHeader
@@ -285,15 +404,15 @@ QD.Dialog
                     top: parent.top
                     topMargin: base.textMargin
                     left: parent.left
-                    leftMargin: base.textMargin
+                    leftMargin: QD.Theme.getSize("default_margin").width
                     right: parent.right
                     rightMargin: base.textMargin
                 }
-
+                horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                height: 20 * screenScaleFactor
+                /*height: 20 * screenScaleFactor*/
                 font: QD.Theme.getFont("large_bold")
-                color: QD.Theme.getColor("text")
+                color: QD.Theme.getColor("blue_6")
             }
 
             ScrollView
@@ -302,31 +421,36 @@ QD.Dialog
                 anchors
                 {
                     top: scriptSpecsHeader.bottom
-                    topMargin: settingsPanel.textMargin
+                    topMargin: 10 * QD.Theme.getSize("size").width
                     left: parent.left
                     leftMargin: QD.Theme.getSize("default_margin").width
                     right: parent.right
                     bottom: parent.bottom
                 }
-
                 visible: manager.selectedScriptDefinitionId != ""
-                style: QD.Theme.styles.scrollview;
+                verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
                 ListView
                 {
                     id: listview
+                    anchors
+                    {
+                        top: scriptSpecsHeader.bottom
+                        left: parent.left
+                        right: parent.right
+                        rightMargin: base.textMargin
+                    }
                     spacing: QD.Theme.getSize("default_lining").height
                     model: QD.SettingDefinitionsModel
                     {
                         id: definitionsModel
                         containerId: manager.selectedScriptDefinitionId
+                        onContainerIdChanged:definitionsModel.setAllVisible(true)
                         showAll: true
                     }
-
                     delegate: Loader
                     {
                         id: settingLoader
-
                         width: parent.width
                         height:
                         {
@@ -479,12 +603,13 @@ QD.Dialog
             QIDI.SettingUnknown { }
         }
     }
-
-    rightButtons: Button
+    Rectangle
     {
-        text: catalog.i18nc("@action:button", "Close")
-        iconName: "dialog-close"
-        onClicked: dialog.accept()
+        width: parent.width
+        height: QD.Theme.getSize("size").width
+        anchors.top: dialog.top
+        anchors.right:dialog.right
+        color: QD.Theme.getColor("gray_3")
     }
 
     Item

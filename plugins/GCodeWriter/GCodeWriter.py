@@ -5,6 +5,13 @@ import re  # For escaping characters in the settings.
 import json
 import copy
 import math
+import os
+import stat
+import subprocess
+import locale
+import tempfile
+
+
 
 from QD.Mesh.MeshWriter import MeshWriter
 from QD.Logger import Logger
@@ -14,6 +21,7 @@ from qidi.Machines.ContainerTree import ContainerTree
 from .ModelPreviewWriter import ModelPreviewWriter
 from QD.i18n import i18nCatalog
 from qidi.QIDIApplication import QIDIApplication
+from QD.Platform import Platform
 
 catalog = i18nCatalog("qidi")
 
@@ -57,6 +65,7 @@ class GCodeWriter(MeshWriter):
         super().__init__(add_to_recent_files = False)
         self._application = Application.getInstance()
 
+
     def write(self, stream, nodes, mode = MeshWriter.OutputMode.TextMode):
         """Writes the g-code for the entire scene to a stream.
 
@@ -82,9 +91,12 @@ class GCodeWriter(MeshWriter):
             return False
         gcode_dict = getattr(scene, "gcode_dict")
         gcode_list = gcode_dict.get(active_build_plate, None)
+        tem_gcode = gcode_list
         if gcode_list is not None:
             if ModelPreviewWriter().write(stream, nodes, mode) :
                 gcode_list = self.gcodeListProcessing(gcode_list)
+                gcode_list = self.arcwelder(gcode_list,Application.getInstance().getGlobalContainerStack())
+
                 # gcode_list = gcode_list
             has_settings = False
             for gcode in gcode_list:
@@ -95,6 +107,7 @@ class GCodeWriter(MeshWriter):
             if not has_settings:
                 settings = self._serialiseSettings(Application.getInstance().getGlobalContainerStack())
                 stream.write(settings)
+            gcode_list = tem_gcode
             return True
 
         self.setInformation(catalog.i18nc("@warning:status", "Please prepare G-code before exporting."))
@@ -159,8 +172,16 @@ class GCodeWriter(MeshWriter):
         if stack.getProperty("shutdown_after_printing", "value"):
             gcode_list[-1] = self.shutdownPrinter(gcode_list[-1])
 
+        if stack0.getProperty("wall_0_wipe_retraction_amount", "value") != 0 and stack0.getProperty("wall_0_wipe_retraction_amount", "enabled"):
+            gcode_list = self.interval_wipe(gcode_list, stack0)
+
+        if stack0.getProperty("retraction_hop_type", "value") != "normal" and stack0.getProperty("retraction_hop_type", "enabled"):
+            gcode_list = self.SpiralLift(gcode_list,stack0)
+
         if stack0.getProperty("enable_travel_prime", "value") or stack1.getProperty("enable_travel_prime", "value"):
             gcode_list = self.travelPrime(gcode_list, stack, stack0, stack1, first_extruder)
+
+
         return gcode_list
 
 
@@ -503,3 +524,261 @@ class GCodeWriter(MeshWriter):
         for pos in range(0, len(escaped_string), 80 - prefix_length):
             result += prefix + escaped_string[pos: pos + 80 - prefix_length] + "\n"
         return result
+
+    def interval_wipe(self,gcode_list,stack0): 
+        retract_distance = stack0.getProperty("retraction_amount", "value")
+        wipe_retract_distance = stack0.getProperty("wall_0_wipe_retraction_amount", "value")
+        retract_speed = int(stack0.getProperty("retraction_retract_speed", "value")*60)
+        move_distance=stack0.getProperty("wall_0_wipe_dist", "value")
+        outer_wall_speed = int(stack0.getProperty("speed_wall_0", "value")*60)
+        str_look_for = "\nG1 F%s E-%s"%(retract_speed,retract_distance)
+        for n in range(len(gcode_list)):
+            type_list = gcode_list[n].split(";TYPE:")
+            for mesh in type_list:
+                tem_mesh = mesh
+                if "WALL-OUTER" in mesh and str_look_for in  mesh:
+                    gcode_split_list = mesh.split("WALL-OUTER\n")[-1].split(str_look_for)
+                    for i in range(0,len(gcode_split_list)-1):
+                        xy_list,G0_list,distance,positon= gcode_split_list[i].split("M204")[-1].split("\n"),[], 0,[]
+                        for xy in xy_list:
+                            if "G0" in xy and "Z" not in xy:
+                                tem=self.processGCode(xy)
+                                if tem[0] !=None and tem[1] !=None:
+                                    G0_list.append(xy)
+                                    positon.append(tem)
+                        if len(positon) ==1:
+                            mesh = mesh.replace(G0_list[0]+str_look_for,"G1 F%s X%s Y%s E%s"%(outer_wall_speed,positon[0][0],positon[0][1],-1*wipe_retract_distance)+"\nG1 F%s E%s"%(retract_speed,-1*(retract_distance-wipe_retract_distance)),1)
+                        elif len(positon) >1:
+                            for i in range(1,len(positon)):
+                                tem_distance = math.sqrt((positon[i][0]-positon[i-1][0])**2 + (positon[i][1]-positon[i-1][1])**2)
+                                if i == (len(positon)-1):
+                                    distance+=tem_distance
+                                    mesh = mesh.replace(G0_list[i]+str_look_for,"G1 X%s Y%s E%.5f"%(positon[i][0],positon[i][1],-1*wipe_retract_distance*tem_distance/move_distance)+"\nG1 F%s E%.5f"%(retract_speed,-1*(retract_distance-wipe_retract_distance)),1)
+                                else:
+                                    distance+=tem_distance
+                                    mesh = mesh.replace(G0_list[i],"G1 X%s Y%s E%.5f"%(positon[i][0],positon[i][1],-1*wipe_retract_distance*tem_distance/move_distance),1)
+                            mesh = mesh.replace(G0_list[0],"G1 F%s X%s Y%s E%.5f"%(outer_wall_speed,positon[0][0],positon[0][1],-1*wipe_retract_distance*(move_distance-distance)/move_distance),1)
+                gcode_list[n] = gcode_list[n].replace(tem_mesh,mesh)
+        return gcode_list
+    
+    
+    def SpiralLift(self,gcode_list,stack0):
+        lift_height = stack0.getProperty("retraction_hop", "value")
+        lift_speed = stack0.getProperty("speed_z_hop", "value")
+        travel_speed = stack0.getProperty("speed_travel","value")
+        lift_type = stack0.getProperty("retraction_hop_type", "value")
+        for i in range(2,len(gcode_list)):
+            type_list = gcode_list[i].split(";TYPE:")
+            for mesh in type_list:
+                if "WALL-OUTER" in mesh or "SKIN" in mesh or "WALL-INNER" in mesh or "SKIRT" in mesh : 
+                    gcode = mesh.split("\n")
+                    xy_list = []
+                    for g in gcode:
+                        if "X" in g and "Y" in g and "MESH" not in g:
+                            xy_list.append(g)
+                    for n in range(len(xy_list)):
+                        if "Z" in xy_list[n] and n>1:
+                            source, target= self.processGCode(xy_list[n-2]),self.processGCode(xy_list[n-1])
+                            if ((target[0]-source[0])**2 + (target[1]-source[1])**2)==0:
+                                source = self.processGCode(xy_list[n-3])
+                            i_offset,j_offset,z = lift_height*3.0425/math.sqrt((target[0]-source[0])**2 + (target[1]-source[1])**2)*(target[1]-source[1])*-1 ,lift_height*3.0425/math.sqrt((target[0]-source[0])**2 + (target[1]-source[1])**2)*(target[0]-source[0]),xy_list[n][xy_list[n].find("Z")+1:].split("\n")[0]
+                            tem_mesh = mesh
+                            if lift_type =="slope":
+                                mesh = mesh.replace("G1 F%s Z%s"%(lift_speed*60,z),";G1 F%s Z%s"%(lift_speed*60,z),1)
+                            elif lift_type == "spiral":
+                                mesh = mesh.replace("G1 F%s Z%s"%(lift_speed*60,z),"G3 Z%s I%.3f J%.3f P1 F%s"%(z,i_offset,j_offset,travel_speed*60),1)
+                            gcode_list[i] = gcode_list[i].replace(tem_mesh,mesh)
+        return gcode_list
+    
+    def arcwelder(self,gcode_list,global_container_stack):
+        if Platform.isWindows():
+            arcwelder_executable = "bin/win64/ArcWelder.exe"
+        elif Platform.isLinux():
+            arcwelder_executable = "bin/linux/ArcWelder"
+        elif Platform.isOSX():
+            arcwelder_executable = "bin/osx/ArcWelder"
+
+        self._arcwelder_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), arcwelder_executable
+        )
+        if not Platform.isWindows():
+            try:
+                os.chmod(
+                    self._arcwelder_path,
+                    stat.S_IXUSR
+                    | stat.S_IRUSR
+                    | stat.S_IRGRP
+                    | stat.S_IROTH
+                    | stat.S_IWUSR,
+                )  # Make sure we have the rights to run this.
+            except:
+                Logger.logException("e", "Could modify rights of ArcWelder executable")
+                return
+
+        if Platform.isWindows():
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        else:
+            startupinfo = None
+        version_output = subprocess.check_output(
+            [self._arcwelder_path, "--version"], startupinfo=startupinfo
+        ).decode(locale.getpreferredencoding())
+
+        match = re.search("version: (.*)", version_output)   
+        if match:
+            Logger.log("d", "Using ArcWelder %s" % match.group(1))
+        else:
+            Logger.log("w", "Could not determine ArcWelder version")
+            return gcode_list
+
+        if not global_container_stack:
+            return gcode_list
+
+        arcwelder_enable = global_container_stack.getProperty(
+            "arcwelder_enable", "value"
+        )
+        if not arcwelder_enable:
+            Logger.log("d", "ArcWelder is not enabled")
+            return gcode_list
+
+        maximum_radius = global_container_stack.getProperty(
+            "arcwelder_maximum_radius", "value"
+        )
+        path_tolerance = (
+            global_container_stack.getProperty("arcwelder_tolerance", "value") / 100
+        )
+        resolution = global_container_stack.getProperty("arcwelder_resolution", "value")
+        firmware_compensation = global_container_stack.getProperty(
+            "arcwelder_firmware_compensation", "value"
+        )
+        min_arc_segment = int(
+            global_container_stack.getProperty("arcwelder_min_arc_segment", "value")
+        )
+        mm_per_arc_segment = global_container_stack.getProperty(
+            "arcwelder_mm_per_arc_segment", "value"
+        )
+        allow_3d_arcs = global_container_stack.getProperty(
+            "arcwelder_allow_3d_arcs", "value"
+        )
+        allow_dynamic_precision = global_container_stack.getProperty(
+            "arcwelder_allow_dynamic_precision", "value"
+        )
+        allow_travel_arcs = global_container_stack.getProperty(
+            "arcwelder_allow_travel_arcs", "value"
+        )
+        default_xyz_precision = int(
+            global_container_stack.getProperty(
+                "arcwelder_default_xyz_precision", "value"
+            )
+        )
+        default_e_precision = int(
+            global_container_stack.getProperty("arcwelder_default_e_precision", "value")
+        )
+        g90_influences_extruder = global_container_stack.getProperty(
+            "arcwelder_g90_influences_extruder", "value"
+        )
+        extrusion_rate_variance = (
+            global_container_stack.getProperty("arcwelder_extrusion_rate_variance", "value") / 100
+        )
+        max_gcode_length = int(
+            global_container_stack.getProperty("arcwelder_max_gcode_length", "value")
+        )
+        layer_separator = ";ARCWELDERPLUGIN_GCODELIST_SEPARATOR\n"
+        processed_marker = ";ARCWELDERPROCESSED\n"
+        if len(gcode_list) < 2:
+            Logger.log("w", "Plate does not contain any layers")
+            return gcode_list
+
+        if processed_marker in gcode_list[0]:
+            Logger.log("d", "Plate %s has already been processed")
+            return gcode_list
+
+        # if len(gcode_list) > 0:
+        #     # remove header from gcode, so we can put it back in front after processing
+        #     header = gcode_list.pop(0)
+        # else:
+        #     header = ""
+        joined_gcode = layer_separator.join(gcode_list)
+
+        file_descriptor, temporary_path = tempfile.mkstemp()
+        Logger.log("d", "Using temporary file %s", temporary_path)
+
+        with os.fdopen(file_descriptor, "w", encoding="utf-8") as temporary_file:
+            temporary_file.write(joined_gcode)
+
+        command_arguments = [
+            self._arcwelder_path,
+            "-m=%f" % maximum_radius,
+            "-t=%f" % path_tolerance,
+            "-r=%f" % resolution,
+            "-x=%d" % default_xyz_precision,
+            "-e=%d" % default_e_precision,
+            "-v=%f" % extrusion_rate_variance,
+            "-c=%d" % max_gcode_length
+        ]
+
+        if firmware_compensation:
+            command_arguments.extend(
+                ["-s=%f" % mm_per_arc_segment, "-a=%d" % min_arc_segment]
+            )
+
+        if allow_3d_arcs:
+            command_arguments.append("-z")
+
+        if allow_dynamic_precision:
+            command_arguments.append("-d")
+
+        if allow_travel_arcs:
+            command_arguments.append("-y")
+
+        if g90_influences_extruder:
+            command_arguments.append("-g")
+
+        command_arguments.append(temporary_path)
+
+        Logger.log(
+            "d",
+            "Running ArcWelder with the following options: %s" % command_arguments,
+        )
+
+        if Platform.isWindows():
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        else:
+            startupinfo = None
+        process_output = subprocess.check_output(
+            command_arguments, startupinfo=startupinfo
+        ).decode(locale.getpreferredencoding())
+
+        Logger.log("d", process_output)
+
+        with open(temporary_path, "r", encoding="utf-8") as temporary_file:
+            result_gcode = temporary_file.read()
+        os.remove(temporary_path)
+
+        gcode_list = result_gcode.split(layer_separator)
+        # if header != "":
+        #     gcode_list.insert(0, header)  # add header back in front
+        tem=gcode_list[1].split("; Copyright(C) 2021 - Brad Hochgesang\n; Version: 1.2.0, Branch: HEAD, BuildDate: 2021-11-21T20:25:43Z\n; resolution=0.05mm\n; path_tolerance=5.0%\n; max_radius=9999.00mm\n; default_xyz_precision=3\n; default_e_precision=5\n; extrusion_rate_variance_percent=5.0%\n")
+        gcode_list[1] = ''.join(tem)
+        gcode_list[0] += processed_marker
+        return gcode_list
+        
+    def processGCode(self,line):
+        s = line.upper().split(" ")
+        x, y,f = None, None,None
+        for item in s[1:]:
+            if len(item) <= 1:
+                continue
+            if item.startswith(";"):
+                continue
+            try:
+                if item[0] == "X":
+                    x = float(item[1:])
+                elif item[0] == "Y":
+                    y = float(item[1:])
+                elif item[0] == "F":
+                    f = float(item[1:])
+            except ValueError:  # Improperly formatted g-code: Coordinates are not floats.
+                continue  # Skip the command then.
+        return [x,y,f]

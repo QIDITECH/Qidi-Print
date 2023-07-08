@@ -272,6 +272,7 @@ class QIDIApplication(QtApplication):
         self._button_text=""
         
         self._head_position = None
+        # self._feed_rate = None
         self._gcode = None
         
         # Backups
@@ -588,6 +589,8 @@ class QIDIApplication(QtApplication):
         preferences = self.getPreferences()
         preferences.addPreference("metadata/setting_version", 0)
         preferences.setValue("metadata/setting_version", self.SettingVersion)  # Don't make it equal to the default so that the setting version always gets written to the file.
+        #preferences.addPreference("qidi/fontsize", 1)
+        #preferences.addPreference("qidi/imagesize", 1)
         preferences.addPreference("qidi/active_mode", "simple")
         preferences.addPreference("qidi/active_mode", "simple")
         preferences.addPreference("qidi/categories_expanded", "extruder")
@@ -676,6 +679,8 @@ class QIDIApplication(QtApplication):
         # the QML code then gets `null` as the global stack and can deal with that as it deems fit.
 
         
+        # print_information = self.getPrintInformation()
+        # self._want_to_close = True
         self.getMachineManager().setActiveMachine(None)
 
         main_window = self.getMainWindow()
@@ -702,6 +707,7 @@ class QIDIApplication(QtApplication):
 
 
         if Application.getInstance().getPreferences().getValue("view/remind_to_save") and  not self._want_to_close :
+            # reply = QMessageBox.question(None,'Application',self._i18n_catalog.i18nc("@info:progress","Whether to save the project before closing the program?"),QMessageBox.Discard|QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             mb = QMessageBox()
 
             mb.setText(self._i18n_catalog.i18nc("@info:progress","Whether to save the project before closing the program?"))
@@ -711,7 +717,13 @@ class QIDIApplication(QtApplication):
             mb.addButton(QMessageBox.No)
             mb.addButton(QMessageBox.Cancel)
 
+            # self.mb.setInformativeText(self._i18n_catalog.i18nc("@info:progress","Whether to save the project before closing the program?"))
+            # mb.show()
+            #信号：
             cb.stateChanged.connect(self.BB)
+            # self.mb.buttonClicked.connect(self.AA)  #按钮被点击时发出信号
+            #会把被点击的按钮对象传递给槽函数
+
 
             reply = mb.exec()
             if reply == QMessageBox.Yes:
@@ -782,11 +794,13 @@ class QIDIApplication(QtApplication):
 
     @pyqtSlot(str,result = str)
     def parameter_changed_color(self, param: str) -> str:
+        #visible_settingsforcplor = self.getPreferences().getValue("general/visible_settings")
         machine_manager = self.getMachineManager()
         global_stack = machine_manager.activeMachine
         if global_stack:
             for stack in [global_stack] + global_stack.extruderList:
                 container = stack.userChanges
+                # Logger.log("e",stack.getSettingDefinition("infill_mesh"))
                 for key, instance in sorted(container.serializetest().items()):
 
                     key_parent = stack.getSettingDefinition(key).parent.key
@@ -923,6 +937,12 @@ class QIDIApplication(QtApplication):
             for extruder in global_stack.extruderList:
                 extruder.userChanges.update()
             global_stack.userChanges.update()
+
+    # showconfirmMessageBox = pyqtSignal()
+
+    # @pyqtSlot()
+    # def showmessage(self):
+    #     self.showconfirmMessageBox.emit()
 
     @pyqtSlot(int)
     def messageBoxClosed(self, button):
@@ -1137,6 +1157,7 @@ class QIDIApplication(QtApplication):
         self.initializeEngine()
 
         # Initialize UI state
+        #controller.setActiveStage("PrepareStage")
         controller.setActiveView("SolidView")
         controller.setCameraTool("CameraTool")
         controller.setSelectionTool("SelectionTool")
@@ -1328,7 +1349,8 @@ class QIDIApplication(QtApplication):
     def getCBDConnect(self, *args) -> CBDConnect:
         return CBDConnect.getInstance()
         
-
+    #def getControlPanel(self, *args) -> ControlPanel:
+    #    return ControlPanel.getInstance()
         
     def registerObjects(self, engine):
         """Registers objects for the QML engine to use.
@@ -1357,6 +1379,9 @@ class QIDIApplication(QtApplication):
         qmlRegisterSingletonType(WifiSend, "QIDI", 1, 0, "WifiSend", self.getWifiSend)
         qmlRegisterSingletonType(CBDConnect, "QIDI", 1, 0, "CBDConnect", self.getCBDConnect)
 
+        # qmlRegisterSingletonType(Controller, "QIDI", 1, 0, "Controller", Application.getInstance().getController())
+
+        #qmlRegisterSingletonType(ControlPanel, "QIDI", 1, 0, "ControlPanel", self.ControlPanel)
         
         qmlRegisterSingletonType(SettingInheritanceManager, "QIDI", 1, 0, "SettingInheritanceManager", self.getSettingInheritanceManager)
         qmlRegisterSingletonType(SimpleModeSettingsManager, "QIDI", 1, 0, "SimpleModeSettingsManager", self.getSimpleModeSettingsManager)
@@ -1457,6 +1482,7 @@ class QIDIApplication(QtApplication):
             if self.getPreferences().getValue("view/center_on_select"):
                 self._center_after_select = True
         else:
+            # self.getBuildVolume()._platform2.setDislightAxis()
 
             self.getBuildVolume()._platform_delete.setDisableAxis()
             self.getBuildVolume()._platform_copy.setDisableAxis()
@@ -1479,8 +1505,14 @@ class QIDIApplication(QtApplication):
 
     @pyqtProperty(bool, notify = activityChanged)
     def platformActivity(self):
-
+        # if self._platform_activity:
+            # self.getBuildVolume()._platform_arrange.setActiveAxis()
+            # self.getBuildVolume()._platform_falt.setActiveAxis()
+        # else:
+            # self.getBuildVolume()._platform_arrange.setDisableAxis()
+            # self.getBuildVolume()._platform_falt.setDisableAxis()
         return self._platform_activity
+        # return True
 
     @pyqtSlot()
     def platformActive(self) :
@@ -1891,6 +1923,7 @@ class QIDIApplication(QtApplication):
             Selection.remove(node)
         Selection.add(group_node)
 
+        # self.getBuildVolume().setPlatformbutton()
 
     @pyqtSlot()
     def ungroupSelected(self) -> None:
@@ -2002,6 +2035,19 @@ class QIDIApplication(QtApplication):
         Logger.log("d", msg)
 
     openProjectFile = pyqtSignal(QUrl, bool, arguments = ["project_file", "add_to_recent_files"])  # Emitted when a project file is about to open.
+    # showButtonTip = pyqtSignal()  # Emitted when a project file is about to open.
+    # showButtonTip = pyqtSignal(int,int,str)  # Emitted when a project file is about to open.
+
+    # hideButtonTip = pyqtSignal()  # Emitted when a project file is about to open.
+    
+    
+    # openFile = pyqtSignal()  # Emitted when a project file is about to open.
+
+    # def open_file(self):
+        # self.openFile.emit()
+        # self.openFile.emit()
+
+        # return True
 
 
     @pyqtSlot(QUrl, str, bool)
@@ -2192,6 +2238,7 @@ class QIDIApplication(QtApplication):
             node.translate(Vector(0, -node.getBoundingBox().bottom, 0), SceneNode.TransformSpace.World)
 
         self.fileCompleted.emit(file_name)
+        #Logger.log("e",file_name)
         
     def addNonSliceableExtension(self, extension):
         self._non_sliceable_extensions.append(extension)
@@ -2204,6 +2251,7 @@ class QIDIApplication(QtApplication):
         if workspace_reader is None:
             return False  # non-project files won't get a reader
         try:
+            #Logger.log("e","456")
             result = workspace_reader.preRead(file_path, show_dialog=False)
             return result == WorkspaceReader.PreReadResult.accepted
         except:
@@ -2241,15 +2289,18 @@ class QIDIApplication(QtApplication):
     def _onOpenFileRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
         self.openFile.emit()
+        # self.getBuildVolume()._platform2.setActiveAxis()
         
     def _onDeleteFileRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
+        # self.deleteAll()
         if Selection.hasSelection():
 
             self._qidi_actions.deleteSelection()
 
     def _onCopyFileRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
+        # self.selectAll()
         if Selection.hasSelection():
             self.copyFile.emit()
 
@@ -2257,6 +2308,7 @@ class QIDIApplication(QtApplication):
         # Ensure we select the object if we request a context menu over an object without having a selection.
         if self._platform_activity:
             self.arrangeAll()
+        # self._qidi_actions.centerSelection()
 
     def _onFlatFileRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
@@ -2265,6 +2317,7 @@ class QIDIApplication(QtApplication):
             self.flatFile.emit()
             Selection.clear()
 
+        # self._qidi_actions.deleteSelection()
 
     def _onOpenLightRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
@@ -2273,6 +2326,7 @@ class QIDIApplication(QtApplication):
         y=self.getController()._event.y
         window_size = self.getRenderer().getWindowSize()
         
+        # Logger.log("e",window_size)
 
         px = round((0.5 + x / 2.0) * window_size[0])
         py = round((0.5 + y / 2.0) * window_size[1])
@@ -2281,7 +2335,8 @@ class QIDIApplication(QtApplication):
         self._button_text = "Open"
         self.callLater(self.showButtonTip.emit)
 
-
+        # self.showButtonTip.emit()
+        # self.getBuildVolume()._platform2.setActiveAxis()
         
     @pyqtSlot(result=int)
     def getShowX(self):
@@ -2306,6 +2361,7 @@ class QIDIApplication(QtApplication):
             y=self.getController()._event.y
             window_size = self.getRenderer().getWindowSize()
             
+            # Logger.log("e",window_size)
 
             px = round((0.5 + x / 2.0) * window_size[0])
             py = round((0.5 + y / 2.0) * window_size[1])
@@ -2314,6 +2370,7 @@ class QIDIApplication(QtApplication):
             self._button_text = "Delete"
             self.callLater(self.showButtonTip.emit)
 
+            # self.showButtonTip.emit(px,py,"Delete")
 
     def _onCopyLightRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
@@ -2324,6 +2381,7 @@ class QIDIApplication(QtApplication):
             y=self.getController()._event.y
             window_size = self.getRenderer().getWindowSize()
             
+            # Logger.log("e",window_size)
 
             px = round((0.5 + x / 2.0) * window_size[0])
             py = round((0.5 + y / 2.0) * window_size[1])
@@ -2331,6 +2389,7 @@ class QIDIApplication(QtApplication):
             self._button_y = py
             self._button_text = "Copy"
             self.callLater(self.showButtonTip.emit)
+            # self.showButtonTip.emit(px,py,"Copy")
 
     def _onPlaceLightRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
@@ -2341,6 +2400,7 @@ class QIDIApplication(QtApplication):
             y=self.getController()._event.y
             window_size = self.getRenderer().getWindowSize()
             
+            # Logger.log("e",window_size)
 
             px = round((0.5 + x / 2.0) * window_size[0])
             py = round((0.5 + y / 2.0) * window_size[1])
@@ -2348,6 +2408,7 @@ class QIDIApplication(QtApplication):
             self._button_y = py
             self._button_text = "Arrange"
             self.callLater(self.showButtonTip.emit)
+        # self.showButtonTip.emit(px,py,"Arrange")
 
     def _onFlatLightRequested(self) -> None:
         # Ensure we select the object if we request a context menu over an object without having a selection.
@@ -2358,6 +2419,7 @@ class QIDIApplication(QtApplication):
             y=self.getController()._event.y
             window_size = self.getRenderer().getWindowSize()
             
+            # Logger.log("e",window_size)
 
             px = round((0.5 + x / 2.0) * window_size[0])
             py = round((0.5 + y / 2.0) * window_size[1])
@@ -2365,6 +2427,7 @@ class QIDIApplication(QtApplication):
             self._button_y = py
             self._button_text = "Flat"
             self.callLater(self.showButtonTip.emit)
+        # self.showButtonTip.emit(px,py,"Flat")
         
         
     def _onOpenDislightRequested(self) -> None:
@@ -2372,6 +2435,7 @@ class QIDIApplication(QtApplication):
         self.getBuildVolume().setDisableAxisforopen()
         self.hideButtonTip.emit()
 
+        # self.getBuildVolume()._platform2.setActiveAxis()
         
         
     def _onDeleteDislightRequested(self) -> None:
@@ -2399,6 +2463,8 @@ class QIDIApplication(QtApplication):
 
 
 
+    # showButtonTip = pyqtSignal(int,int,str)  # Emitted when a project file is about to open.
+    # hideButtonTip = pyqtSignal()  # Emitted when a project file is about to open.
 
     @pyqtSlot()
     def showMoreInformationDialogForAnonymousDataCollection(self):
@@ -2511,13 +2577,34 @@ class QIDIApplication(QtApplication):
         else:
             return ""
 
+    @pyqtSlot(float)
+    def set_copy_splicing(self,factor = 1.5):
+        self._copy_splicing = factor
+        self.splicingChanged.emit()
+      
+    splicingChanged = pyqtSignal()
+    @pyqtProperty(bool, notify=splicingChanged)
+    def get_copy_splicing(self):
+        return self._copy_splicing
+
+    @pyqtSlot(bool)
+    def set_automatic_rotation(self,wtr:bool = True):
+        self._automatic_rotation = wtr
+        self.automaticrotationChanged.emit()
+      
+    automaticrotationChanged = pyqtSignal()
+    @pyqtProperty(bool, notify=automaticrotationChanged)
+    def get_automatic_rotation(self):
+        return self._automatic_rotation
 
 
 
     @pyqtSlot()
     def showCreateMaterial(self):
         if not self._createMaterial_window:
+            #path = "./resources/qml/Preferences/Materials/CreateMaterialMessage.qml"
             searchDir = os.path.join(os.path.dirname(sys.argv[0]),"resources");
+            #Logger.log("e",sys.argv[0])
             if Platform.isWindows():
                 searchDir = searchDir + '\\qml\\Preferences\\Materials\\CreateMaterialMessage.qml'
             elif Platform.isOSX():
@@ -2525,7 +2612,11 @@ class QIDIApplication(QtApplication):
             elif Platform.isLinux():
                 searchDir =os.path.join(os.path.dirname(os.path.realpath(__file__)).split("/lib")[0],"resources") + "/qml/Preferences/Materials/CreateMaterialMessage.qml"
             self._createMaterial_window = Application.getInstance().createQmlComponent(searchDir, {"controlpanel": self})
+        # self._createMaterial_window.flags |= Qt.WindowStaysOnTopHint
+        # self._createMaterial_window.setWindowFlag(Qt.WindowStaysOnTopHint,true)
+        #self._createMaterial_window
         self._createMaterial_window.show()
+        # self._createMaterial_window.flags &= ~Qt.WindowStaysOnTopHint
 
 
     @classmethod

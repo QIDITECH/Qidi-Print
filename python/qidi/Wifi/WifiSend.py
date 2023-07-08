@@ -46,7 +46,7 @@ class WifiSend(QObject):
         self.devices_same_machine = []  #NetDevice
         self.devices_notsame_machine = []  #NetDevice
         self.PORT = 3000
-        self.PORT_mks = 8989
+        self.PORT_qidi = 8989
         self.BUFSIZE = 256 * 5
         self.RECVBUF = 256 * 5
         self.sendNow = 0
@@ -68,7 +68,7 @@ class WifiSend(QObject):
         self._input_ip = ""
         self._input_sm = ""
         Application.getInstance().getPreferences().addPreference(
-            "mkswifi/broad_addr", "")
+            "qidiwifi/broad_addr", "")
         Application.getInstance().getPreferences().addPreference(
             "view/show_ip_warning", True)
 
@@ -132,20 +132,20 @@ class WifiSend(QObject):
                     broadcast.append(
                         self._generate_broad_addr(ipaddr, allIPlist[i + 1]))
         rembroadcastip = Application.getInstance().getPreferences().getValue(
-            "mkswifi/broad_addr")
+            "qidiwifi/broad_addr")
         Logger.log("d", "remember broadcast IP:" + rembroadcastip)
         if rembroadcastip != "":
             broadcast.append(rembroadcastip)
         if self._input_ip != "":
             if self._input_sm.find("255.") != -1:
                 Application.getInstance().getPreferences().setValue(
-                    "mkswifi/broad_addr",
+                    "qidiwifi/broad_addr",
                     self._generate_broad_addr(self._input_ip, self._input_sm))
                 broadcast.append(
                     self._generate_broad_addr(self._input_ip, self._input_sm))
             else:
                 Application.getInstance().getPreferences().setValue(
-                    "mkswifi/broad_addr",
+                    "qidiwifi/broad_addr",
                     self._generate_broad_addr(self._input_ip, "255.255.255.0"))
                 broadcast.append(
                     self._generate_broad_addr(self._input_ip, "255.255.255.0"))
@@ -219,7 +219,7 @@ class WifiSend(QObject):
             if message.find('ok MAC:') != -1:
                 device = NetDevice()
                 device.ipaddr = QHostAddress(
-                    host.toIPv4Address()).toString() + "/CBD"
+                    host.toIPv4Address()).toString() + "%CBD"
                 if not self._isDuplicateIP(device.ipaddr):
                     if 'NAME:' in message:
                         device.name = message[message.find('NAME:') +
@@ -231,11 +231,9 @@ class WifiSend(QObject):
                     Logger.log("d", 'Got reply from known device')
             elif message.find('mkswifi:') != -1:
                 device = NetDevice()
-                # Logger.log("e",message)
                 device.ipaddr = QHostAddress(
-                    host.toIPv4Address()).toString() + "/MKS"
+                    host.toIPv4Address()).toString() + "%QIDI"
                 if not self._isDuplicateIP(device.ipaddr):
-                    # device.name = "MKS"
                     device.name = message[message.find('mkswifi:') +
                                               len('mkswifi:'):message.find(',')]
                     Logger.log("d", 'Got reply from: {}', device)
@@ -278,7 +276,7 @@ class WifiSend(QObject):
             except:
                 traceback.print_exc()
             self.ip_list.append('/'.join(
-                [devicename, device.ipaddr.split("/")[0]]))
+                [devicename, device.ipaddr.split("/")[0].split("%")[0]]))
         if not self.ip_list:
             self.ip_list.append('')
             self.fullname_ip_list.append('')
@@ -298,8 +296,8 @@ class WifiSend(QObject):
     def renameDevice(self, newName, strIP):
         strIP = self.currentDeviceIP
         ss = strIP.split('/')
-        if (len(ss) >= 2):
-            strIP = ss[-2]
+        if(len(ss) >= 2):
+            ipstr = ss[-1].split("%")[0]
         else:
             return
         if ss[-1] =="CBD":
@@ -331,7 +329,9 @@ class WifiSend(QObject):
                 traceback.print_exc()
         else:
             # url = "http://"+strIP+":8990/printer/dev_name?name=" + newName
-            url = "http://"+strIP+":10088/machine/system_info?dev_name="+ newName
+            newName += '@' + Application.getInstance().getGlobalContainerStack(
+                ).getProperty("machine_name", "value").lower().replace(" ", "_")
+            url = "http://"+ipstr+":10088/machine/system_info?dev_name="+ newName
             headers = {'User-Agent': 'Cura Plugin Moonraker', 'Accept': 'application/json, text/plain', 'Connection': 'keep-alive'}
             HttpRequestManager.getInstance().get(
                         url,

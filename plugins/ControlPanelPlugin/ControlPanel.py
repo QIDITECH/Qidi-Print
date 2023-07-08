@@ -19,7 +19,7 @@ from QD.Platform import Platform
 from qidi.PrinterOutputDevice import  ConnectionState
 # from typing import cast
 from enum import IntEnum
-
+from QD.PluginRegistry import PluginRegistry
 
 
 try:
@@ -29,7 +29,7 @@ except:
 
 from qidi.Wifi.WifiSend import WifiSend
 from qidi.Wifi.CBDConnect import CBDConnect
-from qidi.Wifi.MKSConnect import MKSConnect
+from qidi.Wifi.QIDIConnect import QIDIConnect
 
 
 catalog = i18nCatalog("qidi")
@@ -104,31 +104,31 @@ class ControlPanel(Extension, QObject):
         self.select_file = ""
         self.getFilePath = ""
         self.cbdConnect = CBDConnect.getInstance()
-        self.mksConnect = MKSConnect.getInstance()
+        self.qidiConnect = QIDIConnect.getInstance()
         self.cbdConnect.updateRequested.connect(self._onUpdateRequested)
         self.cbdConnect.updateInfoRequested.connect(self._onUpdateInfoRequested)
         self.cbdConnect.setStateConnected.connect(self._onSetStateConnected)
         self.cbdConnect.setStateClosed.connect(self._onSetStateClosed)
         self.cbdConnect.updateFileList.connect(self._onUpdateFileList)
         self.cbdConnect.updateShowText.connect(self._onUpdateShowText)
-        self.mksConnect.updateRequested.connect(self._onUpdateRequested)
-        self.mksConnect.setStateConnected.connect(self._onSetStateConnected)
-        self.mksConnect.setStateClosed.connect(self._onSetStateClosed)
-        self.mksConnect.updateFileList.connect(self._onUpdateFileList)
-        self.mksConnect.updateShowText.connect(self._onUpdateShowText)
-        self.mksConnect.updateInfoRequested.connect(self._onUpdateInfoRequested)
+        self.qidiConnect.updateRequested.connect(self._onUpdateRequested)
+        self.qidiConnect.setStateConnected.connect(self._onSetStateConnected)
+        self.qidiConnect.setStateClosed.connect(self._onSetStateClosed)
+        self.qidiConnect.updateFileList.connect(self._onUpdateFileList)
+        self.qidiConnect.updateShowText.connect(self._onUpdateShowText)
+        self.qidiConnect.updateInfoRequested.connect(self._onUpdateInfoRequested)
                             
     #发送和接收函数等
     connectionStateControlChanged = pyqtSignal()
 
     @pyqtSlot(str)
     def sendCommand(self, cmd):
-        if self.firmware_manufacturers =="MKS":
-            # self.mksConnect._sendCommand(cmd)
+        if self.firmware_manufacturers =="QIDI":
+            # self.qidiConnect._sendCommand(cmd)
             if cmd == "DOWNLOAD_CONFIGURE":
                 self.downloadConfigure()
             else:
-                self.mksConnect._sendCommand("printer/gcode/script?script="+cmd,"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script="+cmd,"post")
             # /api/printer/command 
             # "printer/gcode/script?script=G91"
         else:
@@ -136,30 +136,31 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot()
     def cancelPrint(self):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             self.sendCommand("CANCEL_PRINT")
         else:
             self.cbdConnect._sendCommand("M33")
 # SDCARD_PRINT_FILE FILENAME="20mm_Box.gcode"
     @pyqtSlot()
     def pausePrint(self):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             self.sendCommand("PAUSE")
         else:
             self.cbdConnect._sendCommand("M25")
 
     @pyqtSlot()
     def continuePrint(self):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             self.sendCommand("RESUME")
         else:
             self.cbdConnect._sendCommand("M24")
 
     @pyqtSlot(str)
     def printSDFiles(self, filename):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             # filename = filename[:filename.find(".gcode")+len(".gcode")]
             filename = filename.replace(".",".")
+            filename = filename.replace(" ","\ ")
             self.sendCommand("SDCARD_PRINT_FILE FILENAME="+filename.replace("\\", "/"))
         else:
             if ".tz" in filename :
@@ -171,9 +172,9 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str)
     def deleteSDFiles(self, filename):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             # self._sendCommand("M30 1:/" + filename+"\r\nM20\r\n")
-            self.mksConnect._sendDeleteRequest("server/files/gcodes/"+filename.replace("\\","/"),on_success = self.mksConnect._checkPrinterStatus)
+            self.qidiConnect._sendDeleteRequest("server/files/gcodes/"+filename.replace("\\","/"),on_success = self.qidiConnect._checkPrinterStatus)
         else:
             if "tz" in filename :
                 filename = filename[:filename.find(".tz")+len(".tz")] 
@@ -185,18 +186,18 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot()
     def refreshSDFiles(self):
-        if self.firmware_manufacturers =="MKS":
-            self.mksConnect._sendCommand("server/files/list","get")
+        if self.firmware_manufacturers =="QIDI":
+            self.qidiConnect._sendCommand("server/files/list","get")
         else:
             self.cbdConnect._sendCommand("M20")
 
     @pyqtSlot(str,str)
     def e0down(self,e,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
                 # self.sendCommand("T0\r\n G91\r\n G1 E%s F%s\r\n G90"% (e, str(int(speed)*60)))
-                self.mksConnect._sendCommand("printer/gcode/script?script=T0\nG91\nG1 E%s F%s\nG90"% (e, str(int(speed)*60)),"post")
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=T0","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=T0\nG91\nG1 E%s F%s\nG90"% (e, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=T0","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
             except:
                 Logger.log("e","change E0 speed type error")
         else:
@@ -207,10 +208,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def e0up(self,e,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
-                self.mksConnect._sendCommand("printer/gcode/script?script=T0\nG91\nG1 E-%s F%s\nG90"% (e, str(int(speed)*60)),"post")
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=T0","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E-%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=T0\nG91\nG1 E-%s F%s\nG90"% (e, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=T0","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E-%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
                 # self.sendCommand("T0\r\n G91\r\n G1 E-%s F%s\r\n G90"% (e, str(int(speed)*60)))
             except:
                 Logger.log("e","change E0 speed type error")
@@ -222,10 +223,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def e1down(self,e,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
-                self.mksConnect._sendCommand("printer/gcode/script?script=T1\nG91\nG1 E%s F%s\nG90"% (e, str(int(speed)*60)),"post")
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=T1","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=T1\nG91\nG1 E%s F%s\nG90"% (e, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=T1","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
                 # self.sendCommand("T1\r\n G91\r\n G1 E%s F%s\r\n G90"% (e, str(int(speed)*60)))
             except:
                 Logger.log("e","change E1 speed type error")
@@ -237,10 +238,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def e1up(self,e,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
-                self.mksConnect._sendCommand("printer/gcode/script?script=T1\nG91\nG1 E-%s F%s\nG90"% (e, str(int(speed)*60)),"post")
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=T1","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E-%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=T1\nG91\nG1 E-%s F%s\nG90"% (e, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=T1","printer/gcode/script?script=G91","printer/gcode/script?script=G1 E-%s F%s"% (e, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
                 # self.sendCommand("T1\r\n G91\r\n G1 E-%s F%s\r\n G90"% (e, str(int(speed)*60)))
             except:
                 Logger.log("e","change E1 speed type error")
@@ -252,11 +253,11 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def xleft(self,x,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
                 # self.sendCommand("G91\r\n G1 X%s F%s\r\n G90"% (x, str(int(speed)*60)))
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 X%s F%s"% (x, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 X-%s F%s\nG90"% (x, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 X%s F%s"% (x, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 X-%s F%s\nG90"% (x, str(int(speed)*60)),"post")
             except:
                 Logger.log("e","change X speed type error")
         else:
@@ -267,11 +268,11 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def xright(self,x,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
-                # self.mksConnect._sendCommand("printer/gcode/script?script=G91\r\n G1 X-%s F%s\r\n G90"% (x, str(int(speed)*60)),"post")
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 X-%s F%s"% (x, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 X%s F%s\nG90"% (x, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand("printer/gcode/script?script=G91\r\n G1 X-%s F%s\r\n G90"% (x, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 X-%s F%s"% (x, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 X%s F%s\nG90"% (x, str(int(speed)*60)),"post")
             except:
                 Logger.log("e","change X speed type error")
         else:
@@ -282,11 +283,11 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def yback(self,y,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
                 # self.sendCommand("G91\r\n G1 Y%s F%s\r\n G90"% (y, str(int(speed)*60)))
-                # self.mksConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 Y%s F%s"% (y, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 Y-%s F%s\nG90"% (y, str(int(speed)*60)),"post")
+                # self.qidiConnect._sendCommand(["printer/gcode/script?script=G91","printer/gcode/script?script=G1 Y%s F%s"% (y, str(int(speed)*60)),"printer/gcode/script?script=G90"],"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 Y-%s F%s\nG90"% (y, str(int(speed)*60)),"post")
 
             except:
                 Logger.log("e","change Y speed type error")
@@ -298,10 +299,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def yfont(self,y,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try: 
                 # self.sendCommand("G91\r\n G1 Y-%s F%s\r\n G90"% (y, str(int(speed)*60)))
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 Y%s F%s\nG90"% (y, str(int(speed)*60)),"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 Y%s F%s\nG90"% (y, str(int(speed)*60)),"post")
             except:
                 Logger.log("e","change Y speed type error")
         else:
@@ -312,10 +313,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def zdown(self,z,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
                 # self.sendCommand("G91\r\n G1 Z%s F%s\r\n G90"% (z, str(int(speed)*60)))
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 Z%s F%s\nG90"% (z, str(int(speed)*60)),"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 Z%s F%s\nG90"% (z, str(int(speed)*60)),"post")
             except:
                 Logger.log("e","change Z speed type error")
         else:
@@ -326,10 +327,10 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str,str)
     def zup(self,z,speed):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             try:
                 # self.sendCommand("G91\r\n G1 Z-%s F%s\r\n G90"% (z, str(int(speed)*60)))
-                self.mksConnect._sendCommand("printer/gcode/script?script=G91\nG1 Z-%s F%s\nG90"% (z, str(int(speed)*60)),"post")
+                self.qidiConnect._sendCommand("printer/gcode/script?script=G91\nG1 Z-%s F%s\nG90"% (z, str(int(speed)*60)),"post")
             except:
                 Logger.log("e","change Z speed type error")
         else:
@@ -340,57 +341,57 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot()
     def xyhome(self):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             # self._sendCommand("G28 X Y")
-            self.mksConnect._sendCommand("printer/gcode/script?script=G28","post")
+            self.qidiConnect._sendCommand("printer/gcode/script?script=G28","post")
         else:
             self.cbdConnect._sendCommand("G28 X0 Y0")
 
     @pyqtSlot()
     def zhome(self):
-        if self.firmware_manufacturers == "MKS":
-            self.mksConnect._sendCommand("printer/gcode/script?script=G28 Z","post")
+        if self.firmware_manufacturers == "QIDI":
+            self.qidiConnect._sendCommand("printer/gcode/script?script=G28 Z","post")
         else:
             self.cbdConnect._sendCommand("G28 Z")
 
     @pyqtSlot(str)
     def setfan(self,speed):
-        if self.firmware_manufacturers == "MKS":
+        if self.firmware_manufacturers == "QIDI":
             self.sendCommand("SET_PIN PIN=fan0 VALUE=%s"%(str(int(speed)*2.55)))
         else:
             self.cbdConnect._sendCommand("M106 S%s"%(str(int(speed)*2.55)))
 
     @pyqtSlot(str)
     def setrapidfan(self,speed):
-        if self.firmware_manufacturers == "MKS":
+        if self.firmware_manufacturers == "QIDI":
             self.sendCommand("SET_PIN PIN=fan2 VALUE=%s"%(str(int(speed)*2.55)))
         else:
             self.cbdConnect._sendCommand("M106 S%s"%(str(int(speed)*2.55)))
 
     @pyqtSlot(str)
     def setchamber(self,speed):
-        if self.firmware_manufacturers == "MKS":
+        if self.firmware_manufacturers == "QIDI":
             self.sendCommand("SET_PIN PIN=fan1 VALUE=%s"%(str(int(speed)*2.55)))
         else:
             self.cbdConnect._sendCommand("M106 T-2 S%s"%(str(int(speed)*2.55)))
 
     @pyqtSlot(str)
     def setVolumet(self,tem):
-        if self.firmware_manufacturers =="MKS":
-            self.mksConnect._sendCommand("M141 S%s"%(str(tem)),"post")
+        if self.firmware_manufacturers =="QIDI":
+            self.qidiConnect._sendCommand("M141 S%s"%(str(tem)),"post")
         else:
             self.cbdConnect._sendCommand("M141 S%s"%(str(tem)))
 
     @pyqtSlot(str)
     def setSensor(self,sen):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             self.sendCommand("SET_FILAMENT_SENSOR SENSOR=fila ENABLE=%s"%(str(sen)))
         else:
             self.cbdConnect._sendCommand("M8029 D%s"%(str(sen)))
 
     @pyqtSlot(str)
     def setextruder0t(self,tem):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             self.sendCommand("SET_HEATER_TEMPERATURE HEATER=extruder TARGET=%s"%(tem))
         else:
             self.cbdConnect._sendCommand("M104 T0 S%s"%(str(tem)))
@@ -401,7 +402,7 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str)
     def setbedt(self,tem):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             # self.sendCommand("M892 S%s"%(tem))
             self.sendCommand("SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=%s"%(str(tem)))
 
@@ -410,23 +411,23 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot()
     def motorsoff(self):
-        if self.firmware_manufacturers == "MKS":
-            self.mksConnect._sendCommand("printer/gcode/script?script=M84","post")
+        if self.firmware_manufacturers == "QIDI":
+            self.qidiConnect._sendCommand("printer/gcode/script?script=M84","post")
 
 
     @pyqtSlot()
     def machinestop(self):
-        if self.firmware_manufacturers == "MKS":
-            # self.mksConnect._sendCommand("printer/gcode/script?script=M0","post")
-            self.mksConnect._sendCommand("printer/gcode/script?script=M84","post")
+        if self.firmware_manufacturers == "QIDI":
+            # self.qidiConnect._sendCommand("printer/gcode/script?script=M0","post")
+            self.qidiConnect._sendCommand("printer/gcode/script?script=M84","post")
         else:
             self.cbdConnect._sendCommand("M112")
 
     @pyqtSlot()
     def machineclose(self):
-        if self.firmware_manufacturers =="MKS":
-            self.mksConnect._sendCommand("printer/gcode/script?script=M81","post")
-            # self.mksConnect._sendCommand("printer/gcode/script?script=M84","post")
+        if self.firmware_manufacturers =="QIDI":
+            self.qidiConnect._sendCommand("printer/gcode/script?script=M81","post")
+            # self.qidiConnect._sendCommand("printer/gcode/script?script=M84","post")
         else:
             self.cbdConnect._sendCommand("M4003")
 
@@ -440,20 +441,20 @@ class ControlPanel(Extension, QObject):
             self.cbdConnect.thisdict["printer_name"] = name
             self.cbdConnect._sendCommand(change_name + "&" + str(nameSum) + "&")
         else:
-            self.mksConnect.thisdict["printer_name"] = name
-            # self.mksConnect._sendCommand("/printer/dev_name?name="+name,"get")
-            self.mksConnect._sendCommand("machine/system_info?dev_name="+name,"get")
+            self.qidiConnect.thisdict["printer_name"] = name
+            # self.qidiConnect._sendCommand("/printer/dev_name?name="+name,"get")
+            self.qidiConnect._sendCommand("machine/system_info?dev_name="+name,"get")
 
     @pyqtSlot()
     def selectFileToUplload(self):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             filename, type = QFileDialog.getOpenFileName(None, 'Upload file to Machine', "C:\\", "(*.gcode);;all files(*.*)")
             self._uploadpath = filename
             if ".g" in filename.lower():
                 # if self.isBusy():
                 #     return
                 # else:
-                self.mksConnect.uploadfunc(filename,'')
+                self.qidiConnect.uploadfunc(filename,'')
         else:
             path, type = QFileDialog.getOpenFileName(None, 'Upload file to Machine', "C:\\", "(*.gcode);;all files(*.*)")
             self.cbdConnect.getFilePath = str(path)
@@ -461,12 +462,12 @@ class ControlPanel(Extension, QObject):
                 self.cbdConnect._sendCommand("M28")
 
     def downloadConfigure(self):
-        self.mksConnect._sendCommand("server/files/config/printer.cfg","get")
-        self.mksConnect._sendCommand("server/files/config/MKS_THR.cfg","get")
+        self.qidiConnect._sendCommand("server/files/config/printer.cfg","get")
+        self.qidiConnect._sendCommand("server/files/config/QIDI_THR.cfg","get")
 
     @pyqtSlot(str)
     def selectFileToDownload(self,filename):
-        if self.firmware_manufacturers =="MKS":
+        if self.firmware_manufacturers =="QIDI":
             # filename, type = QFileDialog.getOpenFileName(None, 'Upload file to Machine', "C:\\", "(*.gcode);;all files(*.*)")
             # if filename!= None:
             # dlg = QFileDialog()
@@ -475,10 +476,10 @@ class ControlPanel(Extension, QObject):
             # if dlg.exec_():
             path, type = QFileDialog.getSaveFileName(None, 'Save file to Disk', filename, "(*.gcode)")
 
-            self.mksConnect.getFilePath = str(path)#str(dlg.selectedFiles()[0])
-            # self.mksConnect.getFilePath = filename
-            if self.mksConnect.getFilePath != None and self.mksConnect.getFilePath !="":
-                self.mksConnect._sendCommand("server/files/gcodes/"+filename.replace("\\", "/"),"get")
+            self.qidiConnect.getFilePath = str(path)#str(dlg.selectedFiles()[0])
+            # self.qidiConnect.getFilePath = filename
+            if self.qidiConnect.getFilePath != None and self.qidiConnect.getFilePath !="":
+                self.qidiConnect._sendCommand("server/files/gcodes/"+filename.replace("\\", "/"),"get")
         else:
             if "tz" in filename :
                 filename = filename[:filename.find(".tz")+len(".tz")] 
@@ -493,22 +494,22 @@ class ControlPanel(Extension, QObject):
     PrintstateChanged = pyqtSignal()
     @pyqtProperty(bool, notify = PrintstateChanged)
     def isBusy(self):
-        if self.firmware_manufacturers =="MKS":
-            return self.mksConnect.isBusy()
+        if self.firmware_manufacturers =="QIDI":
+            return self.qidiConnect.isBusy()
         else:
             return self.cbdConnect.isBusy()
 
     @pyqtProperty(bool, notify = PrintstateChanged)
     def isPrinting(self): 
-        if self.firmware_manufacturers =="MKS":
-            return self.mksConnect.isPrinting()
+        if self.firmware_manufacturers =="QIDI":
+            return self.qidiConnect.isPrinting()
         else:
             return self.cbdConnect.isPrinting()
 
     @pyqtProperty(bool, notify = PrintstateChanged)
     def isPause(self): 
-        if self.firmware_manufacturers =="MKS":
-            return self.mksConnect.isPause()
+        if self.firmware_manufacturers =="QIDI":
+            return self.qidiConnect.isPause()
         else:
             return self.cbdConnect.isPause()
 
@@ -643,18 +644,18 @@ class ControlPanel(Extension, QObject):
 
     @pyqtSlot(str)    
     def connect(self,string):
-        Logger.log("d","The firmware manufacturers: "+string[-3:])
-        ip_add = string[string.find("/")+1:string.rfind("/")]
+        Logger.log("d","The firmware manufacturers: "+string[string.find("%")+1:])
+        ip_add = string[string.find("/")+1:string.rfind("%")]
         ip_name = string[:string.find("/")]
         Logger.log("d","IP address: "+ip_add)
-        self.firmware_manufacturers = string[-3:]
-        # self.firmware_manufacturers = "MKS"
-        if self.firmware_manufacturers in ["MKS","CBD","KLI"]:
-            if self.firmware_manufacturers =="MKS":
+        self.firmware_manufacturers = string[string.find("%")+1:]
+        # self.firmware_manufacturers = "QIDI"
+        if self.firmware_manufacturers in ["QIDI","CBD","KLI"]:
+            if self.firmware_manufacturers =="QIDI":
                 self.select_ip = ip_add
-                self.mksConnect.connect(ip_add,ip_name)
+                self.qidiConnect.connect(ip_add,ip_name)
                 
-                # self.mksconnect(ip_add)
+                # self.qidiconnect(ip_add)
             elif self.firmware_manufacturers =="CBD":
                 # self.cbdconnect(ip_add)
                 CBDConnect.getInstance().connect(ip_add)
@@ -675,8 +676,8 @@ class ControlPanel(Extension, QObject):
     @pyqtSlot()    
     def disconnect(self):
         Logger.log("d", "disconnect--------------")
-        if self.firmware_manufacturers == "MKS":
-            self.mksConnect.disconnect()
+        if self.firmware_manufacturers == "QIDI":
+            self.qidiConnect.disconnect()
         else:
             self.cbdConnect.disconnect()
         return
@@ -696,16 +697,16 @@ class ControlPanel(Extension, QObject):
         return WifiSend.getInstance().alliplist
 
     def _onUpdateRequested(self):
-        if self.firmware_manufacturers =="MKS":
-            self.thisdict = self.mksConnect.thisdict
+        if self.firmware_manufacturers =="QIDI":
+            self.thisdict = self.qidiConnect.thisdict
         else:
             self.thisdict = self.cbdConnect.thisdict
         self.TempStringChanged.emit()
         self.PrintstateChanged.emit()
 
     def _onUpdateInfoRequested(self):
-        if self.firmware_manufacturers =="MKS":
-            self.thisdict = self.mksConnect.thisdict
+        if self.firmware_manufacturers =="QIDI":
+            self.thisdict = self.qidiConnect.thisdict
         else:
             self.thisdict = self.cbdConnect.thisdict
         self.PrinterInfoListChanged.emit()
@@ -713,8 +714,8 @@ class ControlPanel(Extension, QObject):
 
     def _onSetStateConnected(self):
         self.setConnectionState(ConnectionState.Connected)
-        # if self.firmware_manufacturers =="MKS":
-        #     self.thisdict = self.mksConnect.thisdict
+        # if self.firmware_manufacturers =="QIDI":
+        #     self.thisdict = self.qidiConnect.thisdict
         # else:
         #     self.thisdict = self.cbdConnect.thisdict
         # self.PrinterInfoListChanged.emit()
@@ -724,17 +725,17 @@ class ControlPanel(Extension, QObject):
         self.setConnectionState(ConnectionState.Closed)
 
     def _onUpdateFileList(self):
-        if self.firmware_manufacturers =="MKS":
-            self.sdFiles = self.mksConnect.sdFiles
+        if self.firmware_manufacturers =="QIDI":
+            self.sdFiles = self.qidiConnect.sdFiles
         else:
             self.sdFiles = self.cbdConnect.sdFiles
         self.FileListChanged.emit()
 
     def _onUpdateShowText(self):
-        if self.firmware_manufacturers =="MKS":
-            if len(self.mksConnect.show_text)>25000:
-                self.mksConnect.show_text = ''
-            self.show_text = self.mksConnect.show_text
+        if self.firmware_manufacturers =="QIDI":
+            if len(self.qidiConnect.show_text)>25000:
+                self.qidiConnect.show_text = ''
+            self.show_text = self.qidiConnect.show_text
         else:
             if len(self.cbdConnect.show_text)>25000:
                 self.cbdConnect.show_text = ''
@@ -751,9 +752,9 @@ class ControlPanel(Extension, QObject):
     # 实例化对象
     def showControlPanel(self):
         if not self._controlpanel_window:
-            #path = os.path.join(PluginRegistry.getInstance().getPluginPath(self.getPluginId()), "ControlPanel.qml")
+            path = os.path.join(PluginRegistry.getInstance().getPluginPath(self.getPluginId()), "ControlPanel.qml")
             # path = "qrc:/ControlPanel.qml"
-            path = "./plugins/ControlPanelPlugin/ControlPanel.qml"
+            # path = "./plugins/ControlPanelPlugin/ControlPanel.qml"
             if os.path.exists(path):
                 self._controlpanel_window = Application.getInstance().createQmlComponent(path, {"controlpanel": self})
             else:

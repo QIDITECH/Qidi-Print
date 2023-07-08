@@ -112,7 +112,8 @@ def add_screenshot(img, width, height, img_type):
         for i in range(len(outputdata)):
             if (outputdata[i] != 0):
                 astr += chr(outputdata[i])
-        os.remove(os.path.abspath("")+"\\cut_image_.png")
+        if os.path.exists(os.path.abspath("")+"\\cut_image_.png"):
+            os.remove(os.path.abspath("")+"\\cut_image_.png")
     except Exception as e:
         Logger.log("d", "Exception == " + str(e))
     

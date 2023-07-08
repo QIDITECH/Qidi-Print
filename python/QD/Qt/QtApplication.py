@@ -494,7 +494,6 @@ class QtApplication(QApplication, Application):
     def setVisible(self, visible: bool) -> None:
         if self._main_window is not None:
             self._main_window.visible = visible
-            self.mainWindowChanged.emit()
 
     @property
     def isVisible(self) -> bool:

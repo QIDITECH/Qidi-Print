@@ -151,9 +151,6 @@ class SimulationPass(RenderPass):
                 layer_data = node.callDecoration("getLayerData")
                 if not layer_data:
                     continue
-                # Logger.log("e",len(node.getMeshData().getVertices()))
-                # Logger.log("e",layer_data.getLayer(0).polygons.data)
-                # Logger.log("e",layer_data.getLayer(0).polygons.data)
                 # Render all layers below a certain number as line mesh instead of vertices.
                 if self._layer_view._current_layer_num > -1 and ((not self._layer_view._only_show_top_layers) or (not self._layer_view.getCompatibilityMode())):
                     start = 0
@@ -165,69 +162,56 @@ class SimulationPass(RenderPass):
                     gcode_list = gcode_dict.get(active_build_plate, None)
                     for layer in sorted(element_counts.keys()):
                         # In the current layer, we show just the indicated paths
-                        if layer == self._layer_view._current_layer_num:
-                            # We look for the position of the head, searching the point of the current path
-                            index = self._layer_view._current_path_num
-                            offset = 0
-                            # Logger.log("e",layer)
-                            # Logger.log("e",len(gcode_list))
-                            # Logger.log("e",gcode_list[1])
-                            if "M4010" in gcode_list[2] or ";gimage" in gcode_list[1]:
-                                str1 = ""
-                                gcode_list = str1.join(gcode_list).split(";LAYER:")
-                                gcode_list[-1] = gcode_list[-1].split(";TIME_ELAPSED")[0]
-                                current_layer_gcode_list = gcode_list[layer+1].split("\n")
-                            # elif ";gimage" in gcode_list[1]:
-                            #     str1 = ""
-                            #     gcode_list = str1.join(gcode_list).split(";LAYER:")
-                            #     gcode_list[-1] = gcode_list[-1].split(";TIME_ELAPSED")[0]
-                            #     current_layer_gcode_list = gcode_list[layer+1].split("\n")
-                            else:
-                                current_layer_gcode_list = gcode_list[layer+2].split("\n")
-                            current_layer_gcode_points_list = []
-                            for i in current_layer_gcode_list:
-                                if "X" in  i and "Y" in i:
-                                    current_layer_gcode_points_list.append(i)
-                            # Logger.log("e",current_layer_gcode_points_list)
-                            # Logger.log("e",len(current_layer_gcode_points_list))
-                            for polygon in layer_data.getLayer(layer).polygons:
-                                # Logger.log("e",layer)
-                                # The size indicates all values in the two-dimension array, and the second dimension is
-                                # always size 3 because we have 3D points.
-                                if index >= polygon.data.size // 3 - offset:
-                                    index -= polygon.data.size // 3 - offset
-                                    offset = 1  # This is to avoid the first point when there is more than one polygon, since has the same value as the last point in the previous polygon
-                                    continue
-                                # The head position is calculated and translated
-                                
-                                # Logger.log("e",polygon.lineFeedrates.size+1)
-                                # Logger.log("e",polygon.data)
-                                # Logger.log("e",index)
-                                
-                                if index ==0:  
-                                    feed_rate = 0
+                        try:
+                            if layer == self._layer_view._current_layer_num:
+                                # We look for the position of the head, searching the point of the current path
+                                index = self._layer_view._current_path_num
+                                offset = 0
+                                if  "M4010" in gcode_list[2] or ";gimage" in gcode_list[1]:
+                                    str1 = ""
+                                    gcode_list = str1.join(gcode_list).split(";LAYER:")
+                                    gcode_list[-1] = gcode_list[-1].split(";TIME_ELAPSED")[0]
+                                    current_layer_gcode_list = gcode_list[layer+1].split("\n")
                                 else:
-                                    feed_rate = polygon.lineFeedrates[index -1][0]
-                                # Logger.log("e",polygon.extruder)
-                                head_position = Vector(polygon.data[index+offset][0], polygon.data[index+offset][1], polygon.data[index+offset][2]) + node.getWorldPosition()
-                                head_position_without_world = Vector(polygon.data[index+offset][0], polygon.data[index+offset][1], -polygon.data[index+offset][2]) 
-                                # Logger.log("e",len(current_layer_gcode_points_list))
-                                symbol ="\n"
-                                if len(current_layer_gcode_points_list)>11:
-                                    if index<len(current_layer_gcode_points_list):
-                                        _current_index = current_layer_gcode_list.index(current_layer_gcode_points_list[index-1])
-                                        if index>0 and _current_index>4:
-                                            if _current_index<(len(current_layer_gcode_list)-6):
-                                                ss = symbol.join(current_layer_gcode_list[_current_index-5:_current_index+6])
-                                            else:
-                                                ss = symbol.join(current_layer_gcode_list[-12:-1])
-                                        else:
-                                            ss = symbol.join(current_layer_gcode_list[0:11])
+                                    current_layer_gcode_list = gcode_list[layer+2].split("\n")
+                                current_layer_gcode_points_list = []
+                                for i in current_layer_gcode_list:
+                                    if "X" in  i and "Y" in i:
+                                        current_layer_gcode_points_list.append(i)
+                                for polygon in layer_data.getLayer(layer).polygons:
+                                    # The size indicates all values in the two-dimension array, and the second dimension is
+                                    # always size 3 because we have 3D points.
+                                    if index >= polygon.data.size // 3 - offset:
+                                        index -= polygon.data.size // 3 - offset
+                                        offset = 1  # This is to avoid the first point when there is more than one polygon, since has the same value as the last point in the previous polygon
+                                        continue
+                                    # The head position is calculated and translated
+                                    
+                                    if index ==0:  
+                                        feed_rate = 0
                                     else:
-                                        ss = symbol.join(current_layer_gcode_list[-12:-1])                                    
-                                else:
-                                    ss = symbol.join(current_layer_gcode_list)
-                            break
+                                        feed_rate = polygon.lineFeedrates[index -1][0]
+                                    head_position = Vector(polygon.data[index+offset][0], polygon.data[index+offset][1], polygon.data[index+offset][2]) + node.getWorldPosition()
+                                    head_position_without_world = Vector(polygon.data[index+offset][0], polygon.data[index+offset][1], -polygon.data[index+offset][2]) 
+                                    symbol ="\n"
+                                    if len(current_layer_gcode_points_list)>11:
+                                        if index<len(current_layer_gcode_points_list):
+                                            _current_index = current_layer_gcode_list.index(current_layer_gcode_points_list[index-1])
+                                            if index>0 and _current_index>4:
+                                                if _current_index<(len(current_layer_gcode_list)-6):
+                                                    ss = symbol.join(current_layer_gcode_list[_current_index-5:_current_index+6])
+                                                else:
+                                                    ss = symbol.join(current_layer_gcode_list[-12:-1])
+                                            else:
+                                                ss = symbol.join(current_layer_gcode_list[0:11])
+                                        else:
+                                            ss = symbol.join(current_layer_gcode_list[-12:-1])                                    
+                                    else:
+                                        ss = symbol.join(current_layer_gcode_list)
+                                break
+                        except:
+                            Logger.log("e","GcodeViewer Error")
+                            ss = ""
                         if self._layer_view._minimum_layer_num > layer:
                             start += element_counts[layer]
                         end += element_counts[layer]
