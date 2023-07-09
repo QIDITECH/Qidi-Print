@@ -1,15 +1,15 @@
 # Copyright (c) 2021 QIDI B.V.
 # QDTECH is released under the terms of the LGPLv3 or higher.
 
-import imp
+import importlib.util
 import json
 import os
 import shutil  # For deleting plugin directories;
 import stat  # For setting file permissions correctly;
+import sys
 import time
 import types
 import zipfile
-from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, TYPE_CHECKING
 
 from PyQt5.QtCore import QCoreApplication
@@ -24,6 +24,7 @@ from QD.Resources import Resources
 from QD.Trust import Trust, TrustBasics, TrustException
 from QD.Version import Version
 from QD.i18n import i18nCatalog
+from QD.Util import find_spec
 
 i18n_catalog = i18nCatalog("qdtech")
 
@@ -626,7 +627,8 @@ class PluginRegistry(QObject):
                     highest_version = current_version
                     final_location = loc
         try:
-            file, path, desc = imp.find_module(plugin_id, [final_location])
+            spec = find_spec(plugin_id, [final_location])
+            path = os.path.join(final_location, plugin_id)
         except Exception:
             Logger.logException("e", "Import error when importing %s", plugin_id)
             return None
@@ -647,13 +649,13 @@ class PluginRegistry(QObject):
                 return None
 
         try:
-            module = imp.load_module(plugin_id, file, path, desc) #type: ignore #MyPy gets the wrong output type from imp.find_module for some reason.
+            module = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = module
+            spec.loader.exec_module(module)
         except Exception:
             Logger.logException("e", "Import error loading module %s", plugin_id)
             return None
-        finally:
-            if file:
-                os.close(file) #type: ignore #MyPy gets the wrong output type from imp.find_module for some reason.
+
         self._found_plugins[plugin_id] = module
         return module
 
