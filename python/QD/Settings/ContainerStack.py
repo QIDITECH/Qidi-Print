@@ -23,7 +23,6 @@ from QD.Settings.SettingDefinition import SettingDefinition
 from QD.Settings.SettingFunction import SettingFunction
 from QD.Settings.Validator import ValidatorState
 
-from line_profiler_pycharm import profile
 class IncorrectVersionError(Exception):
     pass
 
@@ -239,7 +238,6 @@ class ContainerStack(QObject, ContainerInterface, PluginObject):
 
         return value
 
-    @profile
     def getRawProperty(self, key: str, property_name: str, *, context: Optional[PropertyEvaluationContext] = None, use_next: bool = True, skip_until_container: Optional[ContainerInterface] = None) -> Any:
         """Retrieve a property of a setting by key and property name.
 
