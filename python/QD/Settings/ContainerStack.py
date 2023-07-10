@@ -54,7 +54,7 @@ class ContainerStack(QObject, ContainerInterface, PluginObject):
     """A stack of setting containers to handle setting value retrieval."""
 
     Version = 5  # type: int
-
+    
     def __init__(self, stack_id: str) -> None:
         """Constructor
 
@@ -69,7 +69,7 @@ class ContainerStack(QObject, ContainerInterface, PluginObject):
             "name": stack_id,
             "version": self.Version,
             "container_type": ContainerStack
-        } #type: Dict[str, Any]
+        }  # type: Dict[str, Any]
         self._containers = []  # type: List[ContainerInterface]
         self._next_stack = None  # type: Optional[ContainerStack]
         self._read_only = False  # type: bool
@@ -258,35 +258,40 @@ class ContainerStack(QObject, ContainerInterface, PluginObject):
 
         """
 
-
         containers = self._containers
         if context is not None:
             # if context is provided, check if there is any container that needs to be skipped.
             start_index = context.context.get("evaluate_from_container_index", 0)
-            if start_index >= len(self._containers):
+            if start_index >= len(containers):
                 return None
-            containers = self._containers[start_index:]
+            containers = containers[start_index:]
         if property_name not in ["value", "state", "validationState"]:
             # Value, state & validationState can be changed by instanceContainer, the rest cant. Ask the definition
             # right away
-            value = containers[-1].getProperty(key, property_name, context)
+            value = containers[-1].getProperty(key, property_name, context)  # [-1]だけでこの関数の実行時間の内の約1%の時間を使用しているらしい
             if value is not None:
                 return value
         else:
-            for container in containers:
-                if skip_until_container and container.getId() != skip_until_container:
-                    continue #Skip.
-                skip_until_container = None #When we find the container, stop skipping.
-
-                value = container.getProperty(key, property_name, context)
-                if value is not None:
-                    return value
-
+            if skip_until_container:  # forループの中での確認回数を減らす為に、先に分岐
+                for container in containers:
+                    if skip_until_container and container.getId() != skip_until_container:
+                        continue  # Skip.
+                    skip_until_container = None  # When we find the container, stop skipping.
+        
+                    value = container.getProperty(key, property_name, context)
+                    if value is not None:
+                        return value
+            else:
+                skip_until_container = None  # 念のためNoneを代入
+                for container in containers:
+                    value = container.getProperty(key, property_name, context)
+                    if value is not None:
+                        return value
+        
         if self._next_stack and use_next:
             return self._next_stack.getRawProperty(key, property_name, context = context,
                                                    use_next = use_next, skip_until_container = skip_until_container)
-        else:
-            return None
+        return None
 
     def hasProperty(self, key: str, property_name: str) -> bool:
         """:copydoc ContainerInterface::hasProperty
