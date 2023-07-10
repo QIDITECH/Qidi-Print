@@ -8,7 +8,6 @@ DEFAULT_QIDI_DEBUG_MODE = False
 # example QIDI 3.2 with SDK version 6.1 will not work. So the SDK version is hard-coded here and left out of the
 # QIDIVersion.py.in template.
 QIDISDKVersion = "7.5.0"
-from QD.Logger import Logger
 
 try:
     from qidi.QIDIVersion import QIDIAppName  # type: ignore
@@ -21,10 +20,9 @@ try:
     from qidi.QIDIVersion import QIDIVersion  # type: ignore
     if QIDIVersion == "":
         QIDIVersion = DEFAULT_QIDI_VERSION
-    #Logger.log("i","QIDI Version: "+QIDIVersion)
 except ImportError:
     QIDIVersion = DEFAULT_QIDI_VERSION  # [CodeStyle: Reflecting imported value]
-    
+
 # QIDI-6569
 # This string indicates what type of version it is. For example, "enterprise". By default it's empty which indicates
 # a default/normal QIDI build.

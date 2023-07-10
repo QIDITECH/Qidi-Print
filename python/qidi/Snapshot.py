@@ -71,7 +71,7 @@ class Snapshot:
         size = max(bbox.width, bbox.height, bbox.depth * 0.5)
 
         # Looking from this direction (x, y, z) in OGL coordinates
-        looking_from_offset = Vector(-1, 1, 2)
+        looking_from_offset = Vector(0, 1, 2)
         if size > 0:
             # determine the watch distance depending on the size
             looking_from_offset = looking_from_offset * size * 1.75
@@ -112,7 +112,7 @@ class Snapshot:
         else:
             # make x bigger
             min_x, max_x = int((max_x + min_x) / 2 - (max_y - min_y) / 2), int((max_x + min_x) / 2 + (max_y - min_y) / 2)
-        cropped_image = pixel_output.copy(min_x, min_y, max_x - min_x, max_y - min_y)
+        cropped_image = pixel_output.copy(min_x-20, min_y-20, (max_x - min_x)+40, (max_y - min_y)+40)
 
         # Scale it to the correct size
         scaled_image = cropped_image.scaled(

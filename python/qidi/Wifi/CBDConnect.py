@@ -551,8 +551,8 @@ class CBDConnect(QObject):
     @pyqtSlot(str,str)  # 输入参数为str类型
     def startSending(self, fileName,strIP):
         ss = strIP.split('/')
-        if(len(ss) >= 3):
-            strIP = ss[-2]
+        if(len(ss) >= 2):
+            strIP = ss[-1].split("%")[0]
         else:
             return
         self._genTempGcodeFile()

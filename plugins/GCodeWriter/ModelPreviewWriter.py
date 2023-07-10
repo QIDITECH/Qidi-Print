@@ -36,7 +36,7 @@ class ModelPreviewWriter(MeshWriter):
         if self._global_container_stack:
             container = self._global_container_stack.findContainer({ "board": "*" })
             board = container.getMetaDataEntry("board")
-            if board =="MKS":
+            if board =="QIDI":
                 model_preview = container.getMetaDataEntry("model_preview")
                 if model_preview :
                     Logger.log("d","model_preview size :" + str(model_preview))

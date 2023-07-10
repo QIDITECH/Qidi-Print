@@ -41,7 +41,7 @@ class MirrorTool(Tool):
             if not id:
                 return False
 
-            if id == "open" or id == "delete" or id == "flat" or id == "copy" or id == "place":
+            if id == "open" or id == "delete" or id == "float" or id == "copy" or id == "place":
                 return False
 
             if self._handle.isAxis(id):

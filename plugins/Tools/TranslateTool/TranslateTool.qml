@@ -245,7 +245,7 @@ Item
 
         id: lockPositionCheckbox
         height: 18 * QD.Theme.getSize("size").height
-        width:  20 * QD.Theme.getSize("size").height
+        width: base.width - 20 * QD.Theme.getSize("size").height
         anchors.verticalCenter: resetTranslateButton.verticalCenter
         anchors.left: resetTranslateButton.right
         anchors.leftMargin: 8 * QD.Theme.getSize("size").width

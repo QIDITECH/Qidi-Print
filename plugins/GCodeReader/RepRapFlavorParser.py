@@ -2,7 +2,7 @@
 # QIDI is released under the terms of the LGPLv3 or higher.
 
 from . import FlavorParser
-from QD.Logger import Logger
+
 
 class RepRapFlavorParser(FlavorParser.FlavorParser):
     """This parser is intended to interpret the RepRap Firmware g-code flavor."""
@@ -18,7 +18,6 @@ class RepRapFlavorParser(FlavorParser.FlavorParser):
         elif M == 83:
             # Set relative extrusion mode
             self._is_absolute_extrusion = False
-
 
     def _gCode90(self, position, params, path):
         """Set the absolute positioning

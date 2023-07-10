@@ -23,7 +23,6 @@ from QD.Settings.SettingDefinition import SettingDefinition
 from QD.Settings.SettingFunction import SettingFunction
 from QD.Settings.Validator import ValidatorState
 
-
 class IncorrectVersionError(Exception):
     pass
 

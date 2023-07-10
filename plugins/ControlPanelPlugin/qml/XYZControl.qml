@@ -160,22 +160,6 @@ Rectangle
         anchors.margins: 10 * QD.Theme.getSize("size").width
         height: 40 * QD.Theme.getSize("size").width
         spacing: 5 * QD.Theme.getSize("size").width
-        // QIDI.ToolbarButton
-        // {
-        //     id: motorsOffButton
-        //     width: 40 * QD.Theme.getSize("size").width
-        //     height: 40 * QD.Theme.getSize("size").width
-        //     hasBorderElement: true
-        //     toolItem: QD.RecolorImage
-        //     {
-        //         source: QD.Theme.getIcon("Stop","plugin")
-        //         color:controlpanel.connectionState > 1 && !(controlpanel.isPrinting || controlpanel.isPause) && controlpanel.firmwareString =="MKS" ? QD.Theme.getColor("red_1") : QD.Theme.getColor("gray_2")
-        //         width: motorsOffButton.hovered ? 30 * QD.Theme.getSize("size").height : 28 * QD.Theme.getSize("size").height
-        //         height: motorsOffButton.hovered ? 30 * QD.Theme.getSize("size").height : 28 * QD.Theme.getSize("size").height
-        //     }
-        //     onClicked: controlpanel.motorsoff()
-		// 	enabled:controlpanel.connectionState > 1 && !(controlpanel.isPrinting || controlpanel.isPause) && controlpanel.firmwareString =="MKS"
-        // }
 
         QIDI.ToolbarButton
         {

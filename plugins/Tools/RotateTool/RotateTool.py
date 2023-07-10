@@ -224,7 +224,7 @@ class RotateTool(Tool):
         """
 
         super().event(event)
-        
+
         if event.type == Event.KeyPressEvent and event.key == KeyEvent.ShiftKey:
             # Snap is toggled when pressing the shift button
             self.setRotationSnap(not self._snap_rotation)
@@ -237,7 +237,6 @@ class RotateTool(Tool):
             # Start a rotate operation
             if MouseEvent.LeftButton not in event.buttons:
                 return False
-
 
             id = self._selection_pass.getIdAtPosition(event.x, event.y)
             if not id:
@@ -261,17 +260,14 @@ class RotateTool(Tool):
             self._saved_node_positions = []
             for node in self._getSelectedObjectsWithoutSelectedAncestors():
                 self._saved_node_positions.append((node, node.getPosition()))
+
             if id == ToolHandle.XAxis:
                 self.setDragPlane(Plane(Vector(1, 0, 0), handle_position.x))
             elif id == ToolHandle.YAxis:
-
                 self.setDragPlane(Plane(Vector(0, 1, 0), handle_position.y))
-
             elif self._locked_axis == ToolHandle.ZAxis:
-
                 self.setDragPlane(Plane(Vector(0, 0, 1), handle_position.z))
             else:
-
                 self.setDragPlane(Plane(Vector(0, 1, 0), handle_position.y))
 
             self.setDragStart(event.x, event.y)
@@ -280,7 +276,6 @@ class RotateTool(Tool):
             return True
 
         if event.type == Event.MouseMoveEvent:
-
             # Perform a rotate operation
             if not self.getDragPlane():
                 return False
@@ -352,7 +347,6 @@ class RotateTool(Tool):
             return True
 
         if event.type == Event.MouseReleaseEvent:
-
             if self._active_widget != None and time.monotonic() - self._widget_click_start < 0.2:
                 id = self._selection_pass.getIdAtPosition(event.x, event.y)
 
@@ -365,12 +359,10 @@ class RotateTool(Tool):
 
                     rotation = Quaternion()
                     if axis == ToolHandle.XAxis:
-
                         rotation = Quaternion.fromAngleAxis(angle, Vector.Unit_X)
                         for node in self._getSelectedObjectsWithoutSelectedAncestors():
                             node.setAngle(Vector(node.getAngle().x + math.degrees(angle), node.getAngle().y, node.getAngle().z))
                     elif axis == ToolHandle.YAxis:
-
                         rotation = Quaternion.fromAngleAxis(angle, Vector.Unit_Y)
                         for node in self._getSelectedObjectsWithoutSelectedAncestors():
                             node.setAngle(Vector(node.getAngle().x, node.getAngle().y + math.degrees(angle), node.getAngle().z))
@@ -394,7 +386,6 @@ class RotateTool(Tool):
             if self.getDragPlane():
                 self.setDragPlane(None)
                 self.setLockedAxis(ToolHandle.NoAxis)
-
                 if self._dirction == 'x':
                     for node in self._getSelectedObjectsWithoutSelectedAncestors():
                         node.setAngle(Vector(node.getAngle().x + math.degrees(self._angle),
@@ -428,6 +419,7 @@ class RotateTool(Tool):
             return
 
         original_node, face_id = selected_face
+        #Logger.log("e", "face_mid = %s", selected_face)
 
         meshdata = original_node.getMeshDataTransformed()
         if not meshdata or face_id < 0:
@@ -564,6 +556,7 @@ class RotateTool(Tool):
 
         Note: The LayFlat functionality is mostly used for 3d printing and should probably be moved into the QIDI project
         """
+
         self.operationStarted.emit(self)
         self._progress_message = Message(i18n_catalog.i18nc("@label", "Laying object flat on buildplate..."), lifetime = 0, dismissable = False, title = i18n_catalog.i18nc("@title", "Object Rotation"))
         self._progress_message.setProgress(0)

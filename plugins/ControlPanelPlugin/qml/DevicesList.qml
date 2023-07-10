@@ -98,7 +98,7 @@ Rectangle{
                         connectedip = ""
                     }
 					controlpanel.connect(QIDI.WifiSend.FullNameIPList[deviceView.currentIndex])
-                    connectedip = QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].substring( QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].indexOf('/') + 1 , QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].length-4)
+                    connectedip = QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].substring( QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].indexOf('/') + 1 ,QIDI.WifiSend.FullNameIPList[deviceView.currentIndex].indexOf('%'))
 					// tempTimerControl = true
 				}
 				else
@@ -376,10 +376,10 @@ Rectangle{
             anchors.right: parent.right
             anchors.rightMargin: QD.Theme.getSize("default_margin").width
             height: 30 * QD.Theme.getSize("size").height//QD.Theme.getSize("standard_list_lineheight").height
-            ip:QIDI.WifiSend.FullNameIPList[index].substring( QIDI.WifiSend.FullNameIPList[index].indexOf('/') + 1 , QIDI.WifiSend.FullNameIPList[index].length-4)
+            ip:QIDI.WifiSend.FullNameIPList[index].substring( QIDI.WifiSend.FullNameIPList[index].indexOf('/') + 1 , QIDI.WifiSend.FullNameIPList[index].indexOf('%'))
             source:check_State(ip)
             checked: ListView.view.currentIndex == index
-            connected:QIDI.WifiSend.FullNameIPList[index].substring( QIDI.WifiSend.FullNameIPList[index].indexOf('/') + 1 , QIDI.WifiSend.FullNameIPList[index].length-4) == connectedip
+            connected:QIDI.WifiSend.FullNameIPList[index].substring( QIDI.WifiSend.FullNameIPList[index].indexOf('/') + 1 , QIDI.WifiSend.FullNameIPList[index].indexOf('%')) == connectedip
             text: QIDI.WifiSend.FullNameIPList[index].substring( 0 , QIDI.WifiSend.FullNameIPList[index].indexOf('/'))
             onClicked: {
                 if (controlpanel.connectionState ==0)

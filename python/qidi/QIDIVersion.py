@@ -3,7 +3,7 @@
 
 QIDIAppName = "QIDIPrint"
 QIDIAppDisplayName = "QIDI Print"
-QIDIVersion = "6.5.1"
+QIDIVersion = "6.5.4"
 QIDIBuildType = ""
 QIDIDebugMode = True if "" == "ON" else False
 QIDICloudAPIRoot = ""
