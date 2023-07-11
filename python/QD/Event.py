@@ -207,7 +207,9 @@ class ToolEvent(Event):
 
 class CallFunctionEvent(Event):
     """Event used to call a function."""
-
+    
+    __slots__ = ("_type", "_function", "_args", "_kwargs",)
+    
     def __init__(self, func: Callable[..., Any], args: Any, kwargs: Any) -> None:
         super().__init__(Event.CallFunctionEvent)
         self._function = func

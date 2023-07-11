@@ -38,6 +38,9 @@ class SettingFunction:
     If a setting's property is a static type, e.g. a string, an int, a float, etc., its value will just be interpreted
     as it is, but when it's a Python code (formula), the value needs to be evaluated via this class.
     """
+    
+    __slots__ = ('_code', '_used_keys', '_used_values', '_compiled', '_valid',)
+    
     def __init__(self, expression: str) -> None:
         """Constructor.
 
@@ -69,43 +72,41 @@ class SettingFunction:
             Logger.log("e", "Use of illegal method {0} in function ({1}) for setting".format(str(e), self._code))
         except Exception as e:
             Logger.log("e", "Exception in function ({0}) for setting: {1}".format(str(e), self._code))
-
+    
     def __call__(self, value_provider: ContainerInterface, context: Optional[PropertyEvaluationContext] = None) -> Any:
         """Call the actual function to calculate the value.
 
         :param value_provider: The container from which to get setting values in the formula.
         :param context: The context in which the call needs to be executed
         """
-
-        if not value_provider:
+        
+        if not value_provider or not self._valid:
             return None
-
-        if not self._valid:
-            return None
-
-        locals = {}  # type: Dict[str, Any]
-        # If there is a context, evaluate the values from the perspective of the original caller
-        if context is not None:
-            value_provider = context.rootStack()
-        for name in self._used_values:
-            value = value_provider.getProperty(name, "value", context)
-            if value is None:
-                continue
-
-            locals[name] = value
-
-        g = {}  # type: Dict[str, Any]
-        g.update(globals())
-        g.update(self.__operators)
-        # Override operators if there is any in the context
-        if context is not None:
-            g.update(context.context.get("override_operators", {}))
-
-        try:
-            if self._compiled:
-                return eval(self._compiled, g, locals)
+        
+        if not self._compiled:
             Logger.log("e", "An error occurred evaluating the function {0}.".format(self))
             return 0
+        
+        # If there is a context, evaluate the values from the perspective of the original caller
+        context_flag = False  # type: bool
+        if context is not None:
+            value_provider = context.rootStack()
+            context_flag = True
+        
+        locals = {}  # type: Dict[str, Any]
+        for name in self._used_values:
+            value = value_provider.getProperty(name, "value", context)
+            if value is not None:
+                locals[name] = value
+
+        # 呼び出し回数を見ると{**globals(), **self.__operators}のほうが呼び出しが多い
+        # Override operators if there is any in the context
+        g = {**globals(), **self.__operators} \
+            if not context_flag else \
+            {**globals(), **self.__operators, **context.context.get("override_operators", {})}  # type: Dict[str, Any]
+
+        try:
+            return eval(self._compiled, g, locals)
         except Exception as e:
             Logger.logException("d", "An exception occurred in inherit function {0}: {1}".format(self, str(e)))
             return 0  # Settings may be used in calculations and they need a value
@@ -148,12 +149,10 @@ class SettingFunction:
         We can re-compile it later on anyway.
         """
 
-        state = self.__dict__.copy()
-        del state["_compiled"]
-        return state
+        return {'_code': self._code, '_used_keys': self._used_keys, '_used_values': self._used_values, '_valid': self._valid}
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
-        self.__dict__.update(state)
+        self._code, self._used_keys, self._used_values, self._valid = state['_code'], state['_used_keys'], state['_used_values'], state['_valid']
         self._compiled = compile(self._code, repr(self), "eval")
 
     @classmethod
